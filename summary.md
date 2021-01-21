@@ -1,10 +1,10 @@
 # Summary
 
-**Version:** 0.0
+**Version:** 0.1
 
 **Date:** 2021-01-21
 
-**Title:** Initial Commit
+**Title:** Text and Radio
 
 **Description:**
-Created 'submission-to-pdf' repository.
+Supports 'Text' and 'Multiple Choice' questions.
