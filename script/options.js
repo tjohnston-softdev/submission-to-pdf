@@ -20,7 +20,8 @@ var renderTypeOpts =
   "FORM_DESCRIPTION": -2,
   "SUBMISSION_DATA": -3,
   "TEXT": 1,
-  "RADIO_LIST": 2
+  "RADIO_LIST": 2,
+  "CHECK_LIST": 3
 };
 
 

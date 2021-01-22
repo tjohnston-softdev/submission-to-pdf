@@ -5,20 +5,23 @@ function handleTextField(txtTitle, txtAnswer, multipleLines, skipBlank, rTypes)
     elementType: rTypes.TEXT,
     elementTitle: txtTitle,
     elementAnswer: "",
-    titleBreak: multipleLines
+    titleBreak: multipleLines,
+    answerGiven: false
   };
 
   if (txtAnswer.length > 0)
   {
     fieldRes.elementAnswer = txtAnswer;
+    fieldRes.answerGiven = true;
   }
   else if (skipBlank === true)
   {
-    fieldRes = null;
+    fieldRes.answerGiven = false;
   }
   else
   {
     fieldRes.elementAnswer = "";
+    fieldRes.answerGiven = true;
   }
 
 

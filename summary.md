@@ -1,10 +1,13 @@
 # Summary
 
-**Version:** 0.1
+**Version:** 0.2
 
-**Date:** 2021-01-21
+**Date:** 2021-01-22
 
-**Title:** Text and Radio
+**Title:** Checkbox and Dropdown
 
 **Description:**
-Supports 'Text' and 'Multiple Choice' questions.
+
+* Added support for 'Checkbox' and 'Dropdown' form elements.
+* Plans to group parsed elements by section.
+* Parse result objects indicate whether answer was given.

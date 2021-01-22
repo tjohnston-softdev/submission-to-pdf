@@ -7,7 +7,8 @@ function handleRadioListField(rdoTitle, rdoAnswer, rdoElement, rTypes)
     optionList: [],
     chosenOption: -1,
     customEnabled: false,
-    customText: ""
+    customText: "",
+    answerGiven: false
   };
 
   fieldRes.customEnabled = rdoElement.hasOtherOption();
@@ -49,14 +50,17 @@ function setRadioChoice(origAnswer, resObj)
 
   if (matchIndex >= 0 && matchIndex < resObj.optionList.length)
   {
-    resObj.choiceIndex = matchIndex;
+    resObj.chosenOption = matchIndex;
+    resObj.answerGiven = true;
   }
   else if (origAnswer.length > 0 && resObj.customEnabled === true)
   {
     resObj.customText = origAnswer;
+    resObj.answerGiven = true;
   }
   else
   {
     resObj.customText = "";
+    resObj.answerGiven = false;
   }
 }
