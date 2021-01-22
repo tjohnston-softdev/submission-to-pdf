@@ -1,13 +1,12 @@
 # Summary
 
-**Version:** 0.2
+**Version:** 0.3
 
 **Date:** 2021-01-22
 
-**Title:** Checkbox and Dropdown
+**Title:** Revised Checkbox display modes
 
 **Description:**
 
-* Added support for 'Checkbox' and 'Dropdown' form elements.
-* Plans to group parsed elements by section.
-* Parse result objects indicate whether answer was given.
+* Dropped planned support for 'Upload File' form elements.
+* Revised display modes for 'Checkbox' form elements.

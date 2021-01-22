@@ -7,11 +7,11 @@ var nameOpts =
   "SUBMISSION_NUMBER": 5
 };
 
-var fileOpts =
+var checkboxModeOpts =
 {
-  "LINK": 1,
-  "TEXT": 0,
-  "SKIP": -1
+  "PLAIN_TEXT": 1,
+  "BULLET_LIST": 2,
+  "FULL_LIST": 3
 };
 
 var renderTypeOpts =
@@ -35,8 +35,8 @@ var scriptSettings =
   includeEmailAddress: true,
   skipBlankQuestions: true,
   displayRadioList: true,
-  displayCheckList: true,
-  uploadFileMode: fileOpts.LINK,
+  checkboxMode: checkboxModeOpts.FULL_LIST,
+  indentOtherOption: true,
   pageBreakSection: true,
   includeSectionName: true,
   includeSectionDesc: true,
@@ -48,6 +48,12 @@ var scriptSettings =
 function getNameOptions()
 {
   return nameOpts;
+}
+
+
+function getCheckboxModes()
+{
+  return checkboxModeOpts;
 }
 
 

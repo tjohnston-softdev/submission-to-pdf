@@ -1,6 +1,7 @@
 function runSubmissionToPDF()
 {
   var nameOptionsObject = {};
+  var checkboxOptionsObject = {};
   var renderTypesObject = {};
   var settingsObject = {};
   
@@ -25,6 +26,7 @@ function runSubmissionToPDF()
 
 
   nameOptionsObject = getNameOptions();
+  checkboxOptionsObject = getCheckboxModes();
   renderTypesObject = getRenderTypes();
   settingsObject = getScriptSettings();
 
@@ -49,14 +51,14 @@ function runSubmissionToPDF()
   for (formElementIndex = 0; formElementIndex < formItemList.length; formElementIndex = formElementIndex + 1)
   {
     currentFormElement = formItemList[formElementIndex];
-    currentElementResult = parseFormElement(currentFormElement, previousSubmissionObject, renderTypesObject, settingsObject);
+    currentElementResult = parseFormElement(currentFormElement, previousSubmissionObject, checkboxOptionsObject, renderTypesObject, settingsObject);
   }
 
 }
 
 
 
-function parseFormElement(elementObj, submissionObj, renderTypesObj, settingsObj)
+function parseFormElement(elementObj, submissionObj, chkModesObj, renderTypesObj, settingsObj)
 {
   var elementName = elementObj.getTitle();
   var elementType = elementObj.getType();
@@ -87,11 +89,17 @@ function parseFormElement(elementObj, submissionObj, renderTypesObj, settingsObj
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     parseRes = handleTextField(elementName, givenAnswer, false, settingsObj.skipBlankQuestions, renderTypesObj);
   }
-  else if (elementType === FormApp.ItemType.CHECKBOX && settingsObj.displayCheckList === true)
+  else if (elementType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === chkModesObj.FULL_LIST)
   {
     elementCast = elementObj.asCheckboxItem();
     givenAnswer = getCheckboxAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(elementName, givenAnswer, elementCast, renderTypesObj);
+    parseRes = handleCheckListField(elementName, givenAnswer, elementCast, true, renderTypesObj);
+  }
+  else if (elementType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === chkModesObj.BULLET_LIST)
+  {
+    elementCast = elementObj.asCheckboxItem();
+    givenAnswer = getCheckboxAnswer(elementObj, submissionObj);
+    parseRes = handleCheckListField(elementName, givenAnswer, elementCast, false, renderTypesObj)
   }
   else if (elementType === FormApp.ItemType.CHECKBOX)
   {
@@ -104,7 +112,6 @@ function parseFormElement(elementObj, submissionObj, renderTypesObj, settingsObj
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     parseRes = handleTextField(elementName, givenAnswer, false, settingsObj.skipBlankQuestions, renderTypesObj);
   }
-
 
   return parseRes;
 }

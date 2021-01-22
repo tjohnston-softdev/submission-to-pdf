@@ -1,4 +1,4 @@
-function handleCheckListField(chkTitle, chkAnswers, chkElement, rTypes)
+function handleCheckListField(chkTitle, chkAnswers, chkElement, dispAll, rTypes)
 {
   var fieldRes =
   {
@@ -8,6 +8,7 @@ function handleCheckListField(chkTitle, chkAnswers, chkElement, rTypes)
     chosenItems: [],
     customEnabled: false,
     customText: "",
+    displayFullList: dispAll,
     answerGiven: false
   };
 
