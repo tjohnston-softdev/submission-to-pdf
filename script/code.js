@@ -1,116 +1,123 @@
 function runSubmissionToPDF()
 {
-  var nameOptionsObject = {};
-  var checkboxOptionsObject = {};
+  var nameOptsObject = {};
+  var chkOptsObject = {};
   var renderTypesObject = {};
   var settingsObject = {};
   
-  var targetFormObject = null;
+  var targetForm = null;
   var formName = "";
   var formDesc = "";
   var collectEmail = false;
   var formItemList = [];
   var formSubmissionArray = [];
   var submissionCount = -1;
-  var previousSubmissionObject = null;
+  var prevSubmission = null;
 
   var submissionTimestamp = "";
   var submitterEmail = "";
   
   var formElementIndex = 0;
-  var currentFormElement = null;
-  var currentElementResult = null;
+  var currentElement = null;
+  var currentResult = null;
   var currentSectionItems = [];
   
   var preparedElementsArray = [];
 
 
-  nameOptionsObject = getNameOptions();
-  checkboxOptionsObject = getCheckboxModes();
+  nameOptsObject = getNameOptions();
+  chkOptsObject = getCheckboxModes();
   renderTypesObject = getRenderTypes();
   settingsObject = getScriptSettings();
 
-  targetFormObject = FormApp.getActiveForm();
+  targetForm = FormApp.getActiveForm();
 
-  formName = targetFormObject.getTitle();
-  formDesc = targetFormObject.getDescription();
-  collectEmail = targetFormObject.collectsEmail();
-  formItemList = targetFormObject.getItems();
+  formName = targetForm.getTitle();
+  formDesc = targetForm.getDescription();
+  collectEmail = targetForm.collectsEmail();
+  formItemList = targetForm.getItems();
 
-  formSubmissionArray = targetFormObject.getResponses();
+  formSubmissionArray = targetForm.getResponses();
   submissionCount = formSubmissionArray.length;
-  previousSubmissionObject = formSubmissionArray[submissionCount - 1];
+  prevSubmission = formSubmissionArray[submissionCount - 1];
 
   submissionTimestamp = "";
 
   if (collectEmail === true)
   {
-    submitterEmail = previousSubmissionObject.getRespondentEmail();
+    submitterEmail = prevSubmission.getRespondentEmail();
   }
 
   for (formElementIndex = 0; formElementIndex < formItemList.length; formElementIndex = formElementIndex + 1)
   {
-    currentFormElement = formItemList[formElementIndex];
-    currentElementResult = parseFormElement(currentFormElement, previousSubmissionObject, checkboxOptionsObject, renderTypesObject, settingsObject);
+    currentElement = formItemList[formElementIndex];
+    currentResult = parseFormElement(currentElement, prevSubmission, chkOptsObject, renderTypesObject, settingsObject);
   }
 
 }
 
 
 
-function parseFormElement(elementObj, submissionObj, chkModesObj, renderTypesObj, settingsObj)
+function parseFormElement(elementObj, submissionObj, chkModes, rTypesObj, settingsObj)
 {
-  var elementName = elementObj.getTitle();
-  var elementType = elementObj.getType();
-  var elementCast = null;
+  var eName = elementObj.getTitle();
+  var eType = elementObj.getType();
+  var eCast = null;
   var givenAnswer = null;
   var preparedText = "";
 
   var parseRes = null;
 
-  if (elementType === FormApp.ItemType.TEXT)
+  if (eType === FormApp.ItemType.TEXT)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(elementName, givenAnswer, false, settingsObj.skipBlankQuestions, renderTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
-  else if (elementType === FormApp.ItemType.PARAGRAPH_TEXT)
+  else if (eType === FormApp.ItemType.PARAGRAPH_TEXT)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(elementName, givenAnswer, true, settingsObj.skipBlankQuestions, renderTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, true, settingsObj.skipBlankQuestions, rTypesObj);
   }
-  else if (elementType === FormApp.ItemType.MULTIPLE_CHOICE && settingsObj.displayRadioList === true)
+  else if (eType === FormApp.ItemType.MULTIPLE_CHOICE && settingsObj.displayRadioList === true)
   {
-    elementCast = elementObj.asMultipleChoiceItem();
+    eCast = elementObj.asMultipleChoiceItem();
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleRadioListField(elementName, givenAnswer, elementCast, renderTypesObj);
+    parseRes = handleRadioListField(eName, givenAnswer, eCast, rTypesObj);
   }
-  else if (elementType === FormApp.ItemType.MULTIPLE_CHOICE)
+  else if (eType === FormApp.ItemType.MULTIPLE_CHOICE)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(elementName, givenAnswer, false, settingsObj.skipBlankQuestions, renderTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
-  else if (elementType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === chkModesObj.FULL_LIST)
+  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === chkModes.FULL_LIST)
   {
-    elementCast = elementObj.asCheckboxItem();
+    eCast = elementObj.asCheckboxItem();
     givenAnswer = getCheckboxAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(elementName, givenAnswer, elementCast, true, renderTypesObj);
+    parseRes = handleCheckListField(eName, givenAnswer, eCast, true, rTypesObj);
   }
-  else if (elementType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === chkModesObj.BULLET_LIST)
+  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === chkModes.BULLET_LIST)
   {
-    elementCast = elementObj.asCheckboxItem();
+    eCast = elementObj.asCheckboxItem();
     givenAnswer = getCheckboxAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(elementName, givenAnswer, elementCast, false, renderTypesObj)
+    parseRes = handleCheckListField(eName, givenAnswer, eCast, false, rTypesObj)
   }
-  else if (elementType === FormApp.ItemType.CHECKBOX)
+  else if (eType === FormApp.ItemType.CHECKBOX)
   {
     givenAnswer = getCheckboxAnswer(elementObj, submissionObj);
     preparedText = givenAnswer.join();
-    parseRes = handleTextField(elementName, preparedText, true, settingsObj.skipBlankQuestions, renderTypesObj);
+    parseRes = handleTextField(eName, preparedText, true, settingsObj.skipBlankQuestions, rTypesObj);
   }
-  else if (elementType === FormApp.ItemType.LIST)
+  else if (eType === FormApp.ItemType.LIST)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(elementName, givenAnswer, false, settingsObj.skipBlankQuestions, renderTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+  }
+  else if (eType === FormApp.ItemType.SCALE)
+  {
+    eCast = elementObj.asScaleItem();
+    givenAnswer = getStringAnswer(elementObj, submissionObj);
+    preparedText = prepareScaleText(givenAnswer, eCast);
+    parseRes = handleTextField(eName, preparedText, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
 
   return parseRes;

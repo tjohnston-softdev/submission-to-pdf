@@ -6,22 +6,22 @@ function handleTextField(txtTitle, txtAnswer, multipleLines, skipBlank, rTypes)
     elementTitle: txtTitle,
     elementAnswer: "",
     titleBreak: multipleLines,
-    answerGiven: false
+    canUse: false
   };
 
   if (txtAnswer.length > 0)
   {
     fieldRes.elementAnswer = txtAnswer;
-    fieldRes.answerGiven = true;
+    fieldRes.canUse = true;
   }
   else if (skipBlank === true)
   {
-    fieldRes.answerGiven = false;
+    fieldRes.canUse = false;
   }
   else
   {
     fieldRes.elementAnswer = "";
-    fieldRes.answerGiven = true;
+    fieldRes.canUse = true;
   }
 
 

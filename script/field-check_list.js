@@ -9,7 +9,7 @@ function handleCheckListField(chkTitle, chkAnswers, chkElement, dispAll, rTypes)
     customEnabled: false,
     customText: "",
     displayFullList: dispAll,
-    answerGiven: false
+    canUse: false
   };
 
   fieldRes.customEnabled = chkElement.hasOtherOption();
@@ -93,14 +93,14 @@ function setCheckListFinalAnswer(resObj)
 {
   if (resObj.chosenItems.length > 0)
   {
-    resObj.answerGiven = true;
+    resObj.canUse = true;
   }
   else if (resObj.customEnabled === true && resObj.customText.length > 0)
   {
-    resObj.answerGiven = true;
+    resObj.canUse = true;
   }
   else
   {
-    resObj.answerGiven = false;
+    resObj.canUse = false;
   }
 }

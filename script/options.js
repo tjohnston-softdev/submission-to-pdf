@@ -14,7 +14,7 @@ var checkboxModeOpts =
   "FULL_LIST": 3
 };
 
-var renderTypeOpts =
+var renderTypeDefinitions =
 {
   "OVERALL_HEADING": -1,
   "FORM_DESCRIPTION": -2,
@@ -59,7 +59,7 @@ function getCheckboxModes()
 
 function getRenderTypes()
 {
-  return renderTypeOpts;
+  return renderTypeDefinitions;
 }
 
 

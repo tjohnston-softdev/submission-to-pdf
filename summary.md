@@ -1,12 +1,12 @@
 # Summary
 
-**Version:** 0.3
+**Version:** 0.4
 
 **Date:** 2021-01-22
 
-**Title:** Revised Checkbox display modes
+**Title:** Scale elements
 
 **Description:**
 
-* Dropped planned support for 'Upload File' form elements.
-* Revised display modes for 'Checkbox' form elements.
+* Added support for 'Scale' form elements.
+* Cleaned variable names.
