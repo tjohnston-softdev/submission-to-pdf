@@ -123,6 +123,27 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
     parseRes = handleCheckGridField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
   }
+  else if (eType === FormApp.ItemType.DATE)
+  {
+    givenAnswer = getStringAnswer(elementObj, submissionObj);
+    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+  }
+  else if (eType === FormApp.ItemType.TIME)
+  {
+    givenAnswer = getStringAnswer(elementObj, submissionObj);
+    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+  }
+  else if (eType === FormApp.ItemType.DURATION)
+  {
+    givenAnswer = getStringAnswer(elementObj, submissionObj);
+    preparedText = prepareDurationText(givenAnswer, settingsObj.useFullDurationFormat);
+    parseRes = handleTextField(eName, preparedText, false, settingsObj.skipBlankQuestions, rTypesObj);
+  }
+  else if (eType === FormApp.ItemType.DATETIME)
+  {
+    givenAnswer = getStringAnswer(elementObj, submissionObj);
+    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+  }
 
   return parseRes;
 }

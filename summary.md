@@ -1,11 +1,14 @@
 # Summary
 
-**Version:** 0.7
+**Version:** 0.8
 
 **Date:** 2021-01-24
 
-**Title:** Tick Box Grid
+**Title:** Date and Time elements.
 
 **Description:**
 
-* Added support for 'Tick box grid' form elements.
+* Added support for 'Date' and 'Time' form elements.
+* This also includes:
+	* Time-Duration
+	* 'Date' with the time included.

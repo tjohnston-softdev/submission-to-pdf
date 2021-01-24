@@ -18,7 +18,7 @@ var radioGridModeOpts =
 {
   "FULL": 1,
   "LITE": 0
-}
+};
 
 
 var renderTypeDefinitions =
@@ -29,7 +29,8 @@ var renderTypeDefinitions =
   "TEXT": 1,
   "RADIO_LIST": 2,
   "CHECK_LIST": 3,
-  "RADIO_GRID": 4
+  "RADIO_GRID": 4,
+  "CHECK_GRID": 5
 };
 
 
@@ -46,6 +47,7 @@ var scriptSettings =
   checkboxMode: checkboxModeOpts.FULL_LIST,
   indentOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
+  useFullDurationFormat: true,
   pageBreakSection: true,
   includeSectionHeader: true,
   ignoreEmptySections: true
