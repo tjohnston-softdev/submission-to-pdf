@@ -1,11 +1,14 @@
 # Summary
 
-**Version:** 0.5
+**Version:** 0.6
 
 **Date:** 2021-01-24
 
-**Title:** Multiple-choice Grid.
+**Title:** Expanded skipBlankQuestions support.
 
 **Description:**
 
-* Added support for 'Multiple-choice grid' form elements.
+* Added skipBlankQuestions support for element types:
+	* Multiple choice
+	* Checkboxes
+	* Multiple-choice grid.

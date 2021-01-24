@@ -80,24 +80,18 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   {
     eCast = elementObj.asMultipleChoiceItem();
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleRadioListField(eName, givenAnswer, eCast, rTypesObj);
+    parseRes = handleRadioListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.MULTIPLE_CHOICE)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
-  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode > 0)
+  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode >= 0)
   {
     eCast = elementObj.asCheckboxItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(eName, givenAnswer, eCast, true, rTypesObj);
-  }
-  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === 0)
-  {
-    eCast = elementObj.asCheckboxItem();
-    givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(eName, givenAnswer, eCast, false, rTypesObj)
+    parseRes = handleCheckListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.CHECKBOX)
   {
@@ -121,7 +115,7 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   {
     eCast = elementObj.asGridItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleRadioGridField(eName, givenAnswer, eCast, rTypesObj);
+    parseRes = handleRadioGridField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
   }
 
   return parseRes;

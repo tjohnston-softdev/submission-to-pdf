@@ -47,8 +47,7 @@ var scriptSettings =
   indentOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
   pageBreakSection: true,
-  includeSectionName: true,
-  includeSectionDesc: true,
+  includeSectionHeader: true,
   ignoreEmptySections: true
 };
 

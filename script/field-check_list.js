@@ -1,4 +1,4 @@
-function handleCheckListField(chkTitle, chkAnswers, chkElement, dispAll, rTypes)
+function handleCheckListField(chkTitle, chkAnswers, chkElement, skipBlank, rTypes)
 {
   var fieldRes =
   {
@@ -8,14 +8,13 @@ function handleCheckListField(chkTitle, chkAnswers, chkElement, dispAll, rTypes)
     chosenItems: [],
     customEnabled: false,
     customText: "",
-    displayFullList: dispAll,
     canUse: false
   };
 
   fieldRes.customEnabled = chkElement.hasOtherOption();
   readCheckListOptions(chkElement, fieldRes.checkboxList);
   setCheckListChosenItems(chkAnswers, fieldRes);
-  setCheckListFinalAnswer(fieldRes);
+  setCheckListFinalAnswer(fieldRes, skipBlank);
 
   return fieldRes;
 }
@@ -89,7 +88,7 @@ function setCheckListChosenItems(origAnswerList, resObj)
 
 
 
-function setCheckListFinalAnswer(resObj)
+function setCheckListFinalAnswer(resObj, sBlank)
 {
   if (resObj.chosenItems.length > 0)
   {
@@ -99,8 +98,13 @@ function setCheckListFinalAnswer(resObj)
   {
     resObj.canUse = true;
   }
-  else
+  else if (sBlank === true)
   {
     resObj.canUse = false;
+  }
+  else
+  {
+    resObj.chosenItems = [];
+    resObj.canUse = true;
   }
 }

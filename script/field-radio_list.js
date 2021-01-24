@@ -1,4 +1,4 @@
-function handleRadioListField(rdoTitle, rdoAnswer, rdoElement, rTypes)
+function handleRadioListField(rdoTitle, rdoAnswer, rdoElement, skipBlank, rTypes)
 {
   var fieldRes =
   {
@@ -13,7 +13,7 @@ function handleRadioListField(rdoTitle, rdoAnswer, rdoElement, rTypes)
 
   fieldRes.customEnabled = rdoElement.hasOtherOption();
   readRadioListOptions(rdoElement, fieldRes.optionList);
-  setRadioChoice(rdoAnswer, fieldRes);
+  setRadioChoice(rdoAnswer, skipBlank, fieldRes);
 
   return fieldRes;
 }
@@ -44,7 +44,7 @@ function readRadioListOptions(eObj, oList)
 }
 
 
-function setRadioChoice(origAnswer, resObj)
+function setRadioChoice(origAnswer, sBlank, resObj)
 {
   var matchIndex = resObj.optionList.indexOf(origAnswer);
 
@@ -58,9 +58,14 @@ function setRadioChoice(origAnswer, resObj)
     resObj.customText = origAnswer;
     resObj.canUse = true;
   }
-  else
+  else if (sBlank === true)
   {
     resObj.customText = "";
     resObj.canUse = false;
+  }
+  else
+  {
+    resObj.chosenOption = -1;
+    resObj.canUse = true;
   }
 }

@@ -1,4 +1,4 @@
-function handleRadioGridField(gridName, gridAnswers, gridElement, rTypes)
+function handleRadioGridField(gridName, gridAnswers, gridElement, skipBlank, rTypes)
 {
   var fieldRes =
   {
@@ -17,7 +17,7 @@ function handleRadioGridField(gridName, gridAnswers, gridElement, rTypes)
   fieldRes.columnList = gridElement.getColumns();
   baseAnswers = prepareRadioGridBaseAnswers(gridAnswers, fieldRes.rowList.length);
   setRadioGridChosenItems(baseAnswers, fieldRes);
-  setRadioGridFinalAnswer(fieldRes);
+  setRadioGridFinalAnswer(fieldRes, skipBlank);
 
   return fieldRes;
 }
@@ -71,7 +71,7 @@ function setRadioGridChosenItems(answerList, resObj)
 
 
 
-function setRadioGridFinalAnswer(resObj)
+function setRadioGridFinalAnswer(resObj, sBlank)
 {
   var chosenItemIndex = 0;
   var currentColumnIndex = -1;
@@ -93,5 +93,16 @@ function setRadioGridFinalAnswer(resObj)
   }
 
 
-  resObj.canUse = answerFound;
+  if (answerFound === true)
+  {
+    resObj.canUse = true;
+  }
+  else if (sBlank === true)
+  {
+    resObj.canUse = false;
+  }
+  else
+  {
+    resObj.canUse = true;
+  }
 }
