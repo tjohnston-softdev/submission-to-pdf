@@ -1,7 +1,6 @@
 function runSubmissionToPDF()
 {
   var nameOptsObject = {};
-  var chkOptsObject = {};
   var renderTypesObject = {};
   var settingsObject = {};
   
@@ -26,7 +25,6 @@ function runSubmissionToPDF()
 
 
   nameOptsObject = getNameOptions();
-  chkOptsObject = getCheckboxModes();
   renderTypesObject = getRenderTypes();
   settingsObject = getScriptSettings();
 
@@ -51,14 +49,14 @@ function runSubmissionToPDF()
   for (formElementIndex = 0; formElementIndex < formItemList.length; formElementIndex = formElementIndex + 1)
   {
     currentElement = formItemList[formElementIndex];
-    currentResult = parseFormElement(currentElement, prevSubmission, chkOptsObject, renderTypesObject, settingsObject);
+    currentResult = parseFormElement(currentElement, prevSubmission, renderTypesObject, settingsObject);
   }
 
 }
 
 
 
-function parseFormElement(elementObj, submissionObj, chkModes, rTypesObj, settingsObj)
+function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
 {
   var eName = elementObj.getTitle();
   var eType = elementObj.getType();
@@ -89,21 +87,21 @@ function parseFormElement(elementObj, submissionObj, chkModes, rTypesObj, settin
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
-  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === chkModes.FULL_LIST)
+  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode > 0)
   {
     eCast = elementObj.asCheckboxItem();
-    givenAnswer = getCheckboxAnswer(elementObj, submissionObj);
+    givenAnswer = getObjectAnswer(elementObj, submissionObj);
     parseRes = handleCheckListField(eName, givenAnswer, eCast, true, rTypesObj);
   }
-  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === chkModes.BULLET_LIST)
+  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === 0)
   {
     eCast = elementObj.asCheckboxItem();
-    givenAnswer = getCheckboxAnswer(elementObj, submissionObj);
+    givenAnswer = getObjectAnswer(elementObj, submissionObj);
     parseRes = handleCheckListField(eName, givenAnswer, eCast, false, rTypesObj)
   }
   else if (eType === FormApp.ItemType.CHECKBOX)
   {
-    givenAnswer = getCheckboxAnswer(elementObj, submissionObj);
+    givenAnswer = getObjectAnswer(elementObj, submissionObj);
     preparedText = givenAnswer.join();
     parseRes = handleTextField(eName, preparedText, true, settingsObj.skipBlankQuestions, rTypesObj);
   }
@@ -118,6 +116,12 @@ function parseFormElement(elementObj, submissionObj, chkModes, rTypesObj, settin
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     preparedText = prepareScaleText(givenAnswer, eCast);
     parseRes = handleTextField(eName, preparedText, false, settingsObj.skipBlankQuestions, rTypesObj);
+  }
+  else if (eType === FormApp.ItemType.GRID)
+  {
+    eCast = elementObj.asGridItem();
+    givenAnswer = getObjectAnswer(elementObj, submissionObj);
+    parseRes = handleRadioGridField(eName, givenAnswer, eCast, rTypesObj);
   }
 
   return parseRes;
@@ -139,7 +143,7 @@ function getStringAnswer(eObj, subObj)
 }
 
 
-function getCheckboxAnswer(eObj, subObj)
+function getObjectAnswer(eObj, subObj)
 {
   var answerObject = subObj.getResponseForItem(eObj);
   var readRes = [];

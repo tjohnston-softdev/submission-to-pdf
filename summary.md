@@ -1,12 +1,11 @@
 # Summary
 
-**Version:** 0.4
+**Version:** 0.5
 
-**Date:** 2021-01-22
+**Date:** 2021-01-24
 
-**Title:** Scale elements
+**Title:** Multiple-choice Grid.
 
 **Description:**
 
-* Added support for 'Scale' form elements.
-* Cleaned variable names.
+* Added support for 'Multiple-choice grid' form elements.

@@ -9,10 +9,17 @@ var nameOpts =
 
 var checkboxModeOpts =
 {
-  "PLAIN_TEXT": 1,
-  "BULLET_LIST": 2,
-  "FULL_LIST": 3
+  "PLAIN_TEXT": -1,
+  "BULLET_LIST": 0,
+  "FULL_LIST": 1
 };
+
+var radioGridModeOpts =
+{
+  "FULL": 1,
+  "LITE": 0
+}
+
 
 var renderTypeDefinitions =
 {
@@ -21,7 +28,8 @@ var renderTypeDefinitions =
   "SUBMISSION_DATA": -3,
   "TEXT": 1,
   "RADIO_LIST": 2,
-  "CHECK_LIST": 3
+  "CHECK_LIST": 3,
+  "RADIO_GRID": 4
 };
 
 
@@ -37,6 +45,7 @@ var scriptSettings =
   displayRadioList: true,
   checkboxMode: checkboxModeOpts.FULL_LIST,
   indentOtherOption: true,
+  radioGridMode: radioGridModeOpts.FULL,
   pageBreakSection: true,
   includeSectionName: true,
   includeSectionDesc: true,
@@ -48,12 +57,6 @@ var scriptSettings =
 function getNameOptions()
 {
   return nameOpts;
-}
-
-
-function getCheckboxModes()
-{
-  return checkboxModeOpts;
 }
 
 
