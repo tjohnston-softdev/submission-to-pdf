@@ -1,14 +1,11 @@
 # Summary
 
-**Version:** 0.6
+**Version:** 0.7
 
 **Date:** 2021-01-24
 
-**Title:** Expanded skipBlankQuestions support.
+**Title:** Tick Box Grid
 
 **Description:**
 
-* Added skipBlankQuestions support for element types:
-	* Multiple choice
-	* Checkboxes
-	* Multiple-choice grid.
+* Added support for 'Tick box grid' form elements.

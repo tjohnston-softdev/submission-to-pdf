@@ -117,6 +117,12 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
     parseRes = handleRadioGridField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
   }
+  else if (eType === FormApp.ItemType.CHECKBOX_GRID)
+  {
+    eCast = elementObj.asCheckboxGridItem();
+    givenAnswer = getObjectAnswer(elementObj, submissionObj);
+    parseRes = handleCheckGridField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+  }
 
   return parseRes;
 }
