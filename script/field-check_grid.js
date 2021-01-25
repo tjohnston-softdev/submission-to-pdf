@@ -7,7 +7,7 @@ function handleCheckGridField(gridName, gridAnswers, gridElement, skipBlank, rTy
     rowList: [],
     columnList: [],
     boxStatus: [],
-    canUse: false
+    enabledFlag: -1
   };
 
   fieldRes.rowList = gridElement.getRows();
@@ -91,15 +91,15 @@ function setCheckGridFinalAnswer(resObj, sBlank)
 
   if (answerFound === true)
   {
-    resObj.canUse = true;
+    resObj.enabledFlag = 1;
   }
   else if (sBlank === true)
   {
-    resObj.canUse = false;
+    resObj.enabledFlag = -1;
   }
   else
   {
-    resObj.canUse = true;
+    resObj.enabledFlag = 0;
   }
 
 }

@@ -1,32 +1,51 @@
 # Changelog
 
-**./script/**
-* Created new file 'field-section.js'
-	* Used to parse 'Page break' and 'Section header' form elements.
-
----
-
 **./script/code.js**
-* 'parseFormElement' function changes:
-	* Wrote conditions to call parsing for section headers.
-		* For some reason, my example form with several sections only flagged `FormApp.ItemType.PAGE_BREAK` rather than `SECTION_HEADER`
-		* I included conditions for both element types just to be sure.
-		* They both call 'field-section.js' and parse the same way.
-		* The only difference is how the element type is cast.
-	* Added final `else` condition to ignore unsupported element types.
+* Changes made to 'runSubmissionToPDF' variables:
+	* Removed 'submissionTimestamp'.
+	* Renamed 'currentSectionItems' to 'currentSection'
+	* Renamed 'preparedElementsArray' to 'preparedElements'
 
 ---
 
-**./script/options.js**
-* Created new enumerator objects:
-	* 'sectionBreakOpts' - Defines options for 'sectionBreak'.
-	* 'sectionHeaderOpts' - Defines options for 'includeSectionHeader'.
-* Updated 'scriptSettings' properties:
-	* Removed 'pageBreakSection'.
-	* Added 'sectionBreak'. (Set to "PAGE" for now)
-	* Changed 'includeSectionHeader' type from boolean to enum
-		* Uses 'sectionHeaderOpts' object.
-		* Value currently set to "FULL".
-* Added new render type definition "SECTION"
-	* Refers to 'Page break' and 'Section header' elements.
-	* Uses flag value 6.
+**./script/field-text.js**
+* Replaced 'canUse' result property with 'enabledFlag'.
+* Modified IF conditions in 'handleTextField' to use 'enabledFlag' instead of 'canUse'.
+	* If answer is entered, set flag to positive.
+	* If answer is blank and should be skipped, set flag to negative.
+	* If blank answers should not be skipped, set flag to zero.
+
+---
+
+**./script/field-radio_list.js**
+* Replaced 'canUse' result property with 'enabledFlag'.
+* Modified IF conditions in 'setRadioChoice' to use 'enabledFlag' instead of 'canUse'.
+	* If a radio button was selected, set flag to positive.
+	* If a custom option was entered, set flag to positive.
+	* If no radio button was selected and should be skipped, set flag to negative.
+	* If blank selections should not be skipped, set flag to zero.
+
+
+---
+
+**./script/field-check_list.js**
+* Replaced 'canUse' result property with 'enabledFlag'.
+* Modified IF conditions in 'setCheckListFinalAnswer' to use 'enabledFlag' instead of 'canUse'.
+	* Refer to 'field-radio_list.js' for details.
+
+---
+
+**./script/field-radio_grid.js**
+* Replaced 'canUse' result property with 'enabledFlag'.
+* Modified post-loop IF conditions in 'setRadioGridFinalAnswer' to use 'enabledFlag' instead of 'canUse'.
+	*  If the radio grid has at least one selected option across all rows, set flag to positive.
+	* If blank answers should be skipped, set flag to negative.
+	* If blank answers should not be skipped, set flag to zero.
+
+
+---
+
+**./script/field-check_grid.js**
+* Replaced 'canUse' result property with 'enabledFlag'.
+* Modified post-loop IF conditions in 'setCheckGridFinalAnswer' to use 'enabledFlag' instead of 'canUse'.
+	* Refer to 'field-radio_grid.js' for details.

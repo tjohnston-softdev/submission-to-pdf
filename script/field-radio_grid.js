@@ -7,7 +7,7 @@ function handleRadioGridField(gridName, gridAnswers, gridElement, skipBlank, rTy
     rowList: [],
     columnList: [],
     chosenItems: [],
-    canUse: false
+    enabledFlag: -1
   };
 
   var baseAnswers = [];
@@ -95,14 +95,14 @@ function setRadioGridFinalAnswer(resObj, sBlank)
 
   if (answerFound === true)
   {
-    resObj.canUse = true;
+    resObj.enabledFlag = 1;
   }
   else if (sBlank === true)
   {
-    resObj.canUse = false;
+    resObj.enabledFlag = -1;
   }
   else
   {
-    resObj.canUse = true;
+    resObj.enabledFlag = 0;
   }
 }

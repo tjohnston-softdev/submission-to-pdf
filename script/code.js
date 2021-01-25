@@ -12,16 +12,14 @@ function runSubmissionToPDF()
   var formSubmissionArray = [];
   var submissionCount = -1;
   var prevSubmission = null;
-
-  var submissionTimestamp = "";
   var submitterEmail = "";
   
   var formElementIndex = 0;
   var currentElement = null;
   var currentResult = null;
-  var currentSectionItems = [];
+  var currentSection = [];
   
-  var preparedElementsArray = [];
+  var preparedElements = [];
 
 
   nameOptsObject = getNameOptions();
@@ -38,8 +36,6 @@ function runSubmissionToPDF()
   formSubmissionArray = targetForm.getResponses();
   submissionCount = formSubmissionArray.length;
   prevSubmission = formSubmissionArray[submissionCount - 1];
-
-  submissionTimestamp = "";
 
   if (collectEmail === true)
   {

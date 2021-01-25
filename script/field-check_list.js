@@ -8,7 +8,7 @@ function handleCheckListField(chkTitle, chkAnswers, chkElement, skipBlank, rType
     chosenItems: [],
     customEnabled: false,
     customText: "",
-    canUse: false
+    enabledFlag: -1
   };
 
   fieldRes.customEnabled = chkElement.hasOtherOption();
@@ -92,19 +92,19 @@ function setCheckListFinalAnswer(resObj, sBlank)
 {
   if (resObj.chosenItems.length > 0)
   {
-    resObj.canUse = true;
+    resObj.enabledFlag = 1;
   }
   else if (resObj.customEnabled === true && resObj.customText.length > 0)
   {
-    resObj.canUse = true;
+    resObj.enabledFlag = 1;
   }
   else if (sBlank === true)
   {
-    resObj.canUse = false;
+    resObj.enabledFlag = -1;
   }
   else
   {
     resObj.chosenItems = [];
-    resObj.canUse = true;
+    resObj.enabledFlag = 0;
   }
 }

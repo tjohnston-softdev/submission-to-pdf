@@ -1,12 +1,12 @@
 # Summary
 
-**Version:** 0.9
+**Version:** 0.10
 
 **Date:** 2021-01-25
 
-**Title:** Sections
+**Title:** Revised element usage status
 
 **Description:**
 
-* Added support for sections.
-* Covers both header and page breaks.
+Element usage status is now indicated with a flag (enabledFlag)
+instead of a boolean (canUse) 
