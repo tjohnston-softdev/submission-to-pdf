@@ -20,6 +20,20 @@ var radioGridModeOpts =
   "LITE": 0
 };
 
+var sectionBreakOpts =
+{
+  "PAGE": 1,
+  "PARAGRAPH": 0,
+  "IGNORE": -1
+};
+
+var sectionHeaderOpts =
+{
+  "FULL": 1,
+  "TITLE_ONLY": 0,
+  "SKIP": -1
+}
+
 
 var renderTypeDefinitions =
 {
@@ -30,7 +44,8 @@ var renderTypeDefinitions =
   "RADIO_LIST": 2,
   "CHECK_LIST": 3,
   "RADIO_GRID": 4,
-  "CHECK_GRID": 5
+  "CHECK_GRID": 5,
+  "SECTION": 6
 };
 
 
@@ -48,8 +63,8 @@ var scriptSettings =
   indentOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
   useFullDurationFormat: true,
-  pageBreakSection: true,
-  includeSectionHeader: true,
+  sectionBreak: sectionBreakOpts.PAGE,
+  includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true
 };
 

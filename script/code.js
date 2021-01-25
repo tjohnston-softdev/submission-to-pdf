@@ -144,6 +144,20 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
+  else if (eType === FormApp.ItemType.PAGE_BREAK)
+  {
+    eCast = elementObj.asPageBreakItem();
+    parseRes = handleSectionField(eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
+  }
+  else if (eType === FormApp.ItemType.SECTION_HEADER)
+  {
+    eCast = elementObj.asSectionHeaderItem();
+    parseRes = handleSectionField(eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
+  }
+  else
+  {
+    parseRes = null;
+  }
 
   return parseRes;
 }

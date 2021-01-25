@@ -1,14 +1,12 @@
 # Summary
 
-**Version:** 0.8
+**Version:** 0.9
 
-**Date:** 2021-01-24
+**Date:** 2021-01-25
 
-**Title:** Date and Time elements.
+**Title:** Sections
 
 **Description:**
 
-* Added support for 'Date' and 'Time' form elements.
-* This also includes:
-	* Time-Duration
-	* 'Date' with the time included.
+* Added support for sections.
+* Covers both header and page breaks.

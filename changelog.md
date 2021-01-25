@@ -1,27 +1,32 @@
 # Changelog
 
-**./script/code.js**
-* Added new conditions to 'parseFormElement':
-	* `FormApp.ItemType.DATE` calls parsing for regular 'Date' elements.
-	* `FormApp.ItemType.TIME` calls parsing for regular 'Time' elements.
-	* `FormApp.ItemType.DURATION` calls parsing for 'Time-Duration'.
-	* `FormApp.ItemType.DATETIME` calls parsing for 'Date' elements with time included.
+**./script/**
+* Created new file 'field-section.js'
+	* Used to parse 'Page break' and 'Section header' form elements.
 
 ---
 
-**./script/prepare-answer-text.js**
-* Wrote new functions:
-	* prepareDurationText
-		* Used to prepare answer text from 'Time-Duration' elements.
-		* The final text is written differently depending on 'useFullDurationFormat'.
-	* writeFullDurationFormat
-		* Converts duration string to long format.
+**./script/code.js**
+* 'parseFormElement' function changes:
+	* Wrote conditions to call parsing for section headers.
+		* For some reason, my example form with several sections only flagged `FormApp.ItemType.PAGE_BREAK` rather than `SECTION_HEADER`
+		* I included conditions for both element types just to be sure.
+		* They both call 'field-section.js' and parse the same way.
+		* The only difference is how the element type is cast.
+	* Added final `else` condition to ignore unsupported element types.
 
 ---
 
 **./script/options.js**
-* Added missing semicolon at the end of 'radioGridModeOpts'
-* Added new 'scriptSettings' option 'useFullDurationFormat'
-	* This affects how 'Time-Duration' answers will be parsed.
-		* **true:** 7 hours, 30 minutes, 52 seconds
-		* **false:** 07:30:52
+* Created new enumerator objects:
+	* 'sectionBreakOpts' - Defines options for 'sectionBreak'.
+	* 'sectionHeaderOpts' - Defines options for 'includeSectionHeader'.
+* Updated 'scriptSettings' properties:
+	* Removed 'pageBreakSection'.
+	* Added 'sectionBreak'. (Set to "PAGE" for now)
+	* Changed 'includeSectionHeader' type from boolean to enum
+		* Uses 'sectionHeaderOpts' object.
+		* Value currently set to "FULL".
+* Added new render type definition "SECTION"
+	* Refers to 'Page break' and 'Section header' elements.
+	* Uses flag value 6.
