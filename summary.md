@@ -1,14 +1,12 @@
 # Summary
 
-**Version:** 0.11
+**Version:** 0.12
 
 **Date:** 2021-01-26
 
-**Title:** Save element data
+**Title:** Output document name
 
 **Description:**
 
-* Parsed form elements are saved into an array.
-* Form elements are grouped into sections.
-* Renamed './script/prepare-answer-text.js' to 'form-answer-help.js'
-* Added 'useSymbols' option.
+* Added functionality to write output document names.
+* Read submission timestamp.

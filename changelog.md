@@ -1,32 +1,40 @@
 # Changelog
 
 **./script/code.js**
-* Merged the 'currentSection' and 'preparedElements' variables into object 'parsedElements'.
-* Declared new form element loop variable 'currentParsed'
-* Wrote IF conditions that occur after form element parsing to handle object saving.
-* Form element looping appears to be complete.
-* Moved the following functions to 'form-answer-help.js'
-	* getStringAnswer
-	* getObjectAnswer
-* Included calls to 'handleParsedElementSectionBreak' when:
-	* A section element is parsed.
-	* The form element loop is complete, for the last section.
+* Variables in 'runSubmissionToPDF':
+	* Declared 'subTime'.
+		* Set using 'submission-timestamp.js' after the form submission object is retrieved.
+	* Declared 'outputName'.
+		* Set using 'submission-name.js' after all form elements have been parsed.
+	* Renamed 'submissionCount' to 'subCount'.
+	* Renamed 'submitterEmail' to 'subEmail'.
 
 ---
 
-**./script/parsed-section.js**
-* New file
-* Used to facilitate section breaking when looping through form elements.
-* Form elements in a section are grouped together. After the section is complete, this file helps decide if they should be saved to the overall result.
+**./script/submission-timestamp.js**
+* New file.
+* Used to retrieve and convert submission timestamp into a readable string.
+	* **Example:** 20210126-1306
 
 ---
 
-**./script/form-answer-help.js**
-* Renamed from 'prepare-answer-text.js'
-* Now includes functions for casting form element response objects.
+**./script/submission-name.js**
+* New file.
+* Used to decide what the output document file will be called.
+	* Based on the value of 'scriptSettings.documentNameMode'
+	* Refer to 'nameOpts' in 'options.js'
+	* "SUBMISSION_NUMBER" is default.
 
 ---
 
 **./script/options.js**
-* Added new settings property 'useSymbols'
-	* This indicates whether the use of symbols and non-plain characters will be allowed when writing the result document.
+* Changes to 'scriptSettings' properties:
+	* Removed 'includeSubmissionNumber'
+	* Removed 'includeSubmissionTimestamp'
+	* Added 'includeSubmissionData'
+	* 'includeEmailAddress' remains a separate option.
+* Changes to 'nameOpts' properties:
+	* Renamed "FIRST_SHORT_ANSWER" to "FIRST_TEXT"
+	* Added "FORM_NAME_WITH_FIRST_TEXT" (3)
+	* Updated flag values in order of definition.
+* 'scriptSettings.documentNameMode' is currently set to "FORM_NAME_WITH_SUBMISSION_NUMBER"

@@ -2,9 +2,10 @@ var nameOpts =
 {
   "FORM_NAME_WITH_SUBMISSION_TIMESTAMP": 1,
   "FORM_NAME_WITH_SUBMISSION_NUMBER": 2,
-  "FIRST_SHORT_ANSWER": 3,
-  "TIMESTAMP": 4,
-  "SUBMISSION_NUMBER": 5
+  "FORM_NAME_WITH_FIRST_TEXT": 3,
+  "FIRST_TEXT": 4,
+  "TIMESTAMP": 5,
+  "SUBMISSION_NUMBER": 6
 };
 
 var checkboxModeOpts =
@@ -54,8 +55,7 @@ var scriptSettings =
   documentFolderID: "",
   documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER,
   includeFormDesc: false,
-  includeSubmissionNumber: true,
-  includeSubmissionTimestamp: true,
+  includeSubmissionData: false,
   includeEmailAddress: true,
   skipBlankQuestions: true,
   displayRadioList: true,

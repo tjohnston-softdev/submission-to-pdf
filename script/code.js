@@ -10,16 +10,19 @@ function runSubmissionToPDF()
   var collectEmail = false;
   var formItemList = [];
   var formSubmissionArray = [];
-  var submissionCount = -1;
+  var subCount = -1;
   var prevSubmission = null;
-  var submitterEmail = "";
-  
+
+  var subEmail = "";
+  var subTime = null;
+
   var formElementIndex = 0;
   var currentElement = null;
   var currentResult = null;
   var currentParsed = false;
   
   var parsedElements = {section: [], overall: []};
+  var outputName = "";
 
 
   nameOptsObject = getNameOptions();
@@ -34,12 +37,13 @@ function runSubmissionToPDF()
   formItemList = targetForm.getItems();
 
   formSubmissionArray = targetForm.getResponses();
-  submissionCount = formSubmissionArray.length;
-  prevSubmission = formSubmissionArray[submissionCount - 1];
+  subCount = formSubmissionArray.length;
+  prevSubmission = formSubmissionArray[subCount - 1];
+  subTime = readSubmissionTimestamp(prevSubmission);
 
   if (collectEmail === true)
   {
-    submitterEmail = prevSubmission.getRespondentEmail();
+    subEmail = prevSubmission.getRespondentEmail();
   }
 
   for (formElementIndex = 0; formElementIndex < formItemList.length; formElementIndex = formElementIndex + 1)
@@ -65,6 +69,7 @@ function runSubmissionToPDF()
   }
 
   handleParsedElementSectionBreak(null, parsedElements, settingsObject, true);
+  outputName = decideSubmissionName(settingsObject, nameOptsObject, formName, subCount, subTime, parsedElements, renderTypesObject);
 }
 
 
