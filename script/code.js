@@ -23,6 +23,9 @@ function runSubmissionToPDF()
   
   var parsedElements = {section: [], overall: []};
   var outputName = "";
+  var overallHeadingElement = null;
+  var formDescriptionElement = null;
+  var submissionDataElement = null;
 
 
   nameOptsObject = getNameOptions();
@@ -70,6 +73,12 @@ function runSubmissionToPDF()
 
   handleParsedElementSectionBreak(null, parsedElements, settingsObject, true);
   outputName = decideSubmissionName(settingsObject, nameOptsObject, formName, subCount, subTime, parsedElements, renderTypesObject);
+
+  overallHeadingElement = handleOverallHeadingField(formName, renderTypesObject);
+  formDescriptionElement = handleFormDescriptionField(formDesc, settingsObject.includeFormDesc, renderTypesObject);
+  submissionDataElement = handleSubmissionDataField(subCount, subTime, subEmail, settingsObject, renderTypesObject);
+
+  parsedElements.overall.unshift(overallHeadingElement, formDescriptionElement, submissionDataElement);
 }
 
 

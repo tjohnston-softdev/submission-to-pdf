@@ -53,9 +53,9 @@ var renderTypeDefinitions =
 var scriptSettings =
 {
   documentFolderID: "",
-  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER,
-  includeFormDesc: false,
-  includeSubmissionData: false,
+  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP,
+  includeFormDesc: true,
+  includeSubmissionData: true,
   includeEmailAddress: true,
   skipBlankQuestions: true,
   displayRadioList: true,

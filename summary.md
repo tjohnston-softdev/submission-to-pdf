@@ -1,12 +1,11 @@
 # Summary
 
-**Version:** 0.12
+**Version:** 0.13
 
 **Date:** 2021-01-26
 
-**Title:** Output document name
+**Title:** Form and Submission data
 
 **Description:**
 
-* Added functionality to write output document names.
-* Read submission timestamp.
+Parses form name, form description, and submission data.

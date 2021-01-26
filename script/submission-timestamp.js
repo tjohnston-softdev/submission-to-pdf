@@ -10,18 +10,16 @@ function readSubmissionTimestamp(submissionObj)
   var minuteNumber = retrievedTimestamp.getMinutes();
   var secondNumber = retrievedTimestamp.getSeconds();
 
-  var yearText = String(yearNumber);
-  var monthText = stringifyTimestampNumber(monthNumber);
-  var dayText = stringifyTimestampNumber(dayNumber);
+  var timestampRes = {};
 
-  var hourText = stringifyTimestampNumber(hourNumber);
-  var minuteText = stringifyTimestampNumber(minuteNumber);
-  var secondText = stringifyTimestampNumber(secondNumber);
+  timestampRes["year"] = String(yearNumber);
+  timestampRes["month"] = stringifyTimestampNumber(monthNumber);
+  timestampRes["day"] = stringifyTimestampNumber(dayNumber);
 
-  var datePart = [yearText, monthText, dayText].join("");
-  var timePart = [hourText, minuteText, secondText].join("");
+  timestampRes["hour"] = stringifyTimestampNumber(hourNumber);
+  timestampRes["minute"] = stringifyTimestampNumber(minuteNumber);
+  timestampRes["second"] = stringifyTimestampNumber(secondNumber);
 
-  var timestampRes = datePart + "-" + timePart;
   return timestampRes;
 }
 

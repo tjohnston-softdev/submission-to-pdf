@@ -1,12 +1,13 @@
-function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, subTime, pElements, rTypesObj)
+function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, sTimeObj, pElements, rTypesObj)
 {
+  var writtenTimestamp = writeTimestampFileName(sTimeObj);
   var modeFlag = settingsObj.documentNameMode;
   var textAns = "";
   var nameRes = "";
 
   if (modeFlag === nameObj.FORM_NAME_WITH_SUBMISSION_TIMESTAMP)
   {
-    nameRes = incorporateFormName(frmName, subTime);
+    nameRes = incorporateFormName(frmName, writtenTimestamp);
   }
   else if (modeFlag === nameObj.FORM_NAME_WITH_SUBMISSION_NUMBER)
   {
@@ -23,7 +24,7 @@ function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, subTime,
   }
   else if (modeFlag === nameObj.TIMESTAMP)
   {
-    nameRes = subTime;
+    nameRes = writtenTimestamp;
   }
   else
   {
@@ -31,6 +32,17 @@ function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, subTime,
   }
 
   return nameRes;
+}
+
+
+
+function writeTimestampFileName(tsObject)
+{
+  var datePart = [tsObject.year, tsObject.month, tsObject.day].join("");
+  var timePart = [tsObject.hour, tsObject.minute, tsObject.second].join("");
+  var writeRes = datePart + "-" + timePart;
+
+  return writeRes;
 }
 
 
