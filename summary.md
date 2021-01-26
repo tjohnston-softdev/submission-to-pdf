@@ -1,12 +1,14 @@
 # Summary
 
-**Version:** 0.10
+**Version:** 0.11
 
-**Date:** 2021-01-25
+**Date:** 2021-01-26
 
-**Title:** Revised element usage status
+**Title:** Save element data
 
 **Description:**
 
-Element usage status is now indicated with a flag (enabledFlag)
-instead of a boolean (canUse) 
+* Parsed form elements are saved into an array.
+* Form elements are grouped into sections.
+* Renamed './script/prepare-answer-text.js' to 'form-answer-help.js'
+* Added 'useSymbols' option.

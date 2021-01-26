@@ -65,7 +65,8 @@ var scriptSettings =
   useFullDurationFormat: true,
   sectionBreak: sectionBreakOpts.PAGE,
   includeSectionHeader: sectionHeaderOpts.FULL,
-  ignoreEmptySections: true
+  ignoreEmptySections: true,
+  useSymbols: true
 };
 
 

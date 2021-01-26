@@ -17,9 +17,9 @@ function runSubmissionToPDF()
   var formElementIndex = 0;
   var currentElement = null;
   var currentResult = null;
-  var currentSection = [];
+  var currentParsed = false;
   
-  var preparedElements = [];
+  var parsedElements = {section: [], overall: []};
 
 
   nameOptsObject = getNameOptions();
@@ -46,8 +46,25 @@ function runSubmissionToPDF()
   {
     currentElement = formItemList[formElementIndex];
     currentResult = parseFormElement(currentElement, prevSubmission, renderTypesObject, settingsObject);
+    currentParsed = false;
+
+    if (currentResult !== null && currentResult.elementType === renderTypesObject.SECTION)
+    {
+      handleParsedElementSectionBreak(currentResult, parsedElements, settingsObject, false);
+      currentParsed = true;
+    }
+    else if (currentResult !== null)
+    {
+      parsedElements.section.push(currentResult);
+      currentParsed = true;
+    }
+    else
+    {
+      currentParsed = false;
+    }
   }
 
+  handleParsedElementSectionBreak(null, parsedElements, settingsObject, true);
 }
 
 
@@ -156,33 +173,4 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   }
 
   return parseRes;
-}
-
-
-
-function getStringAnswer(eObj, subObj)
-{
-  var answerObject = subObj.getResponseForItem(eObj);
-  var readRes = "";
-
-  if (answerObject !== null)
-  {
-    readRes = answerObject.getResponse();
-  }
-
-  return readRes;
-}
-
-
-function getObjectAnswer(eObj, subObj)
-{
-  var answerObject = subObj.getResponseForItem(eObj);
-  var readRes = [];
-
-  if (answerObject !== null)
-  {
-    readRes = answerObject.getResponse();
-  }
-
-  return readRes;
 }

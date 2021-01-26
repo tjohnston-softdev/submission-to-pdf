@@ -1,3 +1,33 @@
+function getStringAnswer(eObj, subObj)
+{
+  var answerObject = subObj.getResponseForItem(eObj);
+  var readRes = "";
+
+  if (answerObject !== null)
+  {
+    readRes = answerObject.getResponse();
+  }
+
+  return readRes;
+}
+
+
+function getObjectAnswer(eObj, subObj)
+{
+  var answerObject = subObj.getResponseForItem(eObj);
+  var readRes = [];
+
+  if (answerObject !== null)
+  {
+    readRes = answerObject.getResponse();
+  }
+
+  return readRes;
+}
+
+
+
+
 function prepareScaleText(scaleAnswer, scaleElement)
 {
   var upperLimit = -1;

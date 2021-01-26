@@ -1,51 +1,32 @@
 # Changelog
 
 **./script/code.js**
-* Changes made to 'runSubmissionToPDF' variables:
-	* Removed 'submissionTimestamp'.
-	* Renamed 'currentSectionItems' to 'currentSection'
-	* Renamed 'preparedElementsArray' to 'preparedElements'
+* Merged the 'currentSection' and 'preparedElements' variables into object 'parsedElements'.
+* Declared new form element loop variable 'currentParsed'
+* Wrote IF conditions that occur after form element parsing to handle object saving.
+* Form element looping appears to be complete.
+* Moved the following functions to 'form-answer-help.js'
+	* getStringAnswer
+	* getObjectAnswer
+* Included calls to 'handleParsedElementSectionBreak' when:
+	* A section element is parsed.
+	* The form element loop is complete, for the last section.
 
 ---
 
-**./script/field-text.js**
-* Replaced 'canUse' result property with 'enabledFlag'.
-* Modified IF conditions in 'handleTextField' to use 'enabledFlag' instead of 'canUse'.
-	* If answer is entered, set flag to positive.
-	* If answer is blank and should be skipped, set flag to negative.
-	* If blank answers should not be skipped, set flag to zero.
+**./script/parsed-section.js**
+* New file
+* Used to facilitate section breaking when looping through form elements.
+* Form elements in a section are grouped together. After the section is complete, this file helps decide if they should be saved to the overall result.
 
 ---
 
-**./script/field-radio_list.js**
-* Replaced 'canUse' result property with 'enabledFlag'.
-* Modified IF conditions in 'setRadioChoice' to use 'enabledFlag' instead of 'canUse'.
-	* If a radio button was selected, set flag to positive.
-	* If a custom option was entered, set flag to positive.
-	* If no radio button was selected and should be skipped, set flag to negative.
-	* If blank selections should not be skipped, set flag to zero.
-
+**./script/form-answer-help.js**
+* Renamed from 'prepare-answer-text.js'
+* Now includes functions for casting form element response objects.
 
 ---
 
-**./script/field-check_list.js**
-* Replaced 'canUse' result property with 'enabledFlag'.
-* Modified IF conditions in 'setCheckListFinalAnswer' to use 'enabledFlag' instead of 'canUse'.
-	* Refer to 'field-radio_list.js' for details.
-
----
-
-**./script/field-radio_grid.js**
-* Replaced 'canUse' result property with 'enabledFlag'.
-* Modified post-loop IF conditions in 'setRadioGridFinalAnswer' to use 'enabledFlag' instead of 'canUse'.
-	*  If the radio grid has at least one selected option across all rows, set flag to positive.
-	* If blank answers should be skipped, set flag to negative.
-	* If blank answers should not be skipped, set flag to zero.
-
-
----
-
-**./script/field-check_grid.js**
-* Replaced 'canUse' result property with 'enabledFlag'.
-* Modified post-loop IF conditions in 'setCheckGridFinalAnswer' to use 'enabledFlag' instead of 'canUse'.
-	* Refer to 'field-radio_grid.js' for details.
+**./script/options.js**
+* Added new settings property 'useSymbols'
+	* This indicates whether the use of symbols and non-plain characters will be allowed when writing the result document.
