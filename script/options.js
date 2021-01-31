@@ -42,6 +42,7 @@ var renderTypeDefinitions =
   "OVERALL_HEADING": -1,
   "FORM_DESCRIPTION": -2,
   "SUBMISSION_DATA": -3,
+  "END_FORM_HEADER": -4,
   "TEXT": 1,
   "RADIO_LIST": 2,
   "CHECK_LIST": 3,

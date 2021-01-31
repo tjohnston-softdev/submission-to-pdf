@@ -40,7 +40,7 @@ function handleSubmissionDataField(subNumber, sTimeObj, givenEmailAddress, setti
   var fieldRes =
   {
     elementType: rTypes.SUBMISSION_DATA,
-    submissionNumber: -1,
+    submissionNumber: "",
     submissionTimestamp: "",
     submitterEmail: "",
     visible: false
@@ -48,11 +48,22 @@ function handleSubmissionDataField(subNumber, sTimeObj, givenEmailAddress, setti
 
   if (settingsObj.includeSubmissionData === true)
   {
-    fieldRes.submissionNumber = subNumber;
+    fieldRes.submissionNumber = String(subNumber);
     fieldRes.submissionTimestamp = writeFormattedTimestamp(sTimeObj);
     fieldRes.submitterEmail = setSubmissionEmail(givenEmailAddress, settingsObj.includeEmailAddress);
     fieldRes.visible = true;
   }
+
+  return fieldRes;
+}
+
+
+function handleEndFormHeaderField(rTypes)
+{
+  var fieldRes =
+  {
+    elementType: rTypes.END_FORM_HEADER
+  };
 
   return fieldRes;
 }

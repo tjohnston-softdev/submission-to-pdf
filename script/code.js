@@ -26,6 +26,7 @@ function runSubmissionToPDF()
   var overallHeadingElement = null;
   var formDescriptionElement = null;
   var submissionDataElement = null;
+  var endFormHeaderElement = null;
 
   var outputDocumentObject = null;
   var documentBodyObject = null;
@@ -82,7 +83,8 @@ function runSubmissionToPDF()
   overallHeadingElement = handleOverallHeadingField(formName, renderTypesObject);
   formDescriptionElement = handleFormDescriptionField(formDesc, settingsObject.includeFormDesc, renderTypesObject);
   submissionDataElement = handleSubmissionDataField(subCount, subTime, subEmail, settingsObject, renderTypesObject);
-  parsedElements.overall.unshift(overallHeadingElement, formDescriptionElement, submissionDataElement);
+  endFormHeaderElement = handleEndFormHeaderField(renderTypesObject);
+  parsedElements.overall.unshift(overallHeadingElement, formDescriptionElement, submissionDataElement, endFormHeaderElement);
 
   outputDocumentObject = DocumentApp.create(outputName);
   documentBodyObject = outputDocumentObject.getBody();
@@ -91,7 +93,11 @@ function runSubmissionToPDF()
   for (parsedObjectIndex = 0; parsedObjectIndex < parsedElements.overall.length; parsedObjectIndex = parsedObjectIndex + 1)
   {
     currentParsedObject = parsedElements.overall[parsedObjectIndex];
-    constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, settingsObject);
+
+    if (currentParsedObject !== null)
+    {
+      constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, settingsObject);
+    }
   }
 }
 
@@ -211,14 +217,23 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
 
 function constructDocumentElement(eObject, documentBody, rendTypes, settingsObj)
 {
+  var eType = eObject.elementType;
   var elementConstructed = false;
 
-  if (eObject !== null && eObject.elementType === rendTypes.OVERALL_HEADING)
+  if (eType === rendTypes.OVERALL_HEADING)
   {
     elementConstructed = handleOverallHeadingRender(documentBody, eObject);
   }
-  else if (eObject !== null && eObject.elementType === rendTypes.FORM_DESCRIPTION)
+  else if (eType === rendTypes.FORM_DESCRIPTION)
   {
     elementConstructed = handleFormDescriptionRender(documentBody, eObject);
+  }
+  else if (eType === rendTypes.SUBMISSION_DATA)
+  {
+    elementConstructed = handleSubmissionDataRender(documentBody, eObject);
+  }
+  else if (eType === rendTypes.END_FORM_HEADER)
+  {
+    elementConstructed = handleEndFormDataRender(documentBody);
   }
 }

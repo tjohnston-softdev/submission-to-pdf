@@ -40,3 +40,61 @@ function handleFormDescriptionRender(docBody, parsedDesc)
 
   return handleRes;
 }
+
+
+
+function handleSubmissionDataRender(docBody, parsedData)
+{
+  var renderObject = null;
+  var handleRes = false;
+
+  if (parsedData.visible === true)
+  {
+    renderObject = docBody.appendParagraph("");
+    renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
+    renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
+    
+    constructSubmissionDataField("Number", parsedData.submissionNumber, renderObject);
+    constructSubmissionDataField("Timestamp", parsedData.submissionTimestamp, renderObject);
+    constructSubmissionDataField("E-Mail Address", parsedData.submitterEmail, renderObject);
+
+    handleRes = true;
+  }
+
+  return handleRes;
+}
+
+
+function handleEndFormDataRender(docBody)
+{
+  docBody.appendHorizontalRule();
+  docBody.appendParagraph('\r');
+  return true;
+}
+
+
+
+function constructSubmissionDataField(dataName, dataValue, rendObj)
+{
+  var fieldText = "";
+  var boldCutoff = -1;
+  var fullCutoff = -1;
+  var fieldObject = null;
+
+  if (dataValue.length > 0)
+  {
+    fieldText += "\r";
+    fieldText += dataName;
+    fieldText += ": ";
+    boldCutoff = fieldText.length - 1;
+
+    fieldText += dataValue;
+    fullCutoff = fieldText.length - 1;
+    
+    fieldObject = rendObj.appendText(fieldText);
+    fieldObject.setBold(0, fullCutoff, false);
+    fieldObject.setItalic(0, fullCutoff, false);
+    fieldObject.setBold(1, boldCutoff, true);
+    fieldObject.setFontSize(10);
+  }
+}
