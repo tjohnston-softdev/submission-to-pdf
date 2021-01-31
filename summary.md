@@ -1,12 +1,11 @@
 # Summary
 
-**Version:** 0.15
+**Version:** 0.16
 
 **Date:** 2021-01-31
 
-**Title:** Create output document
+**Title:** Construct overall heading and form description
 
 **Description:**
 
-* Output document file is now created.
-* 'documentFolderID' setting automatically uses drive root.
+The overall heading and form description are now written onto the output document.

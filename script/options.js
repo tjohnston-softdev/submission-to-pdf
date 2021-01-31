@@ -24,7 +24,8 @@ var radioGridModeOpts =
 var sectionBreakOpts =
 {
   "PAGE": 1,
-  "PARAGRAPH": 0,
+  "RULE": 2,
+  "WHITESPACE": 3,
   "IGNORE": -1
 };
 

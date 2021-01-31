@@ -209,7 +209,16 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
 
 
 
-function constructDocumentElement(elementObj, bodyObj, rTypesObj, settingsObj)
+function constructDocumentElement(eObject, documentBody, rendTypes, settingsObj)
 {
-  return true;
+  var elementConstructed = false;
+
+  if (eObject !== null && eObject.elementType === rendTypes.OVERALL_HEADING)
+  {
+    elementConstructed = handleOverallHeadingRender(documentBody, eObject);
+  }
+  else if (eObject !== null && eObject.elementType === rendTypes.FORM_DESCRIPTION)
+  {
+    elementConstructed = handleFormDescriptionRender(documentBody, eObject);
+  }
 }

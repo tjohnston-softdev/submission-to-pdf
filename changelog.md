@@ -1,26 +1,24 @@
 # Changelog
 
 **./script/code.js**
-* Variables in 'runSubmissionToPDF'
-	* Declared 'outputDocumentObject'
-	* Declared 'documentBodyObject'
-	* Declared 'parsedObjectIndex'
-	* Declared 'currentParsedObject'
-	* Renamed 'currentParsed' to 'currentParseSuccessful'
-* Output document file is now created after all form elements have been parsed.
-* Started writing loop for parsed form elements array (parsedElements.overall)
-	* This will be used to construct the output document.
-* Wrote definition for 'constructDocumentElement' function.
-	* This is used to coordinate how individual form elements are rendered in the output document.
-	* So far, this only returns 'true'. It is only a basic definition.
-	* Called during the 'parsed form elements' loop in 'runSubmissionToPDF'
+* Variables in 'constructDocumentElement'
+	* Declared 'elementConstructed'
+	* Renamed 'elementObj' to 'eObject'
+	* Renamed 'bodyObj' to 'documentBody'
+	* Renamed 'rTypesObj' to 'rendTypes'
+* Started writing IF structure for constructing different element types in 'constructDocumentElement'
+	* So far, this covers "OVERALL_HEADING" and "FORM_DESCRIPTION"
+
+---
+
+**./script/render-form_data.js**
+* New file
+* Used to render the form heading and description elements for the output document.
 
 ---
 
 **./script/options.js**
-* Wrote new function 'getRootFolderID'
-	* Dynamically retrieves the folder ID of the user's Drive root.
-	* Used to set 'documentFolderID' script option.
-	* This is done for security reasons.
-	* I'm not going to manually specify a folder ID for a public script
-* When declaring 'scriptSettings', the 'documentFolderID' property initial value is "ROOT"
+* Changes to 'sectionBreakOpts' object:
+	* Renamed "PARAGRAPH" to "WHITESPACE". Now uses flag value 3
+	* Added "RULE" mode for horizontal rules. Uses flag value 2
+* The 'sectionBreak' option in 'scriptSettings' is still set to "PAGE"
