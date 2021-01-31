@@ -19,13 +19,18 @@ function runSubmissionToPDF()
   var formElementIndex = 0;
   var currentElement = null;
   var currentResult = null;
-  var currentParsed = false;
+  var currentParseSuccessful = false;
   
   var parsedElements = {section: [], overall: []};
   var outputName = "";
   var overallHeadingElement = null;
   var formDescriptionElement = null;
   var submissionDataElement = null;
+
+  var outputDocumentObject = null;
+  var documentBodyObject = null;
+  var parsedObjectIndex = 0;
+  var currentParsedObject = null;
 
 
   nameOptsObject = getNameOptions();
@@ -53,21 +58,21 @@ function runSubmissionToPDF()
   {
     currentElement = formItemList[formElementIndex];
     currentResult = parseFormElement(currentElement, prevSubmission, renderTypesObject, settingsObject);
-    currentParsed = false;
+    currentParseSuccessful = false;
 
     if (currentResult !== null && currentResult.elementType === renderTypesObject.SECTION)
     {
       handleParsedElementSectionBreak(currentResult, parsedElements, settingsObject, false);
-      currentParsed = true;
+      currentParseSuccessful = true;
     }
     else if (currentResult !== null)
     {
       parsedElements.section.push(currentResult);
-      currentParsed = true;
+      currentParseSuccessful = true;
     }
     else
     {
-      currentParsed = false;
+      currentParseSuccessful = false;
     }
   }
 
@@ -77,8 +82,17 @@ function runSubmissionToPDF()
   overallHeadingElement = handleOverallHeadingField(formName, renderTypesObject);
   formDescriptionElement = handleFormDescriptionField(formDesc, settingsObject.includeFormDesc, renderTypesObject);
   submissionDataElement = handleSubmissionDataField(subCount, subTime, subEmail, settingsObject, renderTypesObject);
-
   parsedElements.overall.unshift(overallHeadingElement, formDescriptionElement, submissionDataElement);
+
+  outputDocumentObject = DocumentApp.create(outputName);
+  documentBodyObject = outputDocumentObject.getBody();
+
+
+  for (parsedObjectIndex = 0; parsedObjectIndex < parsedElements.overall.length; parsedObjectIndex = parsedObjectIndex + 1)
+  {
+    currentParsedObject = parsedElements.overall[parsedObjectIndex];
+    constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, settingsObject);
+  }
 }
 
 
@@ -187,4 +201,15 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   }
 
   return parseRes;
+}
+
+
+
+
+
+
+
+function constructDocumentElement(elementObj, bodyObj, rTypesObj, settingsObj)
+{
+  return true;
 }

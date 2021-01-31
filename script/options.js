@@ -52,7 +52,7 @@ var renderTypeDefinitions =
 
 var scriptSettings =
 {
-  documentFolderID: "",
+  documentFolderID: "ROOT",
   documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP,
   includeFormDesc: true,
   includeSubmissionData: true,
@@ -68,6 +68,18 @@ var scriptSettings =
   ignoreEmptySections: true,
   useSymbols: true
 };
+
+scriptSettings.documentFolderID = getRootFolderID();
+
+
+
+
+function getRootFolderID()
+{
+  var rootFolderObj = DriveApp.getRootFolder();
+  var rootFolderID = rootFolderObj.getId();
+  return rootFolderID;
+}
 
 
 

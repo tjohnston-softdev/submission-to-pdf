@@ -1,11 +1,12 @@
 # Summary
 
-**Version:** 0.13
+**Version:** 0.15
 
-**Date:** 2021-01-26
+**Date:** 2021-01-31
 
-**Title:** Form and Submission data
+**Title:** Create output document
 
 **Description:**
 
-Parses form name, form description, and submission data.
+* Output document file is now created.
+* 'documentFolderID' setting automatically uses drive root.
