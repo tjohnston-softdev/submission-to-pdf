@@ -210,7 +210,7 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
 }
 
 
-
+/* ----------------- */
 
 
 
@@ -235,5 +235,9 @@ function constructDocumentElement(eObject, documentBody, rendTypes, settingsObj)
   else if (eType === rendTypes.END_FORM_HEADER)
   {
     elementConstructed = handleEndFormDataRender(documentBody);
+  }
+  else if (eType === rendTypes.TEXT)
+  {
+    elementConstructed = handleTextRender(documentBody, eObject);
   }
 }

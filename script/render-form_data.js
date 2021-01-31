@@ -34,6 +34,7 @@ function handleFormDescriptionRender(docBody, parsedDesc)
     textContents = renderObject.appendText(parsedDesc.descriptionText);
     textContents.setBold(0, selectCutoff, false);
     textContents.setItalic(0, selectCutoff, true);
+    textContents.setFontSize(11);
 
     handleRes = true;
   }

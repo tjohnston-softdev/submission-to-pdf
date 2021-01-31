@@ -1,11 +1,11 @@
 # Summary
 
-**Version:** 0.17
+**Version:** 0.18
 
 **Date:** 2021-01-31
 
-**Title:** Construct submission data.
+**Title:** Construct plain text elements
 
 **Description:**
 
-Submission data is now written onto the output document.
+Plain text answers are now written onto the output document.

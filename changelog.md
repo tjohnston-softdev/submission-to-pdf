@@ -2,47 +2,34 @@
 
 **./script/code.js**
 * Changes to 'constructDocumentElement'
-	* Removed `eObject !== null` condition from the IF structure
-	* Declared 'eType' variable. Contains parsed form element type.
-	* IF structure now uses 'eType' instead of 'eObject.elementType'
-	* Expanded IF structure to support "SUBMISSION_DATA" elements.
-* Changes to 'runSubmissionToPDF'
-	* Parsed form element loop now checks for null before calling 'constructDocumentElement'
-		* `if (currentParsedObject !== null)`
-	* Declared variable 'endFormHeaderElement'
-		* Assigned after submission data has been parsed
-		* Calls 'handleEndFormHeaderField' from 'field-form_data.js'
-	* 'endFormHeaderElement' is placed into 'parsedElements.overall'
-		* Placed at the beginning.
-		* After 'submissionDataElement'.
-		* Before main elements.
+	* Expanded IF structure to support "END_FORM_HEADER" placeholder.
+		* I forgot to document this change in the previous commit but it is only a placeholder element so that is no big deal.
+	* Expanded IF structure to support "TEXT" elements.
+* Added a divider between 'parseFormElement' and 'constructDocumentElement'
 
 ---
 
-**./script/field-form_data.js**
-* handleSubmissionDataField
-	* The 'submissionNumber' property in the result object is now a string.
-	* 'subNumber' is now cast into a string when assigned into the result object.
-* New function: handleEndFormHeaderField
-	* Creates a parsed object with the type "END_FORM_HEADER"
-	* Unlike most similar functions, this is just a placeholder with no preparation necessary.
+**./script/render-text.js**
+* New file.
+* Used to construct "TEXT" elements for the output document.
 
 ---
 
 **./script/render-form_data.js**
-* Wrote new functions:
-	* 'handleSubmissionDataRender' is used to render "SUBMISSION_DATA" elements.
-	* 'constructSubmissionDataField' is used to write an individual submission data field.
-		* Number
-		* Timestamp
-		* E-Mail Address (optional)
-	* 'handleEndFormDataRender' is used to render "END_FORM_HEADER" elements.
-		* This only adds a horizontal rule and line break.
-		* Nothing special.
+* Form description font size is set to 11 (handleFormDescriptionRender)
+
+---
+
+**./script/form-answer-help.js**
+* The function 'writeFullDurationFormat' now uses a Regular Expression to detect and remove colon characters from the short duration string.
+	* Otherwise, it only removes the first one and not both.
 
 ---
 
 **./script/options.js**
-* Added "END_FORM_HEADER" to 'renderTypeDefinitions'
-	* Refers to a separator between meta information and normal form elements.
-	* Uses flag value -4
+* Changed 'scriptSettings' properties:
+	* 'displayRadioList' is now false.
+	* 'checkboxMode' is now "PLAIN_TEXT"
+	* 'useSymbols' is now false.
+	* 'skipBlankQuestions' is now false.
+* These changes are to help validate text element rendering.

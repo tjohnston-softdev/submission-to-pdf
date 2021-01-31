@@ -68,7 +68,7 @@ function prepareDurationText(durationAnswer, fullFormat)
 
 function writeFullDurationFormat(origAns)
 {
-  var sanitizedText = origAns.replace(":", "");
+  var sanitizedText = origAns.replace(/:/g, "");
 
   var hourPart = sanitizedText.substr(0, 2);
   var minutePart = sanitizedText.substr(2, 2);

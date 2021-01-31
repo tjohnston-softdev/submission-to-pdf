@@ -59,16 +59,16 @@ var scriptSettings =
   includeFormDesc: true,
   includeSubmissionData: true,
   includeEmailAddress: true,
-  skipBlankQuestions: true,
-  displayRadioList: true,
-  checkboxMode: checkboxModeOpts.FULL_LIST,
+  skipBlankQuestions: false,
+  displayRadioList: false,
+  checkboxMode: checkboxModeOpts.PLAIN_TEXT,
   indentOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
   useFullDurationFormat: true,
   sectionBreak: sectionBreakOpts.PAGE,
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true,
-  useSymbols: true
+  useSymbols: false
 };
 
 scriptSettings.documentFolderID = getRootFolderID();
