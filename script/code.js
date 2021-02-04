@@ -2,6 +2,7 @@ function runSubmissionToPDF()
 {
   var nameOptsObject = {};
   var renderTypesObject = {};
+  var symbolDefinitionObject = {};
   var settingsObject = {};
   
   var targetForm = null;
@@ -36,6 +37,7 @@ function runSubmissionToPDF()
 
   nameOptsObject = getNameOptions();
   renderTypesObject = getRenderTypes();
+  symbolDefinitionObject = getSymbolDefinitions();
   settingsObject = getScriptSettings();
 
   targetForm = FormApp.getActiveForm();
@@ -96,7 +98,7 @@ function runSubmissionToPDF()
 
     if (currentParsedObject !== null)
     {
-      constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, settingsObject);
+      constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, symbolDefinitionObject, settingsObject);
     }
   }
 }
@@ -134,11 +136,17 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
-  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode >= 0)
+  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode > 0)
   {
     eCast = elementObj.asCheckboxItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleCheckListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, true, rTypesObj);
+  }
+  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === 0)
+  {
+    eCast = elementObj.asCheckboxItem();
+    givenAnswer = getObjectAnswer(elementObj, submissionObj);
+    parseRes = handleCheckListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, false, rTypesObj);
   }
   else if (eType === FormApp.ItemType.CHECKBOX)
   {
@@ -215,7 +223,7 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
 
 
 
-function constructDocumentElement(eObject, documentBody, rendTypes, settingsObj)
+function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefinitionsObj, settingsObj)
 {
   var eType = eObject.elementType;
   var elementConstructed = false;
@@ -242,6 +250,14 @@ function constructDocumentElement(eObject, documentBody, rendTypes, settingsObj)
   }
   else if (eType === rendTypes.RADIO_LIST)
   {
-    elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj);
+    elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj, symbolDefinitionsObj);
+  }
+  else if (eType === rendTypes.CHECK_LIST && eObject.displayFull === true)
+  {
+    elementConstructed = false;
+  }
+  else if (eType === rendTypes.CHECK_LIST)
+  {
+    elementConstructed = false;
   }
 }

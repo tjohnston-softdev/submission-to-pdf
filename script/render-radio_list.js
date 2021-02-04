@@ -1,4 +1,4 @@
-function handleRadioListRender(docBody, parsedRadioList, renderSettings)
+function handleRadioListRender(docBody, parsedRadioList, renderSettings, symbolDefs)
 {
   var radioUnfilled = "";
   var radioFilled = "";
@@ -11,14 +11,14 @@ function handleRadioListRender(docBody, parsedRadioList, renderSettings)
 
   var handleRes = false;
   
-  radioUnfilled = "[  ]";
-  radioFilled = "[X]";
+  radioUnfilled = symbolDefs.radioPlain.unfilled;
+  radioFilled = symbolDefs.radioPlain.filled;
   boldRadioSelectionText = true;
 
   if (renderSettings.useSymbols === true)
   {
-    radioUnfilled = '\u26AA';
-    radioFilled = '\u26AB';
+    radioUnfilled = symbolDefs.radioSymbol.unfilled;
+    radioFilled = symbolDefs.radioSymbol.filled;
     boldRadioSelectionText = false;
   }
 

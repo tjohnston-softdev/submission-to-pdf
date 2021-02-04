@@ -68,7 +68,7 @@ var scriptSettings =
   sectionBreak: sectionBreakOpts.PAGE,
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true,
-  useSymbols: false
+  useSymbols: true
 };
 
 scriptSettings.documentFolderID = getRootFolderID();
@@ -94,6 +94,20 @@ function getNameOptions()
 function getRenderTypes()
 {
   return renderTypeDefinitions;
+}
+
+
+function getSymbolDefinitions()
+{
+  var definitionRes = {};
+
+  definitionRes["radioSymbol"] = {filled: "\u29BF", unfilled: "\u29BE"};
+  definitionRes["checkSymbol"] = {filled: "\u2611", unfilled: "\u2610"};
+  definitionRes["radioPlain"] = {filled: "(O)", unfilled: "(  )"};
+  definitionRes["checkPlain"] = {filled: "[X]", unfilled: "[  ]"};
+  definitionRes["markedCell"] = "X";
+
+  return definitionRes;
 }
 
 
