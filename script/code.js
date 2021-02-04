@@ -238,6 +238,10 @@ function constructDocumentElement(eObject, documentBody, rendTypes, settingsObj)
   }
   else if (eType === rendTypes.TEXT)
   {
-    elementConstructed = handleTextRender(documentBody, eObject);
+    //elementConstructed = handleTextRender(documentBody, eObject);
+  }
+  else if (eType === rendTypes.RADIO_LIST)
+  {
+    elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj);
   }
 }

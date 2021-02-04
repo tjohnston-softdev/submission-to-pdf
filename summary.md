@@ -1,11 +1,11 @@
 # Summary
 
-**Version:** 0.18
+**Version:** 0.19
 
-**Date:** 2021-01-31
+**Date:** 2021-02-04
 
-**Title:** Construct plain text elements
+**Title:** Construct radio list elements
 
 **Description:**
 
-Plain text answers are now written onto the output document.
+Radio lists are now written onto the output document.
