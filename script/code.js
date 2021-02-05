@@ -246,7 +246,7 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   }
   else if (eType === rendTypes.TEXT)
   {
-    //elementConstructed = handleTextRender(documentBody, eObject);
+    elementConstructed = handleTextRender(documentBody, eObject);
   }
   else if (eType === rendTypes.RADIO_LIST)
   {
@@ -254,10 +254,10 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   }
   else if (eType === rendTypes.CHECK_LIST && eObject.displayFull === true)
   {
-    elementConstructed = false;
+    elementConstructed = handleCheckListRenderFull(documentBody, eObject, settingsObj, symbolDefinitionsObj);
   }
   else if (eType === rendTypes.CHECK_LIST)
   {
-    elementConstructed = false;
+    elementConstructed = handleCheckListRenderBullet(documentBody, eObject, settingsObj);
   }
 }

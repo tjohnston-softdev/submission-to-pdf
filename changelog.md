@@ -1,43 +1,43 @@
 # Changelog
 
 **./script/code.js**
-* Split the `[...] settingsObj.checkboxMode` condition in 'parseFormElement'.
-	* **Positive** - Set to display as a full list. (FULL_LIST)
-	* **Zero** - Set to display selected items only. (BULLET_LIST)
-* Declared 'symbolDefinitionObject' variable in 'runSubmissionToPDF'
-	* Assigned after 'renderTypesObject'
-	* Calls 'getSymbolDefinitions' (options.js)
-* Added new parameter 'symbolDefinitionsObj' to 'constructDocumentElement'.
-
----
-
-**./script/field-check_list.js**
-* handleCheckListField:
-	* Added 'dispFull' parameter.
-	* Added 'displayFull' property to 'fieldRes'
-* Indicates whether the checklist should be displayed in full, or just the selected items.
+* Uncommented call to 'handleTextRender' (render-text.js)
+* "CHECK_LIST" parsed form elements are now being rendered.
+	* 'handleCheckListRenderFull' is called when rendering as a full checklist (render-check_list-full.js)
+	* 'handleCheckListRenderBullet" is called when rendering as bullet points. (render-check_list-bullet.js)
 
 ---
 
 **./script/render-radio_list.js**
-* handleRadioListRender:
-	* Added 'symbolDefs' parameter.
-	* Updated the 'radioFilled' and 'radioUnfilled' variables to use the symbols as defined in 'symbolDefs'
-	* The actual rendering remains unchanged.
-* Changed radio button symbols:
-	* **Before:** ⚪ ⚫
-	* **After:** ⦾ ⦿
-* Changed radio button plain text:
-	* **Before:** [  ], [X]
-	* **After:** (  ), (O)
-	* The original strings will be used for plain checkboxes.
+* Removed the function 'initializeRadioListRenderPrep'
+* 'preperationObject' in 'handleRadioListRender' function:
+	*  Now defined locally rather than using a separate function.
+	* 'otherRange' is initially set to null, rather than an empty array.
+* 'setRadioListOtherItalic' function:
+	* New variable 'otherDefined' checks whether 'otherObj' is an array.
+	* 'otherDefined' is now checked as part of the IF condition.
+	* Array length check remains unchanged.
+
+---
+
+**./script/render-check_list-full.js**
+* New file
+* Used to render "CHECK_LIST" elements as a full, complete list.
+* Symbols used:
+	* **Plain:** [  ], [X]
+	* **Unicode:** ☐ ☑
+
+---
+
+**./script/render-check_list-bullet.js**
+* New file
+* Used to render "CHECK_LIST" elements as bullet points
+	* Only selected items will be listed.
+* Bullet points are a filled black square.
+	* Like this: ■
 
 ---
 
 **./script/options.js**
-* Wrote new function 'getSymbolDefinitions'
-	* Defines an object containing symbol definitions for rendering certain form elements.
-	* Includes both unicode and plain text
-	* Unlike 'getRenderTypes', the object is defined inside the function, rather than globally.
-* scriptSettings
-	* 'useSymbols' is now true
+* 'checkboxMode' option is now "FULL_LIST"
+* 'skipBlankQuestions' option is now true.

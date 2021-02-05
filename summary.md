@@ -1,15 +1,14 @@
 # Summary
 
-**Version:** 0.20
+**Version:** 0.21
 
-**Date:** 2021-02-04
+**Date:** 2021-02-05
 
-**Title:** Revised symbols
+**Title:** Construct check lists
 
 **Description:**
 
-* Created a definition object for symbol text. (eg. radio buttons)
-* When parsing a checklist form element, it now indicates whether the full list is displayed, or only selected items.
-* Updated radio button symbols.
-* Chosen checkbox symbols.
-* Rewritten plain text strings for radio buttons and checkboxes.
+* Check list form elements are now being rendered in the output document.
+* This can take the form of either:
+	* Full checklist
+	* Selected items only (bullet points)

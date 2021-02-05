@@ -1,44 +1,44 @@
-function handleRadioListRender(docBody, parsedRadioList, renderSettings, symbolDefs)
+function handleCheckListRenderFull(docBody, parsedCheckList, renderSettings, symbolDefs)
 {
-  var radioUnfilled = "";
-  var radioFilled = "";
-  var boldRadioSelectionText = null;
+  var checkUnfilled = "";
+  var checkFilled = "";
+  var boldCheckSelectionText = null;
 
   var renderObject = null;
-  var preperationObject = {textString: "", boldArray: [], otherRange: null}
+  var preperationObject = {textString: "", boldArray: [], otherRange: null};
   var textContents = null;
   var fullCutoff = -1;
 
   var handleRes = false;
-  
-  radioUnfilled = symbolDefs.radioPlain.unfilled;
-  radioFilled = symbolDefs.radioPlain.filled;
-  boldRadioSelectionText = true;
+
+  checkUnfilled = symbolDefs.checkPlain.unfilled;
+  checkFilled = symbolDefs.checkPlain.filled;
+  boldCheckSelectionText = true;
 
   if (renderSettings.useSymbols === true)
   {
-    radioUnfilled = symbolDefs.radioSymbol.unfilled;
-    radioFilled = symbolDefs.radioSymbol.filled;
-    boldRadioSelectionText = false;
+    checkUnfilled = symbolDefs.checkSymbol.unfilled;
+    checkFilled = symbolDefs.checkSymbol.filled;
+    boldCheckSelectionText = false;
   }
 
-  if (parsedRadioList.enabledFlag >= 0)
+  if (parsedCheckList.enabledFlag >= 0)
   {
     renderObject = docBody.appendParagraph("");
     renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
     renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
 
-    constructRadioListHeaderText(parsedRadioList, preperationObject);
-    constructRadioListOptions(parsedRadioList, preperationObject, radioUnfilled, radioFilled, boldRadioSelectionText);
-    constructRadioListOther(parsedRadioList, preperationObject, radioFilled, boldRadioSelectionText);
+    constructCheckListHeaderTextFull(parsedCheckList, preperationObject);
+    constructCheckListOptions(parsedCheckList, preperationObject, checkFilled, checkUnfilled, boldCheckSelectionText);
+    constructCheckListOtherFull(parsedCheckList, preperationObject, checkFilled, boldCheckSelectionText);
 
     textContents = renderObject.appendText(preperationObject.textString);
     fullCutoff = preperationObject.textString.length - 1;
 
     textContents.setBold(0, fullCutoff, false);
     textContents.setItalic(0, fullCutoff, false);
-    setRadioListBoldStatus(textContents, preperationObject.boldArray);
-    setRadioListOtherItalic(textContents, preperationObject.otherRange, renderSettings.markOtherOption);
+    setCheckListBoldStatus(textContents, preperationObject.boldArray);
+    setCheckListOtherItalic(textContents, preperationObject.otherRange, renderSettings.markOtherOption);
     textContents.setFontSize(11);
 
     handleRes = true;
@@ -48,13 +48,13 @@ function handleRadioListRender(docBody, parsedRadioList, renderSettings, symbolD
 }
 
 
-function constructRadioListHeaderText(parsedRadio, prepObject)
+function constructCheckListHeaderTextFull(parsedCheck, prepObject)
 {
   var localCutoff = -1;
   var headerIndex = [];
-  
+
   prepObject.textString += "\r";
-  prepObject.textString += parsedRadio.elementTitle;
+  prepObject.textString += parsedCheck.elementTitle;
   prepObject.textString += ":";
 
   localCutoff = prepObject.textString.length - 1;
@@ -64,23 +64,27 @@ function constructRadioListHeaderText(parsedRadio, prepObject)
 
 
 
-function constructRadioListOptions(parsedRadio, prepObject, unfilledText, filledText, boldSelection)
+function constructCheckListOptions(parsedCheck, prepObject, filledText, unfilledText, boldSelection)
 {
   var optionIndex = 0;
   var currentOption = "";
+  var currentChosen = false;
   var currentSelectStart = -1;
   var currentSelectEnd = -1;
   var currentBold = [];
 
-  for (optionIndex = 0; optionIndex < parsedRadio.optionList.length; optionIndex = optionIndex + 1)
+  for (optionIndex = 0; optionIndex < parsedCheck.checkboxList.length; optionIndex = optionIndex + 1)
   {
-    currentOption = parsedRadio.optionList[optionIndex];
-    prepObject.textString += "\r";
-    currentSelectStart = prepObject.textString.length - 1;
+    currentOption = parsedCheck.checkboxList[optionIndex];
+    currentChosen = parsedCheck.chosenItems.includes(optionIndex);
+    currentSelectStart = -1;
     currentSelectEnd = -1;
     currentBold = [];
 
-    if (optionIndex === parsedRadio.chosenOption)
+    prepObject.textString += "\r";
+    currentSelectStart = prepObject.textString.length - 1;
+
+    if (currentChosen === true)
     {
       prepObject.textString += filledText;
     }
@@ -105,7 +109,7 @@ function constructRadioListOptions(parsedRadio, prepObject, unfilledText, filled
 
 
 
-function constructRadioListOther(parsedRadio, prepObject, filledText, boldSelection)
+function constructCheckListOtherFull(parsedCheck, prepObject, filledText, boldSelection)
 {
   var selectStart = -1;
   var selectEnd = -1;
@@ -114,7 +118,7 @@ function constructRadioListOther(parsedRadio, prepObject, filledText, boldSelect
   var selectRange = [];
   var customAdded = false;
 
-  if (parsedRadio.customEnabled === true && parsedRadio.customText.length > 0)
+  if (parsedCheck.customEnabled === true && parsedCheck.customText.length > 0)
   {
     prepObject.textString += "\r";
     selectStart = prepObject.textString.length - 1;
@@ -125,7 +129,7 @@ function constructRadioListOther(parsedRadio, prepObject, filledText, boldSelect
     prepObject.textString += "\t";
     optionStart = prepObject.textString.length - 1;
 
-    prepObject.textString += parsedRadio.customText;
+    prepObject.textString += parsedCheck.customText;
     optionEnd = prepObject.textString.length - 1;
 
     prepObject.otherRange = [optionStart, optionEnd];
@@ -137,12 +141,11 @@ function constructRadioListOther(parsedRadio, prepObject, filledText, boldSelect
     selectRange = [selectStart, selectEnd];
     prepObject.boldArray.push(selectRange);
   }
-
 }
 
 
 
-function setRadioListBoldStatus(txtObj, boldArr)
+function setCheckListBoldStatus(txtObj, boldArr)
 {
   var boldIndex = 0;
   var currentBold = [];
@@ -160,16 +163,17 @@ function setRadioListBoldStatus(txtObj, boldArr)
 }
 
 
-function setRadioListOtherItalic(txtObj, otherObj, markToggle)
+
+function setCheckListOtherItalic(txtObj, otherObj, markToggle)
 {
   var otherDefined = Array.isArray(otherObj);
-  var otherBegin = -1;
-  var otherCutoff = -1;
+  var otherStart = -1;
+  var otherEnd = -1;
 
   if (otherDefined === true && otherObj.length >= 2 && markToggle === true)
   {
-    otherBegin = otherObj[0];
-    otherCutoff = otherObj[1];
-    txtObj.setItalic(otherBegin, otherCutoff, true);
+    otherStart = otherObj[0];
+    otherEnd = otherObj[1];
+    txtObj.setItalic(otherStart, otherEnd, true);
   }
 }
