@@ -54,7 +54,7 @@ var renderTypeDefinitions =
 
 var scriptSettings =
 {
-  documentFolderID: "ROOT",
+  documentFolderID: "DRIVE ROOT FOLDER",
   documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP,
   includeFormDesc: true,
   includeSubmissionData: true,
@@ -63,9 +63,9 @@ var scriptSettings =
   displayRadioList: true,
   checkboxMode: checkboxModeOpts.FULL_LIST,
   markOtherOption: true,
-  radioGridMode: radioGridModeOpts.LITE,
+  radioGridMode: radioGridModeOpts.FULL,
   useFullDurationFormat: true,
-  sectionBreak: sectionBreakOpts.PAGE,
+  sectionBreak: sectionBreakOpts.IGNORE,
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true,
   useSymbols: true
@@ -105,7 +105,6 @@ function getSymbolDefinitions()
   definitionRes["checkSymbol"] = {filled: "\u2611", unfilled: "\u2610"};
   definitionRes["radioPlain"] = {filled: "(O)", unfilled: "(  )"};
   definitionRes["checkPlain"] = {filled: "[X]", unfilled: "[  ]"};
-  definitionRes["markedCell"] = "X";
 
   return definitionRes;
 }

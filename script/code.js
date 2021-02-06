@@ -262,10 +262,10 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   }
   else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
   {
-    elementConstructed = false;
+    elementConstructed = handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolDefinitionsObj);
   }
   else if (eType === rendTypes.RADIO_GRID)
   {
-    elementConstructed = handleRadioGridRenderLite(documentBody, eObject);
+    //elementConstructed = handleRadioGridRenderLite(documentBody, eObject);
   }
 }
