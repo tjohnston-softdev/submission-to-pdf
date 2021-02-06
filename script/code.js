@@ -246,18 +246,26 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   }
   else if (eType === rendTypes.TEXT)
   {
-    elementConstructed = handleTextRender(documentBody, eObject);
+    //elementConstructed = handleTextRender(documentBody, eObject);
   }
   else if (eType === rendTypes.RADIO_LIST)
   {
-    elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj, symbolDefinitionsObj);
+    //elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj, symbolDefinitionsObj);
   }
   else if (eType === rendTypes.CHECK_LIST && eObject.displayFull === true)
   {
-    elementConstructed = handleCheckListRenderFull(documentBody, eObject, settingsObj, symbolDefinitionsObj);
+    //elementConstructed = handleCheckListRenderFull(documentBody, eObject, settingsObj, symbolDefinitionsObj);
   }
   else if (eType === rendTypes.CHECK_LIST)
   {
-    elementConstructed = handleCheckListRenderBullet(documentBody, eObject, settingsObj);
+    //elementConstructed = handleCheckListRenderBullet(documentBody, eObject, settingsObj);
+  }
+  else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
+  {
+    elementConstructed = false;
+  }
+  else if (eType === rendTypes.RADIO_GRID)
+  {
+    elementConstructed = handleRadioGridRenderLite(documentBody, eObject);
   }
 }

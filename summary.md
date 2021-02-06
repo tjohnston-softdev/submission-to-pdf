@@ -1,14 +1,11 @@
 # Summary
 
-**Version:** 0.21
+**Version:** 0.22
 
-**Date:** 2021-02-05
+**Date:** 2021-02-06
 
-**Title:** Construct check lists
+**Title:** Construct radio grids - Lite
 
 **Description:**
 
-* Check list form elements are now being rendered in the output document.
-* This can take the form of either:
-	* Full checklist
-	* Selected items only (bullet points)
+* Radio Grid form elements are now rendered under "LITE" mode.

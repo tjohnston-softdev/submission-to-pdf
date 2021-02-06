@@ -1,43 +1,29 @@
 # Changelog
 
 **./script/code.js**
-* Uncommented call to 'handleTextRender' (render-text.js)
-* "CHECK_LIST" parsed form elements are now being rendered.
-	* 'handleCheckListRenderFull' is called when rendering as a full checklist (render-check_list-full.js)
-	* 'handleCheckListRenderBullet" is called when rendering as bullet points. (render-check_list-bullet.js)
+* Commented out calls to the following functions:
+	* handleTextRender (render-text.js)
+	* handleRadioListRender (render-radio_list.js)
+	* handleCheckListRenderFull (render-check_list-full.js)
+	* handleCheckListRenderBullet(render-check_list-bullet.js)
+* Wrote IF conditions in 'constructDocumentElement' to support "RADIO_GRID" elements.
+	* If the 'radioGridMode' setting is a positive flag, the full grid will be rendered.
+	* Otherwise, it will be a table of selected answers.
+* Added call to 'handleRadioGridRenderLite' (render-radio_grid.js)
+	* Only the "LITE" mode is supported for now.
+	* The "FULL" condition is only a stub.
 
 ---
 
-**./script/render-radio_list.js**
-* Removed the function 'initializeRadioListRenderPrep'
-* 'preperationObject' in 'handleRadioListRender' function:
-	*  Now defined locally rather than using a separate function.
-	* 'otherRange' is initially set to null, rather than an empty array.
-* 'setRadioListOtherItalic' function:
-	* New variable 'otherDefined' checks whether 'otherObj' is an array.
-	* 'otherDefined' is now checked as part of the IF condition.
-	* Array length check remains unchanged.
-
----
-
-**./script/render-check_list-full.js**
+**./script/render-radio_grid.js**
 * New file
-* Used to render "CHECK_LIST" elements as a full, complete list.
-* Symbols used:
-	* **Plain:** [  ], [X]
-	* **Unicode:** ☐ ☑
-
----
-
-**./script/render-check_list-bullet.js**
-* New file
-* Used to render "CHECK_LIST" elements as bullet points
-	* Only selected items will be listed.
-* Bullet points are a filled black square.
-	* Like this: ■
+	* Used to render "RADIO_GRID" parsed form elements into the output document.
+	* Only "LITE" mode is supported for now.
+	* Unlike "CHECK_LIST", both rendering modes will use the same file.
 
 ---
 
 **./script/options.js**
-* 'checkboxMode' option is now "FULL_LIST"
-* 'skipBlankQuestions' option is now true.
+* scriptSettings
+	* 'skipBlankQuestions' is now false.
+	* 'radioGridMode' is now "LITE"
