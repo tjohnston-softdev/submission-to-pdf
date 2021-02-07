@@ -1,12 +1,12 @@
 # Summary
 
-**Version:** 0.26
+**Version:** 0.27
 
 **Date:** 2021-02-07
 
-**Title:** Construct section elements
+**Title:** PDF conversion
 
 **Description:**
 
-* Section breaks and headers are now rendered in the output document.
-* Output document generation is now complete.
+* Output document is converted to PDF.
+* Script is now feature-complete.

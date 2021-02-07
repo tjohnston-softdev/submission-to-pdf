@@ -64,8 +64,6 @@ var scriptSettings =
   useSymbols: true
 };
 
-scriptSettings.documentFolderID = getRootFolderID();
-
 
 
 

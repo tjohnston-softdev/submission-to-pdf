@@ -35,6 +35,12 @@ function runSubmissionToPDF()
   var parsedObjectIndex = 0;
   var currentParsedObject = null;
 
+  var documentFileID = "";
+  var documentFileObject = null;
+  var documentBinary = null;
+  var pdfFileObject = null;
+  var targetFolderObject = null;
+
 
   nameOptsObject = getNameOptions();
   breakOptsObject = getSectionBreakOptions();
@@ -103,6 +109,16 @@ function runSubmissionToPDF()
       constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, breakOptsObject, symbolObject, settingsObject);
     }
   }
+
+  outputDocumentObject.saveAndClose();
+  documentFileID = outputDocumentObject.getId();
+  documentFileObject = DriveApp.getFileById(documentFileID);
+  documentBinary = documentFileObject.getAs("application/pdf");
+  pdfFileObject = DriveApp.createFile(documentBinary);
+
+  targetFolderObject = DriveApp.getFolderById(settingsObject.documentFolderID);
+  pdfFileObject.moveTo(targetFolderObject);
+  documentFileObject.setTrashed(true);
 }
 
 
