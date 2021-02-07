@@ -1,7 +1,7 @@
 function handleCheckGridRender(docBody, parsedCheckGrid, renderSettings, symbolDefs)
 {
   var cellFilledText = "";
-  var cellUnfilledText = "";
+  var cellEmptyText = "";
   var boldIndividualCells = null;
 
   var cellGrid = null;
@@ -9,13 +9,13 @@ function handleCheckGridRender(docBody, parsedCheckGrid, renderSettings, symbolD
   var handleRes = false;
 
   cellFilledText = symbolDefs.checkPlain.filled;
-  cellUnfilledText = symbolDefs.checkPlain.unfilled;
+  cellEmptyText = symbolDefs.checkPlain.empty;
   boldIndividualCells = true;
 
   if (renderSettings.useSymbols === true)
   {
     cellFilledText = symbolDefs.checkSymbol.filled;
-    cellUnfilledText = symbolDefs.checkSymbol.unfilled;
+    cellEmptyText = symbolDefs.checkSymbol.empty;
     boldIndividualCells = false;
   }
 
@@ -24,7 +24,7 @@ function handleCheckGridRender(docBody, parsedCheckGrid, renderSettings, symbolD
     constructCheckGridHeaderText(docBody, parsedCheckGrid);
     cellGrid = [];
     prepareCheckGridHeaderRow(parsedCheckGrid, cellGrid);
-    prepareCheckGridCells(parsedCheckGrid, cellFilledText, cellUnfilledText, cellGrid);
+    prepareCheckGridCells(parsedCheckGrid, cellFilledText, cellEmptyText, cellGrid);
 
     tableObject = docBody.appendTable(cellGrid);
     formatCheckGridCells(tableObject);
@@ -71,7 +71,7 @@ function prepareCheckGridHeaderRow(parsedChkGrid, gObject)
 }
 
 
-function prepareCheckGridCells(parsedChkGrid, filledText, unfilledText, gObject)
+function prepareCheckGridCells(parsedChkGrid, filledText, emptyText, gObject)
 {
   var rowIndex = 0;
   var currentHeader = "";
@@ -100,7 +100,7 @@ function prepareCheckGridCells(parsedChkGrid, filledText, unfilledText, gObject)
     while (columnIndex >= 0 && columnIndex < parsedChkGrid.columnList.length)
     {
       currentStatusValue = false;
-      currentCellText = unfilledText;
+      currentCellText = emptyText;
 
       if (columnIndex >= 0 && columnIndex < currentStatusRow.length)
       {

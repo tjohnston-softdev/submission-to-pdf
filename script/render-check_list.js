@@ -1,6 +1,6 @@
-function handleCheckListRenderFull(docBody, parsedCheckList, renderSettings, symbolDefs)
+function handleCheckListRender(docBody, parsedCheckList, renderSettings, symbolDefs)
 {
-  var checkUnfilled = "";
+  var checkEmpty = "";
   var checkFilled = "";
   var boldCheckSelectionText = null;
 
@@ -11,13 +11,13 @@ function handleCheckListRenderFull(docBody, parsedCheckList, renderSettings, sym
 
   var handleRes = false;
 
-  checkUnfilled = symbolDefs.checkPlain.unfilled;
+  checkEmpty = symbolDefs.checkPlain.empty;
   checkFilled = symbolDefs.checkPlain.filled;
   boldCheckSelectionText = true;
 
   if (renderSettings.useSymbols === true)
   {
-    checkUnfilled = symbolDefs.checkSymbol.unfilled;
+    checkEmpty = symbolDefs.checkSymbol.empty;
     checkFilled = symbolDefs.checkSymbol.filled;
     boldCheckSelectionText = false;
   }
@@ -28,9 +28,9 @@ function handleCheckListRenderFull(docBody, parsedCheckList, renderSettings, sym
     renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
     renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
 
-    constructCheckListHeaderTextFull(parsedCheckList, preperationObject);
-    constructCheckListOptions(parsedCheckList, preperationObject, checkFilled, checkUnfilled, boldCheckSelectionText);
-    constructCheckListOtherFull(parsedCheckList, preperationObject, checkFilled, boldCheckSelectionText);
+    constructCheckListHeaderText(parsedCheckList, preperationObject);
+    constructCheckListOptions(parsedCheckList, preperationObject, checkFilled, checkEmpty, boldCheckSelectionText);
+    constructCheckListOther(parsedCheckList, preperationObject, checkFilled, boldCheckSelectionText);
 
     textContents = renderObject.appendText(preperationObject.textString);
     fullCutoff = preperationObject.textString.length - 1;
@@ -48,7 +48,7 @@ function handleCheckListRenderFull(docBody, parsedCheckList, renderSettings, sym
 }
 
 
-function constructCheckListHeaderTextFull(parsedCheck, prepObject)
+function constructCheckListHeaderText(parsedCheck, prepObject)
 {
   var localCutoff = -1;
   var headerIndex = [];
@@ -64,7 +64,7 @@ function constructCheckListHeaderTextFull(parsedCheck, prepObject)
 
 
 
-function constructCheckListOptions(parsedCheck, prepObject, filledText, unfilledText, boldSelection)
+function constructCheckListOptions(parsedCheck, prepObject, filledText, emptyText, boldSelection)
 {
   var optionIndex = 0;
   var currentOption = "";
@@ -90,7 +90,7 @@ function constructCheckListOptions(parsedCheck, prepObject, filledText, unfilled
     }
     else
     {
-      prepObject.textString += unfilledText;
+      prepObject.textString += emptyText;
     }
 
     currentSelectEnd = prepObject.textString.length - 1;
@@ -109,7 +109,7 @@ function constructCheckListOptions(parsedCheck, prepObject, filledText, unfilled
 
 
 
-function constructCheckListOtherFull(parsedCheck, prepObject, filledText, boldSelection)
+function constructCheckListOther(parsedCheck, prepObject, filledText, boldSelection)
 {
   var selectStart = -1;
   var selectEnd = -1;

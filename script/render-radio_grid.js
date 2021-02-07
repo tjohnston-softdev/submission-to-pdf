@@ -1,7 +1,7 @@
 function handleRadioGridRenderFull(docBody, parsedRadioGrid, renderSettings, symbolDefs)
 {
   var cellFilledText = "";
-  var cellUnfilledText = "";
+  var cellEmptyText = "";
   var boldIndividualCells = null;
   
   var cellGrid = null;
@@ -9,13 +9,13 @@ function handleRadioGridRenderFull(docBody, parsedRadioGrid, renderSettings, sym
   var handleRes = false;
 
   cellFilledText = symbolDefs.radioPlain.filled;
-  cellUnfilledText = symbolDefs.radioPlain.unfilled;
+  cellEmptyText = symbolDefs.radioPlain.empty;
   boldIndividualCells = true;
 
   if (renderSettings.useSymbols === true)
   {
     cellFilledText = symbolDefs.radioSymbol.filled;
-    cellUnfilledText = symbolDefs.radioSymbol.unfilled;
+    cellEmptyText = symbolDefs.radioSymbol.empty;
     boldIndividualCells = false;
   }
 
@@ -24,7 +24,7 @@ function handleRadioGridRenderFull(docBody, parsedRadioGrid, renderSettings, sym
     constructRadioGridHeaderText(docBody, parsedRadioGrid);
     cellGrid = [];
     prepareRadioGridCellsHeader(parsedRadioGrid, cellGrid);
-    prepareRadioGridCellsSelection(parsedRadioGrid, cellFilledText, cellUnfilledText, cellGrid);
+    prepareRadioGridCellsSelection(parsedRadioGrid, cellFilledText, cellEmptyText, cellGrid);
     
     tableObject = docBody.appendTable(cellGrid);
     formatRadioGridCells(tableObject);
@@ -128,7 +128,7 @@ function prepareRadioGridCellsHeader(parsedRadGrid, gObject)
 }
 
 
-function prepareRadioGridCellsSelection(parsedRadGrid, filledText, unfilledText, gObject)
+function prepareRadioGridCellsSelection(parsedRadGrid, filledText, emptyText, gObject)
 {
   var rowIndex = 0;
   var currentRowHeader = "";
@@ -155,7 +155,7 @@ function prepareRadioGridCellsSelection(parsedRadGrid, filledText, unfilledText,
 
     while (columnIndex >= 0 && columnIndex < parsedRadGrid.columnList.length)
     {
-      currentCellText = unfilledText;
+      currentCellText = emptyText;
 
       if (columnIndex === currentSelection)
       {

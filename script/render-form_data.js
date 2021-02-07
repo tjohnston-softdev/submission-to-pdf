@@ -6,7 +6,7 @@ function handleOverallHeadingRender(docBody, parsedHeading)
   if (parsedHeading.headingText.length > 0)
   {
     renderObject = docBody.insertParagraph(0, parsedHeading.headingText);
-    renderObject.setHeading(DocumentApp.ParagraphHeading.HEADING1);
+    renderObject.setHeading(DocumentApp.ParagraphHeading.TITLE);
     renderObject.setAlignment(DocumentApp.HorizontalAlignment.CENTER);
     handleRes = true;
   }

@@ -1,11 +1,12 @@
 # Summary
 
-**Version:** 0.25
+**Version:** 0.26
 
 **Date:** 2021-02-07
 
-**Title:** Construct check grid elements
+**Title:** Construct section elements
 
 **Description:**
 
-Checkbox grid elements are now rendered in the output document.
+* Section breaks and headers are now rendered in the output document.
+* Output document generation is now complete.

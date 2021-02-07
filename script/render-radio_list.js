@@ -1,6 +1,6 @@
 function handleRadioListRender(docBody, parsedRadioList, renderSettings, symbolDefs)
 {
-  var radioUnfilled = "";
+  var radioEmpty = "";
   var radioFilled = "";
   var boldRadioSelectionText = null;
 
@@ -11,13 +11,13 @@ function handleRadioListRender(docBody, parsedRadioList, renderSettings, symbolD
 
   var handleRes = false;
   
-  radioUnfilled = symbolDefs.radioPlain.unfilled;
+  radioEmpty = symbolDefs.radioPlain.empty;
   radioFilled = symbolDefs.radioPlain.filled;
   boldRadioSelectionText = true;
 
   if (renderSettings.useSymbols === true)
   {
-    radioUnfilled = symbolDefs.radioSymbol.unfilled;
+    radioEmpty = symbolDefs.radioSymbol.empty;
     radioFilled = symbolDefs.radioSymbol.filled;
     boldRadioSelectionText = false;
   }
@@ -29,7 +29,7 @@ function handleRadioListRender(docBody, parsedRadioList, renderSettings, symbolD
     renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
 
     constructRadioListHeaderText(parsedRadioList, preperationObject);
-    constructRadioListOptions(parsedRadioList, preperationObject, radioUnfilled, radioFilled, boldRadioSelectionText);
+    constructRadioListOptions(parsedRadioList, preperationObject, radioEmpty, radioFilled, boldRadioSelectionText);
     constructRadioListOther(parsedRadioList, preperationObject, radioFilled, boldRadioSelectionText);
 
     textContents = renderObject.appendText(preperationObject.textString);
@@ -64,7 +64,7 @@ function constructRadioListHeaderText(parsedRadio, prepObject)
 
 
 
-function constructRadioListOptions(parsedRadio, prepObject, unfilledText, filledText, boldSelection)
+function constructRadioListOptions(parsedRadio, prepObject, emptyText, filledText, boldSelection)
 {
   var optionIndex = 0;
   var currentOption = "";
@@ -86,7 +86,7 @@ function constructRadioListOptions(parsedRadio, prepObject, unfilledText, filled
     }
     else
     {
-      prepObject.textString += unfilledText;
+      prepObject.textString += emptyText;
     }
 
     currentSelectEnd = prepObject.textString.length - 1;

@@ -1,8 +1,9 @@
 function runSubmissionToPDF()
 {
   var nameOptsObject = {};
+  var breakOptsObject = {};
   var renderTypesObject = {};
-  var symbolDefinitionObject = {};
+  var symbolObject = {};
   var settingsObject = {};
   
   var targetForm = null;
@@ -36,8 +37,9 @@ function runSubmissionToPDF()
 
 
   nameOptsObject = getNameOptions();
+  breakOptsObject = getSectionBreakOptions();
   renderTypesObject = getRenderTypes();
-  symbolDefinitionObject = getSymbolDefinitions();
+  symbolObject = getSymbolDefinitions();
   settingsObject = getScriptSettings();
 
   targetForm = FormApp.getActiveForm();
@@ -98,7 +100,7 @@ function runSubmissionToPDF()
 
     if (currentParsedObject !== null)
     {
-      constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, symbolDefinitionObject, settingsObject);
+      constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, breakOptsObject, symbolObject, settingsObject);
     }
   }
 }
@@ -217,7 +219,7 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
 
 
 
-function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefinitionsObj, settingsObj)
+function constructDocumentElement(eObject, documentBody, rendTypes, breakOptsObj, symbolObj, settingsObj)
 {
   var eType = eObject.elementType;
   var elementConstructed = false;
@@ -240,19 +242,19 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   }
   else if (eType === rendTypes.TEXT)
   {
-    //elementConstructed = handleTextRender(documentBody, eObject);
+    elementConstructed = handleTextRender(documentBody, eObject);
   }
   else if (eType === rendTypes.RADIO_LIST)
   {
-    //elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj, symbolDefinitionsObj);
+    elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.CHECK_LIST)
   {
-    elementConstructed = handleCheckListRenderFull(documentBody, eObject, settingsObj, symbolDefinitionsObj);
+    elementConstructed = handleCheckListRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
   {
-    elementConstructed = handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolDefinitionsObj);
+    elementConstructed = handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.RADIO_GRID)
   {
@@ -260,6 +262,14 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   }
   else if (eType === rendTypes.CHECK_GRID)
   {
-    elementConstructed = handleCheckGridRender(documentBody, eObject, settingsObj, symbolDefinitionsObj);
+    elementConstructed = handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
+  }
+  else if (eType === rendTypes.SECTION)
+  {
+    elementConstructed = handleSectionRender(documentBody, eObject, settingsObj, breakOptsObj);
+  }
+  else
+  {
+    elementConstructed = false;
   }
 }

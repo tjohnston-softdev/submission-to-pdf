@@ -58,7 +58,7 @@ var scriptSettings =
   markOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
   useFullDurationFormat: true,
-  sectionBreak: sectionBreakOpts.SKIP,
+  sectionBreak: sectionBreakOpts.RULE,
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true,
   useSymbols: true
@@ -84,6 +84,12 @@ function getNameOptions()
 }
 
 
+function getSectionBreakOptions()
+{
+  return sectionBreakOpts;
+}
+
+
 function getRenderTypes()
 {
   return renderTypeDefinitions;
@@ -94,10 +100,10 @@ function getSymbolDefinitions()
 {
   var definitionRes = {};
 
-  definitionRes["radioSymbol"] = {filled: "\u29BF", unfilled: "\u29BE"};
-  definitionRes["checkSymbol"] = {filled: "\u2611", unfilled: "\u2610"};
-  definitionRes["radioPlain"] = {filled: "(O)", unfilled: "(  )"};
-  definitionRes["checkPlain"] = {filled: "[X]", unfilled: "[  ]"};
+  definitionRes["radioSymbol"] = {filled: "\u29BF", empty: "\u29BE"};
+  definitionRes["checkSymbol"] = {filled: "\u2611", empty: "\u2610"};
+  definitionRes["radioPlain"] = {filled: "(O)", empty: "(  )"};
+  definitionRes["checkPlain"] = {filled: "[X]", empty: "[  ]"};
 
   return definitionRes;
 }
