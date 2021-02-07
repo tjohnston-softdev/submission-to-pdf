@@ -1,11 +1,11 @@
 # Summary
 
-**Version:** 0.24
+**Version:** 0.25
 
 **Date:** 2021-02-07
 
-**Title:** Removed bullet list support
+**Title:** Construct check grid elements
 
 **Description:**
 
-Removed bullet point list support when rendering checklist elements.
+Checkbox grid elements are now rendered in the output document.

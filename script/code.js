@@ -258,4 +258,8 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   {
     elementConstructed = handleRadioGridRenderLite(documentBody, eObject);
   }
+  else if (eType === rendTypes.CHECK_GRID)
+  {
+    elementConstructed = handleCheckGridRender(documentBody, eObject, settingsObj, symbolDefinitionsObj);
+  }
 }
