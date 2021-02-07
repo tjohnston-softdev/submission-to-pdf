@@ -136,17 +136,11 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
-  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode > 0)
+  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.displayCheckList === true)
   {
     eCast = elementObj.asCheckboxItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, true, rTypesObj);
-  }
-  else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.checkboxMode === 0)
-  {
-    eCast = elementObj.asCheckboxItem();
-    givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, false, rTypesObj);
+    parseRes = handleCheckListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.CHECKBOX)
   {
@@ -252,13 +246,9 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   {
     //elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj, symbolDefinitionsObj);
   }
-  else if (eType === rendTypes.CHECK_LIST && eObject.displayFull === true)
-  {
-    //elementConstructed = handleCheckListRenderFull(documentBody, eObject, settingsObj, symbolDefinitionsObj);
-  }
   else if (eType === rendTypes.CHECK_LIST)
   {
-    //elementConstructed = handleCheckListRenderBullet(documentBody, eObject, settingsObj);
+    elementConstructed = handleCheckListRenderFull(documentBody, eObject, settingsObj, symbolDefinitionsObj);
   }
   else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
   {
@@ -266,6 +256,6 @@ function constructDocumentElement(eObject, documentBody, rendTypes, symbolDefini
   }
   else if (eType === rendTypes.RADIO_GRID)
   {
-    //elementConstructed = handleRadioGridRenderLite(documentBody, eObject);
+    elementConstructed = handleRadioGridRenderLite(documentBody, eObject);
   }
 }

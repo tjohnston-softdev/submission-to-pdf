@@ -1,12 +1,11 @@
 # Summary
 
-**Version:** 0.23
+**Version:** 0.24
 
-**Date:** 2021-02-06
+**Date:** 2021-02-07
 
-**Title:** Construct radio grids - Full
+**Title:** Removed bullet list support
 
 **Description:**
 
-* Radio Grid form elements are now rendered under "FULL" mode.
-* Radio Grid form element rendering is now complete.
+Removed bullet point list support when rendering checklist elements.

@@ -8,13 +8,6 @@ var nameOpts =
   "SUBMISSION_NUMBER": 6
 };
 
-var checkboxModeOpts =
-{
-  "PLAIN_TEXT": -1,
-  "BULLET_LIST": 0,
-  "FULL_LIST": 1
-};
-
 var radioGridModeOpts =
 {
   "FULL": 1,
@@ -26,7 +19,7 @@ var sectionBreakOpts =
   "PAGE": 1,
   "RULE": 2,
   "WHITESPACE": 3,
-  "IGNORE": -1
+  "SKIP": -1
 };
 
 var sectionHeaderOpts =
@@ -61,11 +54,11 @@ var scriptSettings =
   includeEmailAddress: true,
   skipBlankQuestions: false,
   displayRadioList: true,
-  checkboxMode: checkboxModeOpts.FULL_LIST,
+  displayCheckList: true,
   markOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
   useFullDurationFormat: true,
-  sectionBreak: sectionBreakOpts.IGNORE,
+  sectionBreak: sectionBreakOpts.SKIP,
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true,
   useSymbols: true
