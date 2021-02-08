@@ -116,7 +116,7 @@ function runSubmissionToPDF()
   documentBinary = documentFileObject.getAs("application/pdf");
   pdfFileObject = DriveApp.createFile(documentBinary);
 
-  targetFolderObject = DriveApp.getFolderById(settingsObject.documentFolderID);
+  targetFolderObject = DriveApp.getFolderById(settingsObject.outputFolderID);
   pdfFileObject.moveTo(targetFolderObject);
   documentFileObject.setTrashed(true);
 }

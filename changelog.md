@@ -1,26 +1,35 @@
 # Changelog
 
 **./script/code.js**
-* runSubmissionToPDF
-	* Output document is manually saved after rendering loop.
-	* Declared new variables assigned after output document is written.
-		* documentFileID - ID of output document file.
-		* documentFileObject - Output document file object.
-		* documentBinary - Output document converted to PDF.
-		* pdfFileObject - Converted PDF file object.
-		* targetFolderObject - Target output folder object. (documentFolderID)
-	*  Output document is converted to PDF and moved to the target folder.
-	* Original Google Docs file is deleted after successful conversion.
-
----
-
-**./script/code.js** (previous)
-* constructDocumentElement
-	* Added IF condition to render "SECTION" elements.
-	* Added `else` condition
+* Changed 'targetFolderObject' assignment in 'runSubmissionToPDF" to use the correct settings property.
 
 ---
 
 **./script/options.js**
-* Removed `scriptSettings.documentFolderID` assignment.
-* 'getRootFolderID' still exists for testing purposes.
+* scriptSettings
+	* Renamed 'documentFolderID' to 'outputFolderID'
+	* Removed placeholder value for 'outputFolderID'
+	* 'documentNameMode' is now "FORM_NAME_WITH_SUBMISSION_NUMBER"
+	* 'includeEmailAddress' is now false.
+	* 'ignoreEmptySections' is now false.
+
+---
+
+**./readme.md**
+* Wrote readme file from placeholder.
+
+---
+
+**./docs/install.md**
+* New file - Contains install instructions.
+
+---
+
+**./docs/config.md**
+* New file - Contains documentation for script settings.
+
+---
+
+**./docs/files.md**
+* New file - Placeholder.
+* Will contain a description of each individual script file.

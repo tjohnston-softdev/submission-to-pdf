@@ -47,11 +47,11 @@ var renderTypeDefinitions =
 
 var scriptSettings =
 {
-  documentFolderID: "DRIVE ROOT FOLDER",
-  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP,
+  outputFolderID: "",
+  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER,
   includeFormDesc: true,
   includeSubmissionData: true,
-  includeEmailAddress: true,
+  includeEmailAddress: false,
   skipBlankQuestions: false,
   displayRadioList: true,
   displayCheckList: true,
@@ -60,7 +60,7 @@ var scriptSettings =
   useFullDurationFormat: true,
   sectionBreak: sectionBreakOpts.RULE,
   includeSectionHeader: sectionHeaderOpts.FULL,
-  ignoreEmptySections: true,
+  ignoreEmptySections: false,
   useSymbols: true
 };
 

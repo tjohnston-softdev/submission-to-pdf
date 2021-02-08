@@ -1,12 +1,14 @@
 # Summary
 
-**Version:** 0.27
+**Version:** 0.28
 
-**Date:** 2021-02-07
+**Date:** 2021-02-08
 
-**Title:** PDF conversion
+**Title:** Script Documentation
 
 **Description:**
 
-* Output document is converted to PDF.
-* Script is now feature-complete.
+* Wrote readme file.
+* Wrote install instructions.
+* Wrote documentation for script settings.
+* Descriptions for individual files will be written next.
