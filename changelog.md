@@ -1,4 +1,3 @@
 # Changelog
 
-**./docs/files.md**
-* Wrote file descriptions.
+Migrated from GitLab to GitHub.
