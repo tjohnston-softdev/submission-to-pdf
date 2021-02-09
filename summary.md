@@ -1,14 +1,12 @@
 # Summary
 
-**Version:** 0.28
+**Version:** 0.29
 
-**Date:** 2021-02-08
+**Date:** 2021-02-09
 
-**Title:** Script Documentation
+**Title:** Definitions
 
 **Description:**
 
-* Wrote readme file.
-* Wrote install instructions.
-* Wrote documentation for script settings.
-* Descriptions for individual files will be written next.
+* Split hard-coded definitions into their own script file.
+* Empty sections are now ignored by default.
