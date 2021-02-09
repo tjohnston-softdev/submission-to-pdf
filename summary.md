@@ -1,11 +1,11 @@
 # Summary
 
-**Version:** 0.31
+**Version:** 1.0
 
 **Date:** 2021-02-09
 
-**Title:** GitHub Migration
+**Title:** Public release
 
 **Description:**
 
-Migrated from GitLab to GitHub
+'submission-to-pdf' public release.
