@@ -1,14 +1,11 @@
 # Summary
 
-**Version:** 1.3
+**Version:** 1.4
 
 **Date:** 2021-02-12
 
-**Title:** Modified 'Short answer' and 'Paragraph' parsing.
+**Title:** Cleaned render result code.
 
 **Description:**
 
-When parsing these form elements as "TEXT" objects,
-there is now a clear distinction between textbox
-form elements, and other elements interpreted as
-text.
+Removed unused variable code from render script files.

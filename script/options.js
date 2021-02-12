@@ -32,8 +32,8 @@ var sectionHeaderOpts =
 
 var scriptSettings =
 {
-  outputFolderID: "1438ccdTouENBrkwyP1zeAmP1Krcs74Jf",
-  documentNameMode: nameOpts.FORM_NAME_WITH_FIRST_TEXT,
+  outputFolderID: "",
+  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER,
   includeFormDesc: true,
   includeSubmissionData: true,
   includeEmailAddress: false,

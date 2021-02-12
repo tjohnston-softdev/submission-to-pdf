@@ -1,15 +1,12 @@
 function handleSectionRender(docBody, parsedSection, renderSettings, breakModes)
 { 
-  var breakConstructed = constructSectionBreak(docBody, renderSettings.sectionBreak, breakModes)
-  var headerConstructed = constructSectionHeader(docBody, parsedSection.visible, parsedSection.elementTitle, parsedSection.sectionDesc);
-  var handleRes = false;
+  constructSectionBreak(docBody, renderSettings.sectionBreak, breakModes)
 
-  if (breakConstructed === true || headerConstructed === true)
+  if (parsedSection.visible === true)
   {
-    handleRes = true;
+    prepareRenderedSectionHeading(docBody, parsedSection.elementTitle);
+    prepareRenderedSectionDescription(docBody, parsedSection.sectionDesc);
   }
-
-  return handleRes;
 }
 
 
@@ -35,36 +32,19 @@ function constructSectionBreak(dBody, chosenFlag, modeObject)
   {
     constructRes = false;
   }
-
-  return constructRes;
-}
-
-
-function constructSectionHeader(dBody, sVisible, sTitle, sDescription)
-{
-  var constructRes = false;
-
-  if (sVisible === true)
-  {
-    prepareRenderedSectionHeading(dBody, sTitle);
-    prepareRenderedSectionDescription(dBody, sDescription);
-    constructRes = true;
-  }
-
-  return constructRes;
 }
 
 
 
-function prepareRenderedSectionHeading(bObject, titleText)
+function prepareRenderedSectionHeading(dBody, titleText)
 {
-  var headingObject = bObject.appendParagraph(titleText);
+  var headingObject = dBody.appendParagraph(titleText);
   headingObject.setHeading(DocumentApp.ParagraphHeading.HEADING2);
   headingObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
 }
 
 
-function prepareRenderedSectionDescription(bObject, descText)
+function prepareRenderedSectionDescription(dBody, descText)
 {
   var selectCutoff = -1;
   var renderObject = null;
@@ -73,7 +53,7 @@ function prepareRenderedSectionDescription(bObject, descText)
   if (descText.length > 0)
   {
     selectCutoff = descText.length - 1;
-    renderObject = bObject.appendParagraph("");
+    renderObject = dBody.appendParagraph("");
 
     renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
     renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);

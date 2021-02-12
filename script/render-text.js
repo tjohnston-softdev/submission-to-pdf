@@ -4,8 +4,6 @@ function handleTextRender(docBody, parsedText)
   var preperationObject = null;
   var textContents = null;
 
-  var handleRes = false;
-
   if (parsedText.enabledFlag >= 0)
   {
     renderObject = docBody.appendParagraph("");
@@ -18,12 +16,8 @@ function handleTextRender(docBody, parsedText)
     textContents.setItalic(0, preperationObject.fullCutoff, false);
     textContents.setBold(preperationObject.boldStart, preperationObject.boldCutoff, true);
     textContents.setFontSize(11);
-
-    handleRes = true;
   }
-
-
-  return handleRes;
+  
 }
 
 

@@ -6,7 +6,7 @@ function handleRadioGridRenderFull(docBody, parsedRadioGrid, renderSettings, sym
   
   var cellGrid = null;
   var tableObject = null;
-  var handleRes = false;
+  var tableConstructed = false;
 
   cellFilledText = symbolDefs.radioPlain.filled;
   cellEmptyText = symbolDefs.radioPlain.empty;
@@ -31,15 +31,14 @@ function handleRadioGridRenderFull(docBody, parsedRadioGrid, renderSettings, sym
     formatRadioGridHeaderRow(tableObject, 1);
     formatRadioGridHeaderColumn(tableObject);
 
-    handleRes = true;
+    tableConstructed = true;
   }
 
-  if (handleRes === true && boldIndividualCells === true)
+  if (tableConstructed === true && boldIndividualCells === true)
   {
     formatRadioGridInnerCells(tableObject);
   }
-
-  return handleRes;
+  
 }
 
 

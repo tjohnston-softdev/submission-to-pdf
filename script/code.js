@@ -238,54 +238,50 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
 function constructDocumentElement(eObject, documentBody, rendTypes, breakOptsObj, symbolObj, settingsObj)
 {
   var eType = eObject.elementType;
-  var elementConstructed = false;
 
   if (eType === rendTypes.OVERALL_HEADING)
   {
-    elementConstructed = handleOverallHeadingRender(documentBody, eObject);
+    handleOverallHeadingRender(documentBody, eObject);
   }
   else if (eType === rendTypes.FORM_DESCRIPTION)
   {
-    elementConstructed = handleFormDescriptionRender(documentBody, eObject);
+    handleFormDescriptionRender(documentBody, eObject);
   }
   else if (eType === rendTypes.SUBMISSION_DATA)
   {
-    elementConstructed = handleSubmissionDataRender(documentBody, eObject);
+    handleSubmissionDataRender(documentBody, eObject);
   }
   else if (eType === rendTypes.END_FORM_HEADER)
   {
-    elementConstructed = handleEndFormDataRender(documentBody);
+    handleEndFormDataRender(documentBody);
   }
   else if (eType === rendTypes.TEXT)
   {
-    elementConstructed = handleTextRender(documentBody, eObject);
+    handleTextRender(documentBody, eObject);
   }
   else if (eType === rendTypes.RADIO_LIST)
   {
-    elementConstructed = handleRadioListRender(documentBody, eObject, settingsObj, symbolObj);
+    handleRadioListRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.CHECK_LIST)
   {
-    elementConstructed = handleCheckListRender(documentBody, eObject, settingsObj, symbolObj);
+    handleCheckListRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
   {
-    elementConstructed = handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
+    handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.RADIO_GRID)
   {
-    elementConstructed = handleRadioGridRenderLite(documentBody, eObject);
+    handleRadioGridRenderLite(documentBody, eObject);
   }
   else if (eType === rendTypes.CHECK_GRID)
   {
-    elementConstructed = handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
+    handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.SECTION)
   {
-    elementConstructed = handleSectionRender(documentBody, eObject, settingsObj, breakOptsObj);
+    handleSectionRender(documentBody, eObject, settingsObj, breakOptsObj);
   }
-  else
-  {
-    elementConstructed = false;
-  }
+  
 }

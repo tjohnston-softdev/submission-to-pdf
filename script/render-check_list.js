@@ -9,8 +9,6 @@ function handleCheckListRender(docBody, parsedCheckList, renderSettings, symbolD
   var fullCutoff = -1;
   var textContents = null;
 
-  var handleRes = false;
-
   checkEmpty = symbolDefs.checkPlain.empty;
   checkFilled = symbolDefs.checkPlain.filled;
   boldCheckSelectionText = true;
@@ -33,7 +31,6 @@ function handleCheckListRender(docBody, parsedCheckList, renderSettings, symbolD
     constructCheckListOther(parsedCheckList, preperationObject, checkFilled, boldCheckSelectionText);
 
     fullCutoff = preperationObject.textString.length - 1;
-    preperationObject.textString += "\r";
     textContents = renderObject.appendText(preperationObject.textString);
 
     textContents.setBold(0, fullCutoff, false);
@@ -41,11 +38,8 @@ function handleCheckListRender(docBody, parsedCheckList, renderSettings, symbolD
     setCheckListBoldStatus(textContents, preperationObject.boldArray);
     setCheckListOtherItalic(textContents, preperationObject.otherRange, renderSettings.markOtherOption);
     textContents.setFontSize(11);
-
-    handleRes = true;
   }
 
-  return handleRes;
 }
 
 

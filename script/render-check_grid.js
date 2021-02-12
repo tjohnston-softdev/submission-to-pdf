@@ -6,7 +6,7 @@ function handleCheckGridRender(docBody, parsedCheckGrid, renderSettings, symbolD
 
   var cellGrid = null;
   var tableObject = null;
-  var handleRes = false;
+  var tableConstructed = false;
 
   cellFilledText = symbolDefs.checkPlain.filled;
   cellEmptyText = symbolDefs.checkPlain.empty;
@@ -31,15 +31,14 @@ function handleCheckGridRender(docBody, parsedCheckGrid, renderSettings, symbolD
     formatCheckGridHeaderRow(tableObject);
     formatCheckGridHeaderColumns(tableObject);
 
-    handleRes = true;
+    tableConstructed = true;
   }
 
-  if (handleRes === true && boldIndividualCells === true)
+  if (tableConstructed === true && boldIndividualCells === true)
   {
     formatCheckGridInnerCells(tableObject);
   }
-
-  return handleRes;
+  
 }
 
 
