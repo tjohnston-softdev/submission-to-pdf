@@ -1,11 +1,11 @@
 # Summary
 
-**Version:** 1.1
+**Version:** 1.2
 
 **Date:** 2021-02-12
 
-**Title:** dev-version2 Branch
+**Title:** File description formatting 20210212
 
 **Description:**
 
-Version 2 branch - Initial commit.
+Reformatted file descriptions.
