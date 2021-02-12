@@ -18,7 +18,8 @@ function runSubmissionToPDF()
   var subEmail = "";
   var subTime = null;
 
-  var formElementIndex = 0;
+  var elementIndex = 0;
+  var elementCutoff = -1;
   var currentElement = null;
   var currentResult = null;
   var currentParseSuccessful = false;
@@ -31,9 +32,9 @@ function runSubmissionToPDF()
   var endFormHeaderElement = null;
 
   var outputDocumentObject = null;
-  var documentBodyObject = null;
-  var parsedObjectIndex = 0;
-  var currentParsedObject = null;
+  var outputContents = null;
+  var renderIndex = 0;
+  var currentRender = null;
 
   var documentFileID = "";
   var documentFileObject = null;
@@ -60,15 +61,17 @@ function runSubmissionToPDF()
   prevSubmission = formSubmissionArray[subCount - 1];
   subTime = readSubmissionTimestamp(prevSubmission);
 
+  elementCutoff = formItemList.length - 1;
+
   if (collectEmail === true)
   {
     subEmail = prevSubmission.getRespondentEmail();
   }
 
-  for (formElementIndex = 0; formElementIndex < formItemList.length; formElementIndex = formElementIndex + 1)
+  for (elementIndex = 0; elementIndex <= elementCutoff; elementIndex = elementIndex + 1)
   {
-    currentElement = formItemList[formElementIndex];
-    currentResult = parseFormElement(currentElement, prevSubmission, renderTypesObject, settingsObject);
+    currentElement = formItemList[elementIndex];
+    currentResult = parseFormElement(elementIndex, elementCutoff, currentElement, prevSubmission, renderTypesObject, settingsObject);
     currentParseSuccessful = false;
 
     if (currentResult !== null && currentResult.elementType === renderTypesObject.SECTION)
@@ -97,16 +100,16 @@ function runSubmissionToPDF()
   parsedElements.overall.unshift(overallHeadingElement, formDescriptionElement, submissionDataElement, endFormHeaderElement);
 
   outputDocumentObject = DocumentApp.create(outputName);
-  documentBodyObject = outputDocumentObject.getBody();
+  outputContents = outputDocumentObject.getBody();
 
 
-  for (parsedObjectIndex = 0; parsedObjectIndex < parsedElements.overall.length; parsedObjectIndex = parsedObjectIndex + 1)
+  for (renderIndex = 0; renderIndex < parsedElements.overall.length; renderIndex = renderIndex + 1)
   {
-    currentParsedObject = parsedElements.overall[parsedObjectIndex];
+    currentRender = parsedElements.overall[renderIndex];
 
-    if (currentParsedObject !== null)
+    if (currentRender !== null)
     {
-      constructDocumentElement(currentParsedObject, documentBodyObject, renderTypesObject, breakOptsObject, symbolObject, settingsObject);
+      constructDocumentElement(currentRender, outputContents, renderTypesObject, breakOptsObject, symbolObject, settingsObject);
     }
   }
 
@@ -123,7 +126,7 @@ function runSubmissionToPDF()
 
 
 
-function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
+function parseFormElement(eIndex, eLast, elementObj, submissionObj, rTypesObj, settingsObj)
 {
   var eName = elementObj.getTitle();
   var eType = elementObj.getType();
@@ -214,12 +217,12 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   else if (eType === FormApp.ItemType.PAGE_BREAK)
   {
     eCast = elementObj.asPageBreakItem();
-    parseRes = handleSectionField(eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
+    parseRes = handleSectionField(eIndex, eLast, eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
   }
   else if (eType === FormApp.ItemType.SECTION_HEADER)
   {
     eCast = elementObj.asSectionHeaderItem();
-    parseRes = handleSectionField(eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
+    parseRes = handleSectionField(eIndex, eLast, eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
   }
   else
   {
@@ -231,8 +234,6 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
 
 
 /* ----------------- */
-
-
 
 
 function constructDocumentElement(eObject, documentBody, rendTypes, breakOptsObj, symbolObj, settingsObj)
@@ -283,5 +284,5 @@ function constructDocumentElement(eObject, documentBody, rendTypes, breakOptsObj
   {
     handleSectionRender(documentBody, eObject, settingsObj, breakOptsObj);
   }
-  
+
 }

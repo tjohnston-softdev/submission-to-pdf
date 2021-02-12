@@ -1,7 +1,11 @@
 function handleSectionRender(docBody, parsedSection, renderSettings, breakModes)
 { 
-  constructSectionBreak(docBody, renderSettings.sectionBreak, breakModes)
-
+  
+  if (parsedSection.allowBreak === true)
+  {
+    constructSectionBreak(docBody, renderSettings.sectionBreak, breakModes);
+  }
+  
   if (parsedSection.visible === true)
   {
     prepareRenderedSectionHeading(docBody, parsedSection.elementTitle);

@@ -43,8 +43,8 @@ var scriptSettings =
   markOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
   useFullDurationFormat: true,
-  sectionBreak: sectionBreakOpts.SKIP,
-  includeSectionHeader: sectionHeaderOpts.SKIP,
+  sectionBreak: sectionBreakOpts.RULE,
+  includeSectionHeader: sectionHeaderOpts.TITLE_ONLY,
   ignoreEmptySections: false,
   useSymbols: true
 };

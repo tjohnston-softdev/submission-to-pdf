@@ -1,12 +1,18 @@
-function handleSectionField(headerName, headerElement, headerFlag, rTypes)
+function handleSectionField(headerIndex, headerLast, headerName, headerElement, headerFlag, rTypes)
 {
   var fieldRes =
   {
     elementType: rTypes.SECTION,
     elementTitle: "",
     sectionDesc: "",
+    allowBreak: false,
     visible: false
   };
+
+  if (headerIndex > 0 && headerIndex < headerLast)
+  {
+    fieldRes.allowBreak = true;
+  }
 
 
   if (headerFlag > 0)

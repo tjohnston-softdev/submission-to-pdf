@@ -1,70 +1,45 @@
 # Changelog
 
 **./script/code.js**
-* constructDocumentElement
-	* Removed the 'elementConstructed' variable.
-	* Removed the `else` condition.
-	* Function calls remain unchanged.
+* Reduced whitespace between 'parseFormElement' and 'constructDocumentElement'
+* runSubmissionToPDF
+	* Renamed variables:
+		* 'documentBodyObject' to 'outputContents'
+		* 'parsedObjectIndex' to 'renderIndex'
+		* 'currentParsedObject' to 'currentRender'
+		* 'formElementIndex' to 'elementIndex'
+	* Added 'elementCutoff' variable.
+		* Contains last index for element array.
+		* Used by form element loop.
+		* Assigned after 'subTime'.
+* parseFormElement
+	* Added new parameters:
+		* eIndex - Form element index.
+		* eLast - Last index for element array.
+	* Updated 'handleSectionField' calls to use new parameters.
 
 ---
 
-**./script/render-form_data.js**
-* Removed 'handleRes' variable from these functions:
-	* handleOverallHeadingRender
-	* handleFormDescriptionRender
-	* handleSubmissionDataRender
-* Removed `return true` from 'handleEndFormDataRender'
-
----
-
-**./script/render-text.js**
-* Removed 'handleRes' from 'handleTextRender'
-
----
-
-**./script/render-radio_list.js**
-* handleRadioListRender
-	* Removed 'handleRes' variable.
-	* Removed extra line break at end.
-
----
-
-**./script/render-check_list.js**
-* handleCheckListRender
-	* Removed 'handleRes' variable.
-	* Removed extra line break at end.
-
----
-
-**./script/render-radio_grid.js**
-* handleRadioGridRenderFull
-	* Renamed 'handleRes' variable to 'tableConstructed'
-	* Removed return.
-
----
-
-**./script/render-check_grid.js**
-* handleCheckGridRender
-	* Renamed 'handleRes' variable to 'tableConstructed'
-	* Removed return.
+**./script/field-section.js**
+* Added parameters to 'handleSectionField':
+	* 'headerIndex' - Form element index.
+	* 'headerLast' - Last element index.
+* Added new result property 'breakAllowed'
+	* Indicates whether there should be a break in the output document before this section header.
+	* Set to 'false' by default.
+	* Breaks will only be inserted between sections.
+	* If this is the first or last form element, the value will remain false.
 
 ---
 
 **./script/render-section.js**
-* Removed variables from 'handleSectionRender':
-	* breakConstructed
-	* headerConstructed
-	* handleRes
-* Removed return from 'constructSectionBreak'
-	* 'constructionRes' variable remains intact, just not returned.
-* Merged 'constructSectionHeader' into 'handleSectionRender'
-* Renamed 'bObject' parameter to 'dBody' in these functions:
-	* prepareRenderedSectionHeading
-	* prepareRenderedSectionDescription
+* handleSectionRender
+	* Added missing semicolon to 'constructSectionBreak' call.
+	* 'constructSectionBreak' will only be called if the `parsedSection.allowBreak` is true.
 
 ---
 
 **./script/options.js**
-* Cleared 'outputFolderID' setting That was a mistake.
-	* Although this will cause an error, PDF generation is successful.
-* 'documentNameMode' setting is now "FORM_NAME_WITH_SUBMISSION_NUMBER"
+* scriptSettings
+	* 'sectionBreak' is now "RULE"
+	* 'includeSectionHeader' is now "TITLE_ONLY"
