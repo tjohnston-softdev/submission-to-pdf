@@ -1,11 +1,11 @@
 # Summary
 
-**Version:** 1.0
+**Version:** 1.1
 
-**Date:** 2021-02-09
+**Date:** 2021-02-12
 
-**Title:** Public release
+**Title:** dev-version2 Branch
 
 **Description:**
 
-'submission-to-pdf' public release.
+Version 2 branch - Initial commit.

@@ -1,3 +1,3 @@
 # Changelog
 
-Public release.
+Version 2 branch - Initial commit.
