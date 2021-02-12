@@ -1,10 +1,11 @@
-function handleTextField(txtTitle, txtAnswer, multipleLines, skipBlank, rTypes)
+function handleTextField(txtTitle, txtAnswer, textboxUsed, multipleLines, skipBlank, rTypes)
 {
   var fieldRes =
   {
     elementType: rTypes.TEXT,
     elementTitle: txtTitle,
     elementAnswer: "",
+    textbox: textboxUsed,
     titleBreak: multipleLines,
     enabledFlag: -1
   };

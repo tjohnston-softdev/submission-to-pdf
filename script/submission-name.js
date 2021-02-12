@@ -51,9 +51,14 @@ function getFirstTextAnswer(eList, sNum, rTypes)
 {
   var elementIndex = 0;
   var currentElement = null;
+
   var currentText = false;
   var currentEnabled = -1;
   var currentLength = -1;
+
+  var currentAnswered = false;
+  var currentBox = false;
+  var currentBreak = false;
 
   var textAnswerFound = false;
   var textRes = sNum;
@@ -61,7 +66,14 @@ function getFirstTextAnswer(eList, sNum, rTypes)
   while (elementIndex >= 0 && elementIndex < eList.length && textAnswerFound !== true)
   {
     currentElement = eList[elementIndex];
+
     currentText = false;
+    currentEnabled = -1;
+    currentLength = -1;
+
+    currentAnswered = false;
+    currentBox = false;
+    currentBreak = false;
 
     if (currentElement !== null && currentElement.elementType === rTypes.TEXT)
     {
@@ -71,6 +83,13 @@ function getFirstTextAnswer(eList, sNum, rTypes)
     }
 
     if (currentText === true && currentEnabled > 0 && currentLength > 0)
+    {
+      currentAnswered = true;
+      currentBox = currentElement.textbox;
+      currentBreak = currentElement.titleBreak;
+    }
+
+    if (currentAnswered === true && currentBox === true && currentBreak !== true)
     {
       textAnswerFound = true;
       textRes = currentElement.elementAnswer;

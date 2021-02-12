@@ -32,8 +32,8 @@ var sectionHeaderOpts =
 
 var scriptSettings =
 {
-  outputFolderID: "",
-  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER,
+  outputFolderID: "1438ccdTouENBrkwyP1zeAmP1Krcs74Jf",
+  documentNameMode: nameOpts.FORM_NAME_WITH_FIRST_TEXT,
   includeFormDesc: true,
   includeSubmissionData: true,
   includeEmailAddress: false,
@@ -43,9 +43,9 @@ var scriptSettings =
   markOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
   useFullDurationFormat: true,
-  sectionBreak: sectionBreakOpts.RULE,
-  includeSectionHeader: sectionHeaderOpts.FULL,
-  ignoreEmptySections: true,
+  sectionBreak: sectionBreakOpts.SKIP,
+  includeSectionHeader: sectionHeaderOpts.SKIP,
+  ignoreEmptySections: false,
   useSymbols: true
 };
 

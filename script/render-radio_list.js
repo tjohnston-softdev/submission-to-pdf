@@ -6,8 +6,8 @@ function handleRadioListRender(docBody, parsedRadioList, renderSettings, symbolD
 
   var renderObject = null;
   var preperationObject = {textString: "", boldArray: [], otherRange: null}
-  var textContents = null;
   var fullCutoff = -1;
+  var textContents = null;
 
   var handleRes = false;
   
@@ -32,8 +32,9 @@ function handleRadioListRender(docBody, parsedRadioList, renderSettings, symbolD
     constructRadioListOptions(parsedRadioList, preperationObject, radioEmpty, radioFilled, boldRadioSelectionText);
     constructRadioListOther(parsedRadioList, preperationObject, radioFilled, boldRadioSelectionText);
 
-    textContents = renderObject.appendText(preperationObject.textString);
     fullCutoff = preperationObject.textString.length - 1;
+    preperationObject.textString += "\r";
+    textContents = renderObject.appendText(preperationObject.textString);
 
     textContents.setBold(0, fullCutoff, false);
     textContents.setItalic(0, fullCutoff, false);

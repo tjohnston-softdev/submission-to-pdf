@@ -136,12 +136,12 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   if (eType === FormApp.ItemType.TEXT)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, true, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.PARAGRAPH_TEXT)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, true, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, true, true, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.MULTIPLE_CHOICE && settingsObj.displayRadioList === true)
   {
@@ -152,7 +152,7 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   else if (eType === FormApp.ItemType.MULTIPLE_CHOICE)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.displayCheckList === true)
   {
@@ -164,19 +164,19 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   {
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
     preparedText = givenAnswer.join();
-    parseRes = handleTextField(eName, preparedText, true, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, preparedText, false, true, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.LIST)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.SCALE)
   {
     eCast = elementObj.asScaleItem();
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     preparedText = prepareScaleText(givenAnswer, eCast);
-    parseRes = handleTextField(eName, preparedText, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, preparedText, false, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.GRID)
   {
@@ -193,23 +193,23 @@ function parseFormElement(elementObj, submissionObj, rTypesObj, settingsObj)
   else if (eType === FormApp.ItemType.DATE)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.TIME)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.DURATION)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     preparedText = prepareDurationText(givenAnswer, settingsObj.useFullDurationFormat);
-    parseRes = handleTextField(eName, preparedText, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, preparedText, false, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.DATETIME)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
   }
   else if (eType === FormApp.ItemType.PAGE_BREAK)
   {
