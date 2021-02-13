@@ -1,44 +1,91 @@
-# Changelog
-
 **./script/code.js**
-* runSubmissionToPDF
-	* Renamed 'elementCutoff' variable to 'elementCount'.
-	* 'elementCount' now contains the number of form elements.
-	* Form element loop now uses 'elementCount'
-	* Declared new variable 'currentNumber'
-		* Used in form element loop.
-		* `elementIndex + 1`
-	* Updated 'parseFormElement' call to use:
-		* currentNumber
-		* elementCount
-* parseFormElement
-	* Renamed 'eLast' parameter to 'eCount'.
-	* Renamed 'eIndex' parameter to 'eNumber'.
-	* Changed 'handleSectionField' calls to use:
-		* eNumber
-		* eCount
+* Commented out calls to:
+	* handleRadioGridRenderFull
+	* handleRadioGridRenderLite
+	* handleCheckGridRender	
+* Declared variable 'currentPrevType' in 'runSubmissionToPDF'
+	* Used in the element rendering loop.
+	* Stores the render type of the previous element.
+	* Calls 'getPreviousElementRenderType' (type-offset.js)
+* Added 'prevType' parameter to 'constructDocumentElement'
+* x
 
 ---
 
-**./script/field-section.js**
-* handleSectionField
-	* Renamed 'headerIndex' parameter to 'headerNum'
-	* Renamed 'headerLast' parameter to 'totalCount'
-	* Removed 'allowBreak' property from result object.
-	* Added 'orderFlag' property to result object.
-		* **Negative:** Last form element - Ignore entirely.
-		* **Zero:** First form element - Header without break. 
-		* **Positive:** Between form elements - Break and header.
+**./script/submission-name.js**
+* Updated "TIMESTAMP" condition in 'decideSubmissionName' to use new name.
 
 ---
 
-**./script/render-section.js**
-* Renamed 'constructSectionBreak' function to 'prepareSectionBreak'
-* Rewrote 'handleSectionRender' to use the 'orderFlag' property.
-* Removed the extra whitespace when rendering horizontal rules in 'prepareSectionBreak'
+**./script/type-offset.js**
+* New file
+* Used to retrieve the render type of previous answered element in the array.
 
 ---
 
-**./script/render-form_data.js**
-* handleEndFormDataRender
-	* Removed extra blank lines when rendering "END_FORM_HEADER elements.
+**./script/render-text.js - New functions**
+* getTextRenderLineBreakPrefix
+	* Checks whether line break prefix is required.
+	* Returns 'true' if previous type is "RADIO_LIST" or "CHECK_LIST"
+* constructTextElementLineBreakPrefix
+	* Adds prefix line break before element text if required.
+	* Also sets bold start.
+* constructTextElementQuestion
+	* Writes question text.
+	* This is the same, no matter what.
+* constructTextElementAnswer
+	* Writes answer text.
+	* Different depending on the 'blockFlag' value.
+
+---
+
+**./script/render-text.js - handleTextRender**
+* New parameters:
+	* previousParsedType - Render type of previous element.
+	* renderDefs - Render type definitions.
+* Declared new variable 'breakPrefixRequired'
+	* Assigned before 'renderObject'
+	* Calls 'getTextRenderLineBreakPrefix'
+* Declared new variable 'fullCutoff'
+	* Last character index for element text.
+	* Previously part of the preperation object.
+	* Is now a local variable because of redundancy.
+	* Assigned before 'textContents'
+* Updated 'setBold' and 'setItalic' calls to use 'fullCutoff'
+* Added calls to the new construct functions.
+	* constructTextElementLineBreakPrefix
+	* constructTextElementQuestion
+	* constructTextElementAnswer
+
+---
+
+**./script/render-text.js - prepareTextElementConstruction**
+* Result properties:
+	* Removed 'fullCutoff'
+	* Added 'prefixLinebreak' - Decides if a blank line is required before text.
+	* Added 'blockFlag' - Decides how text is written.
+		* **Positive:** Paragraph - Question and answer on separate line.
+		* **Zero:** Inline - Question and answer on same line.
+		* **Negative:** No answer given.
+* Added 'usePrefix' parameter.
+* Revised overall structure.
+	* Only handles the preparation object.
+	* It does not write the element text itself.
+	* Only decides how to write the text.
+* Split the existing text write code into new functions.
+
+---
+
+**./script/options.js**
+* Renamed the "TIMESTAMP" option in 'nameOpts' to "SUBMISSION_TIMESTAMP"
+* scriptSettings
+	* 'sectionBreak' is now "SKIP"
+	* 'includeSectionHeader' is now "SKIP"
+	* 'skipBlankQuestions' is now true.
+
+---
+
+**./docs/files.md**
+* Wrote description for 'type-offset.js'
+	* Before 'render-form_data'
+	* After 'submission-name'

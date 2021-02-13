@@ -4,7 +4,7 @@ var nameOpts =
   "FORM_NAME_WITH_SUBMISSION_NUMBER": 2,
   "FORM_NAME_WITH_FIRST_TEXT": 3,
   "FIRST_TEXT": 4,
-  "TIMESTAMP": 5,
+  "SUBMISSION_TIMESTAMP": 5,
   "SUBMISSION_NUMBER": 6
 };
 
@@ -37,14 +37,14 @@ var scriptSettings =
   includeFormDesc: true,
   includeSubmissionData: true,
   includeEmailAddress: false,
-  skipBlankQuestions: false,
+  skipBlankQuestions: true,
   displayRadioList: true,
   displayCheckList: true,
   markOtherOption: true,
   radioGridMode: radioGridModeOpts.FULL,
   useFullDurationFormat: true,
-  sectionBreak: sectionBreakOpts.RULE,
-  includeSectionHeader: sectionHeaderOpts.TITLE_ONLY,
+  sectionBreak: sectionBreakOpts.SKIP,
+  includeSectionHeader: sectionHeaderOpts.SKIP,
   ignoreEmptySections: false,
   useSymbols: true
 };

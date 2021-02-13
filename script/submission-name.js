@@ -22,7 +22,7 @@ function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, sTimeObj
   {
     nameRes = getFirstTextAnswer(pElements.overall, subNumber, rTypesObj);
   }
-  else if (modeFlag === nameObj.TIMESTAMP)
+  else if (modeFlag === nameObj.SUBMISSION_TIMESTAMP)
   {
     nameRes = writtenTimestamp;
   }

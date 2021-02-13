@@ -83,6 +83,12 @@ Decides the file name of the output document depending on the [chosen option](./
 
 ---
 
+**type-offset** ([link(../script/type-offset.js))
+
+Used to retrieve the render type of the previously answered form element when constructing the output document.
+
+---
+
 **render-form_data** ([link](../script/render-form_data.js))
 
 Writes the form name, form description, and submission data at the start of the output document.
@@ -141,3 +147,4 @@ Contains [script settings](./config.md).
 ---
 
 [Return to Index](../readme.md) 
+

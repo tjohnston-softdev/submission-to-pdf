@@ -36,6 +36,7 @@ function runSubmissionToPDF()
   var outputContents = null;
   var renderIndex = 0;
   var currentRender = null;
+  var currentPrevType = null;
 
   var documentFileID = "";
   var documentFileObject = null;
@@ -108,10 +109,11 @@ function runSubmissionToPDF()
   for (renderIndex = 0; renderIndex < parsedElements.overall.length; renderIndex = renderIndex + 1)
   {
     currentRender = parsedElements.overall[renderIndex];
+    currentPrevType = getPreviousElementRenderType(renderIndex, parsedElements.overall);
 
     if (currentRender !== null)
     {
-      constructDocumentElement(currentRender, outputContents, renderTypesObject, breakOptsObject, symbolObject, settingsObject);
+      constructDocumentElement(currentRender, currentPrevType, outputContents, renderTypesObject, breakOptsObject, symbolObject, settingsObject);
     }
   }
 
@@ -238,7 +240,7 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, rTypesObj,
 /* ----------------- */
 
 
-function constructDocumentElement(eObject, documentBody, rendTypes, breakOptsObj, symbolObj, settingsObj)
+function constructDocumentElement(eObject, prevType, documentBody, rendTypes, breakOptsObj, symbolObj, settingsObj)
 {
   var eType = eObject.elementType;
 
@@ -260,7 +262,7 @@ function constructDocumentElement(eObject, documentBody, rendTypes, breakOptsObj
   }
   else if (eType === rendTypes.TEXT)
   {
-    handleTextRender(documentBody, eObject);
+    handleTextRender(documentBody, eObject, prevType, rendTypes);
   }
   else if (eType === rendTypes.RADIO_LIST)
   {
@@ -272,15 +274,15 @@ function constructDocumentElement(eObject, documentBody, rendTypes, breakOptsObj
   }
   else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
   {
-    handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
+    //handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.RADIO_GRID)
   {
-    handleRadioGridRenderLite(documentBody, eObject);
+    //handleRadioGridRenderLite(documentBody, eObject);
   }
   else if (eType === rendTypes.CHECK_GRID)
   {
-    handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
+    //handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.SECTION)
   {
