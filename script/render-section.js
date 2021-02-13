@@ -1,21 +1,33 @@
 function handleSectionRender(docBody, parsedSection, renderSettings, breakModes)
-{ 
-  
-  if (parsedSection.allowBreak === true)
+{
+  var sectionEnabled = false;
+
+  if (parsedSection.orderFlag > 0)
   {
-    constructSectionBreak(docBody, renderSettings.sectionBreak, breakModes);
+    prepareSectionBreak(docBody, renderSettings.sectionBreak, breakModes);
+    sectionEnabled = true;
+  }
+  else if (parsedSection.orderFlag === 0)
+  {
+    sectionEnabled = true;
+  }
+  else
+  {
+    sectionEnabled = false;
   }
   
-  if (parsedSection.visible === true)
+
+  if (sectionEnabled === true && parsedSection.visible === true)
   {
     prepareRenderedSectionHeading(docBody, parsedSection.elementTitle);
     prepareRenderedSectionDescription(docBody, parsedSection.sectionDesc);
   }
+
 }
 
 
 
-function constructSectionBreak(dBody, chosenFlag, modeObject)
+function prepareSectionBreak(dBody, chosenFlag, modeObject)
 {
   var constructRes = true;
   
@@ -26,7 +38,6 @@ function constructSectionBreak(dBody, chosenFlag, modeObject)
   else if (chosenFlag === modeObject.RULE)
   {
     dBody.appendHorizontalRule();
-    dBody.appendParagraph("");
   }
   else if (chosenFlag === modeObject.WHITESPACE)
   {

@@ -1,17 +1,25 @@
-function handleSectionField(headerIndex, headerLast, headerName, headerElement, headerFlag, rTypes)
+function handleSectionField(headerNum, totalCount, headerName, headerElement, headerFlag, rTypes)
 {
   var fieldRes =
   {
     elementType: rTypes.SECTION,
     elementTitle: "",
     sectionDesc: "",
-    allowBreak: false,
+    orderFlag: 0,
     visible: false
   };
 
-  if (headerIndex > 0 && headerIndex < headerLast)
+  if (headerNum > 1 && headerNum < totalCount)
   {
-    fieldRes.allowBreak = true;
+    fieldRes.orderFlag = 1;
+  }
+  else if (headerNum >= totalCount)
+  {
+    fieldRes.orderFlag = -1;
+  }
+  else
+  {
+    fieldRes.orderFlag = 0;
   }
 
 

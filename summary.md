@@ -1,13 +1,13 @@
 # Summary
 
-**Version:** 1.5
+**Version:** 1.6
 
-**Date:** 2021-02-12
+**Date:** 2021-02-13
 
-**Title:** Fixed first section break glitch.
+**Title:** Updated section header rendering
 
 **Description:**
 
-* If the first form element is a section, it may include an unnecessary break between the form data and the first section in the output document.
-* If the section is the first or last element, the break will not be inserted.
-* Although a 'last element' section does not insert a break, it will still include the (empty) header.
+* Modified section header rendering so that if a section is the last form element, it will be ignored entirely.
+* Removed extra whitespace when rendering horizontal rules between sections.
+	* This covers both "END_FORM_HEADER" and "SECTION" elements.

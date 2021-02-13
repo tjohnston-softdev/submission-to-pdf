@@ -57,7 +57,6 @@ function handleSubmissionDataRender(docBody, parsedData)
 function handleEndFormDataRender(docBody)
 {
   docBody.appendHorizontalRule();
-  docBody.appendParagraph('\r');
 }
 
 

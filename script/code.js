@@ -19,7 +19,8 @@ function runSubmissionToPDF()
   var subTime = null;
 
   var elementIndex = 0;
-  var elementCutoff = -1;
+  var elementCount = -1;
+  var currentNumber = -1;
   var currentElement = null;
   var currentResult = null;
   var currentParseSuccessful = false;
@@ -61,17 +62,18 @@ function runSubmissionToPDF()
   prevSubmission = formSubmissionArray[subCount - 1];
   subTime = readSubmissionTimestamp(prevSubmission);
 
-  elementCutoff = formItemList.length - 1;
+  elementCount = formItemList.length;
 
   if (collectEmail === true)
   {
     subEmail = prevSubmission.getRespondentEmail();
   }
 
-  for (elementIndex = 0; elementIndex <= elementCutoff; elementIndex = elementIndex + 1)
+  for (elementIndex = 0; elementIndex < elementCount; elementIndex = elementIndex + 1)
   {
+    currentNumber = elementIndex + 1;
     currentElement = formItemList[elementIndex];
-    currentResult = parseFormElement(elementIndex, elementCutoff, currentElement, prevSubmission, renderTypesObject, settingsObject);
+    currentResult = parseFormElement(currentNumber, elementCount, currentElement, prevSubmission, renderTypesObject, settingsObject);
     currentParseSuccessful = false;
 
     if (currentResult !== null && currentResult.elementType === renderTypesObject.SECTION)
@@ -126,7 +128,7 @@ function runSubmissionToPDF()
 
 
 
-function parseFormElement(eIndex, eLast, elementObj, submissionObj, rTypesObj, settingsObj)
+function parseFormElement(eNumber, eCount, elementObj, submissionObj, rTypesObj, settingsObj)
 {
   var eName = elementObj.getTitle();
   var eType = elementObj.getType();
@@ -217,12 +219,12 @@ function parseFormElement(eIndex, eLast, elementObj, submissionObj, rTypesObj, s
   else if (eType === FormApp.ItemType.PAGE_BREAK)
   {
     eCast = elementObj.asPageBreakItem();
-    parseRes = handleSectionField(eIndex, eLast, eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
+    parseRes = handleSectionField(eNumber, eCount, eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
   }
   else if (eType === FormApp.ItemType.SECTION_HEADER)
   {
     eCast = elementObj.asSectionHeaderItem();
-    parseRes = handleSectionField(eIndex, eLast, eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
+    parseRes = handleSectionField(eNumber, eCount, eName, eCast, settingsObj.includeSectionHeader, rTypesObj);
   }
   else
   {

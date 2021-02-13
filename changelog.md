@@ -1,45 +1,44 @@
 # Changelog
 
 **./script/code.js**
-* Reduced whitespace between 'parseFormElement' and 'constructDocumentElement'
 * runSubmissionToPDF
-	* Renamed variables:
-		* 'documentBodyObject' to 'outputContents'
-		* 'parsedObjectIndex' to 'renderIndex'
-		* 'currentParsedObject' to 'currentRender'
-		* 'formElementIndex' to 'elementIndex'
-	* Added 'elementCutoff' variable.
-		* Contains last index for element array.
-		* Used by form element loop.
-		* Assigned after 'subTime'.
+	* Renamed 'elementCutoff' variable to 'elementCount'.
+	* 'elementCount' now contains the number of form elements.
+	* Form element loop now uses 'elementCount'
+	* Declared new variable 'currentNumber'
+		* Used in form element loop.
+		* `elementIndex + 1`
+	* Updated 'parseFormElement' call to use:
+		* currentNumber
+		* elementCount
 * parseFormElement
-	* Added new parameters:
-		* eIndex - Form element index.
-		* eLast - Last index for element array.
-	* Updated 'handleSectionField' calls to use new parameters.
+	* Renamed 'eLast' parameter to 'eCount'.
+	* Renamed 'eIndex' parameter to 'eNumber'.
+	* Changed 'handleSectionField' calls to use:
+		* eNumber
+		* eCount
 
 ---
 
 **./script/field-section.js**
-* Added parameters to 'handleSectionField':
-	* 'headerIndex' - Form element index.
-	* 'headerLast' - Last element index.
-* Added new result property 'breakAllowed'
-	* Indicates whether there should be a break in the output document before this section header.
-	* Set to 'false' by default.
-	* Breaks will only be inserted between sections.
-	* If this is the first or last form element, the value will remain false.
+* handleSectionField
+	* Renamed 'headerIndex' parameter to 'headerNum'
+	* Renamed 'headerLast' parameter to 'totalCount'
+	* Removed 'allowBreak' property from result object.
+	* Added 'orderFlag' property to result object.
+		* **Negative:** Last form element - Ignore entirely.
+		* **Zero:** First form element - Header without break. 
+		* **Positive:** Between form elements - Break and header.
 
 ---
 
 **./script/render-section.js**
-* handleSectionRender
-	* Added missing semicolon to 'constructSectionBreak' call.
-	* 'constructSectionBreak' will only be called if the `parsedSection.allowBreak` is true.
+* Renamed 'constructSectionBreak' function to 'prepareSectionBreak'
+* Rewrote 'handleSectionRender' to use the 'orderFlag' property.
+* Removed the extra whitespace when rendering horizontal rules in 'prepareSectionBreak'
 
 ---
 
-**./script/options.js**
-* scriptSettings
-	* 'sectionBreak' is now "RULE"
-	* 'includeSectionHeader' is now "TITLE_ONLY"
+**./script/render-form_data.js**
+* handleEndFormDataRender
+	* Removed extra blank lines when rendering "END_FORM_HEADER elements.
