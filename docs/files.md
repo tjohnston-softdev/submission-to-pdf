@@ -59,9 +59,9 @@ Reads the form name and description so that they can be displayed in the output 
 
 ---
 
-**form-answer-help** ([link](../script/form-answer-help.js))
+**form-element-help** ([link](../script/form-element-help.js))
 
-This file is used to retrieve submitted answers for a corresponding form element, and format 'Linear scale' and 'Time / Duration' answers into readable text.
+This file is used to retrieve submitted answers for a corresponding form element, format 'Linear scale' and 'Time / Duration' answers into readable text, and prepare form element names.
 
 ---
 

@@ -1,12 +1,14 @@
 # Summary
 
-**Version:** 1.9
+**Version:** 1.10
 
 **Date:** 2021-02-14
 
-**Title:** Default Element Names
+**Title:** Removed Full Duration
 
 **Description:**
 
-If a parsed element does not have a title,
-a default name will be generated.
+* Removed 'useFullDurationFormat' option.
+* Now 'Duration' form elements are all written the same way.
+	* **Before:** 7 Hours, 30 Minutes, 52 Seconds
+	* **After:** 7h 30m 52s

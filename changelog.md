@@ -1,70 +1,32 @@
 # Changelog
 
-**./script/code.js parseFormElement**
-* Removed the 'eName' variable from the following calls:
-	* handleTextField
-	* handleRadioListField
-	* handleCheckListField
-	* handleRadioGridField
-	* handleCheckGridField
-* Added calls to 'setParsedElementTitle' throughout the IF structure after parsing form elements.
-	* This applies to all conditions except for ones calling 'handleSectionField'
-	* This is because 'handleSectionField' has its own code for resolving empty names.
-
----
-
-**./script/field-text.js**
-* handleTextField
-	* Removed 'txtTitle' parameter.
-	* 'elementTitle' result property is now empty.
-
----
-
-**./script/field-radio_list.js**
-* handleRadioListField
-	* Removed 'rdoTitle' parameter.
-	* 'elementTitle' result property is now empty.
-
----
-
-**./script/field-check_list.js**
-* handleCheckListField
-	* Removed 'chkTitle' parameter.
-	* 'elementTitle' result property is now empty.
-
----
-
-**./script/field-radio_grid.js**
-* handleRadioGridField
-	* Removed 'gridName' parameter.
-	* 'elementTitle' result property is now empty.
-
----
-
-**./script/field-check_grid.js**
-* handleCheckGridField
-	* Removed 'gridName' parameter.
-	* 'elementTitle' result property is now empty.
-
----
-
-**field-section.js**
-* handleSectionField
-	* Moved the 'orderFlag' assignment IF structure into its own function 'setSectionOrderFlag'
-	* 'elementTitle' default value is now "Section %headerNum%
-		* eg. "Section 123"
-	* Renamed the 'headerFlag' parameter to 'headerUsageFlag'
-
----
-
-**./script/form-answer-help.js**
-* Renamed to 'form-element-help.js'
+**./script/code.js**
+* Removed 'settingsObj.useFullDurationFormat' from 'prepareDurationText' call
 
 ---
 
 **./script/form-element-help.js**
-* Wrote new function 'setParsedElementTitle'
-	* Used to save the form element title into the parsed object.
-	* If the element does not have a title, a default will be used instead.
-	* %typeDesc% %orderNumber%
-	* eg. "Short answer 123"
+* Removed the 'fullFormat' parameter from 'prepareDurationText'
+* Removed the 'writeFullDurationFormat' function.
+	* Rewrote inside 'prepareDurationText' with a simpler format.
+* IF structure revised to only have one condition.
+* String format
+	* **Before:** 7 Hours, 30 Minutes, 52 Seconds
+	* **After:** 7h 30m 52s
+
+---
+
+**./script/options.js**
+* Removed 'useFullDurationFormat' from 'scriptSettings'
+
+---
+
+**./docs/files.md**
+* Renamed the 'form-answer-help' entry to 'form-element-help'
+	* Matches the new file name.
+* Expanded the 'form-element-help' description to explain name preparation.
+
+---
+
+**./docs/config.md**
+* Removed 'useFullDurationFormat' row from "Script Settings" table.

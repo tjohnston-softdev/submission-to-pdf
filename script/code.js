@@ -222,7 +222,7 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, rTypesObj,
   else if (eType === FormApp.ItemType.DURATION)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    preparedText = prepareDurationText(givenAnswer, settingsObj.useFullDurationFormat);
+    preparedText = prepareDurationText(givenAnswer);
     parseRes = handleTextField(preparedText, false, false, settingsObj.skipBlankQuestions, rTypesObj);
     setParsedElementTitle(parseRes, eName, "Duration", eNumber);
   }
