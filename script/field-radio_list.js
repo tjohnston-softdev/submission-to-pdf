@@ -1,9 +1,9 @@
-function handleRadioListField(rdoTitle, rdoAnswer, rdoElement, skipBlank, rTypes)
+function handleRadioListField(rdoAnswer, rdoElement, skipBlank, rTypes)
 {
   var fieldRes =
   {
     elementType: rTypes.RADIO_LIST,
-    elementTitle: rdoTitle,
+    elementTitle: "",
     optionList: [],
     chosenOption: -1,
     customEnabled: false,

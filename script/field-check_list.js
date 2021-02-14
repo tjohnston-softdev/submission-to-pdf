@@ -1,9 +1,9 @@
-function handleCheckListField(chkTitle, chkAnswers, chkElement, skipBlank, rTypes)
+function handleCheckListField(chkAnswers, chkElement, skipBlank, rTypes)
 {
   var fieldRes =
   {
     elementType: rTypes.CHECK_LIST,
-    elementTitle: chkTitle,
+    elementTitle: "",
     checkboxList: [],
     chosenItems: [],
     customEnabled: false,

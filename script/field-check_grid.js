@@ -1,9 +1,9 @@
-function handleCheckGridField(gridName, gridAnswers, gridElement, skipBlank, rTypes)
+function handleCheckGridField(gridAnswers, gridElement, skipBlank, rTypes)
 {
   var fieldRes =
   {
     elementType: rTypes.CHECK_GRID,
-    elementTitle: gridName,
+    elementTitle: "",
     rowList: [],
     columnList: [],
     boxStatus: [],

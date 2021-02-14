@@ -1,9 +1,9 @@
-function handleRadioGridField(gridName, gridAnswers, gridElement, skipBlank, rTypes)
+function handleRadioGridField(gridAnswers, gridElement, skipBlank, rTypes)
 {
   var fieldRes =
   {
     elementType: rTypes.RADIO_GRID,
-    elementTitle: gridName,
+    elementTitle: "",
     rowList: [],
     columnList: [],
     chosenItems: [],

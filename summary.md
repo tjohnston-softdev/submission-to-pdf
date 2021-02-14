@@ -1,12 +1,12 @@
 # Summary
 
-**Version:** 1.8
+**Version:** 1.9
 
 **Date:** 2021-02-14
 
-**Title:** Debug Output Name
+**Title:** Default Element Names
 
 **Description:**
 
-* Added debug output name mode.
-* If 'documentNameMode' is a negative value, execution time will be used instead.
+If a parsed element does not have a title,
+a default name will be generated.

@@ -143,80 +143,94 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, rTypesObj,
   if (eType === FormApp.ItemType.TEXT)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, true, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(givenAnswer, true, false, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Short answer", eNumber);
   }
   else if (eType === FormApp.ItemType.PARAGRAPH_TEXT)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, true, true, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(givenAnswer, true, true, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Paragraph", eNumber);
   }
   else if (eType === FormApp.ItemType.MULTIPLE_CHOICE && settingsObj.displayRadioList === true)
   {
     eCast = elementObj.asMultipleChoiceItem();
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleRadioListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleRadioListField(givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Multiple choice list", eNumber);
   }
   else if (eType === FormApp.ItemType.MULTIPLE_CHOICE)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Multiple choice", eNumber);
   }
   else if (eType === FormApp.ItemType.CHECKBOX && settingsObj.displayCheckList === true)
   {
     eCast = elementObj.asCheckboxItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleCheckListField(givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Checkbox list", eNumber);
   }
   else if (eType === FormApp.ItemType.CHECKBOX)
   {
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
     preparedText = givenAnswer.join();
-    parseRes = handleTextField(eName, preparedText, false, true, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(preparedText, false, true, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Checkbox", eNumber);
   }
   else if (eType === FormApp.ItemType.LIST)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Drop-down", eNumber);
   }
   else if (eType === FormApp.ItemType.SCALE)
   {
     eCast = elementObj.asScaleItem();
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     preparedText = prepareScaleText(givenAnswer, eCast);
-    parseRes = handleTextField(eName, preparedText, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(preparedText, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Linear scale", eNumber);
   }
   else if (eType === FormApp.ItemType.GRID)
   {
     eCast = elementObj.asGridItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleRadioGridField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleRadioGridField(givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Multiple-choice grid", eNumber);
   }
   else if (eType === FormApp.ItemType.CHECKBOX_GRID)
   {
     eCast = elementObj.asCheckboxGridItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckGridField(eName, givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleCheckGridField(givenAnswer, eCast, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Tick box grid", eNumber);
   }
   else if (eType === FormApp.ItemType.DATE)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Date", eNumber);
   }
   else if (eType === FormApp.ItemType.TIME)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Time", eNumber);
   }
   else if (eType === FormApp.ItemType.DURATION)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     preparedText = prepareDurationText(givenAnswer, settingsObj.useFullDurationFormat);
-    parseRes = handleTextField(eName, preparedText, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(preparedText, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Duration", eNumber);
   }
   else if (eType === FormApp.ItemType.DATETIME)
   {
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(eName, givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    parseRes = handleTextField(givenAnswer, false, false, settingsObj.skipBlankQuestions, rTypesObj);
+    setParsedElementTitle(parseRes, eName, "Timestamp", eNumber);
   }
   else if (eType === FormApp.ItemType.PAGE_BREAK)
   {

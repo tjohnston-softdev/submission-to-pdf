@@ -1,4 +1,4 @@
-function handleSectionField(headerNum, totalCount, headerName, headerElement, headerFlag, rTypes)
+function handleSectionField(headerNum, totalCount, headerName, headerElement, headerUsageFlag, rTypes)
 {
   var fieldRes =
   {
@@ -9,27 +9,17 @@ function handleSectionField(headerNum, totalCount, headerName, headerElement, he
     visible: false
   };
 
-  if (headerNum > 1 && headerNum < totalCount)
-  {
-    fieldRes.orderFlag = 1;
-  }
-  else if (headerNum >= totalCount)
-  {
-    fieldRes.orderFlag = -1;
-  }
-  else
-  {
-    fieldRes.orderFlag = 0;
-  }
+  fieldRes.elementTitle = "Section " + headerNum;
+  fieldRes.orderFlag = setSectionOrderFlag(headerNum, totalCount);
 
 
-  if (headerFlag > 0)
+  if (headerUsageFlag > 0)
   {
     fieldRes.elementTitle = headerName;
     fieldRes.sectionDesc = headerElement.getHelpText();
     fieldRes.visible = true;
   }
-  else if (headerFlag === 0)
+  else if (headerUsageFlag === 0)
   {
     fieldRes.elementTitle = headerName;
     fieldRes.sectionDesc = "";
@@ -42,4 +32,26 @@ function handleSectionField(headerNum, totalCount, headerName, headerElement, he
 
 
   return fieldRes;
+}
+
+
+
+function setSectionOrderFlag(hdrNum, tCount)
+{
+  var flagRes = 0;
+
+  if (hdrNum > 1 && hdrNum < tCount)
+  {
+    flagRes = 1;
+  }
+  else if (hdrNum >= tCount)
+  {
+    flagRes = -1;
+  }
+  else
+  {
+    flagRes = 0;
+  }
+
+  return flagRes;
 }

@@ -91,3 +91,18 @@ function writeFullDurationFormat(origAns)
 
   return writeRes;
 }
+
+
+
+
+function setParsedElementTitle(parseObj, origTitle, typeDesc, orderNumber)
+{
+  if (origTitle.length > 0)
+  {
+    parseObj.elementTitle = origTitle;
+  }
+  else
+  {
+    parseObj.elementTitle = typeDesc + " " + orderNumber
+  }
+}
