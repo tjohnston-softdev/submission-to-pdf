@@ -274,15 +274,15 @@ function constructDocumentElement(eObject, prevType, documentBody, rendTypes, br
   }
   else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
   {
-    //handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
+    handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.RADIO_GRID)
   {
-    //handleRadioGridRenderLite(documentBody, eObject);
+    handleRadioGridRenderLite(documentBody, eObject);
   }
   else if (eType === rendTypes.CHECK_GRID)
   {
-    //handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
+    handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.SECTION)
   {

@@ -1,13 +1,12 @@
 # Summary
 
-**Version:** 1.7
+**Version:** 1.8
 
-**Date:** 2021-02-13
+**Date:** 2021-02-14
 
-**Title:** Revised text rendering
+**Title:** Debug Output Name
 
 **Description:**
 
-* Cleaned text rendering code.
-* Keeps track of previously rendered element.
-* Line break between Radio-Check lists, and 'short answer' text.
+* Added debug output name mode.
+* If 'documentNameMode' is a negative value, execution time will be used instead.

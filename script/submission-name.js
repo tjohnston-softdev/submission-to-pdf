@@ -26,12 +26,25 @@ function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, sTimeObj
   {
     nameRes = writtenTimestamp;
   }
-  else
+  else if (modeFlag >= 0)
   {
     nameRes = subNumber;
   }
+  else
+  {
+    nameRes = writeCurrentTimeOfDay();
+  }
 
   return nameRes;
+}
+
+
+function writeCurrentTimeOfDay()
+{
+  var dateObj = new Date();
+  var fullTimeString = dateObj.toTimeString();
+  var extractRes = fullTimeString.substr(0, 8);
+  return extractRes;
 }
 
 
