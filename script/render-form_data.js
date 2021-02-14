@@ -13,53 +13,26 @@ function handleOverallHeadingRender(docBody, parsedHeading)
 
 
 
-function handleFormDescriptionRender(docBody, parsedDesc)
+function handleFormDescriptionRender(descPara, parsedDesc)
 {
   var selectCutoff = -1;
-  var renderObject = null;
   var textContents = null;
 
-  if (parsedDesc.visible === true && parsedDesc.descriptionText.length > 0)
-  {
-    selectCutoff = parsedDesc.descriptionText.length - 1;
-
-    renderObject = docBody.appendParagraph("");
-    renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
-    renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
-
-    textContents = renderObject.appendText(parsedDesc.descriptionText);
-    textContents.setBold(0, selectCutoff, false);
-    textContents.setItalic(0, selectCutoff, true);
-    textContents.setFontSize(11);
-  }
-
+  selectCutoff = parsedDesc.descriptionText.length - 1;
+  textContents = descPara.appendText(parsedDesc.descriptionText);
+  textContents.setBold(0, selectCutoff, false);
+  textContents.setItalic(0, selectCutoff, true);
+  textContents.setFontSize(11);
 }
 
 
 
-function handleSubmissionDataRender(docBody, parsedData)
+function handleSubmissionDataRender(subPara, parsedData)
 {
-  var renderObject = null;
-
-  if (parsedData.visible === true)
-  {
-    renderObject = docBody.appendParagraph("");
-    renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
-    renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
-    
-    constructSubmissionDataField("Number", parsedData.submissionNumber, renderObject);
-    constructSubmissionDataField("Timestamp", parsedData.submissionTimestamp, renderObject);
-    constructSubmissionDataField("E-Mail Address", parsedData.submitterEmail, renderObject);
-  }
+  constructSubmissionDataField("Number", parsedData.submissionNumber, subPara);
+  constructSubmissionDataField("Timestamp", parsedData.submissionTimestamp, subPara);
+  constructSubmissionDataField("E-Mail Address", parsedData.submitterEmail, subPara);
 }
-
-
-function handleEndFormDataRender(docBody)
-{
-  docBody.appendHorizontalRule();
-}
-
-
 
 function constructSubmissionDataField(dataName, dataValue, rendObj)
 {

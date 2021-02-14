@@ -1,14 +1,13 @@
 # Summary
 
-**Version:** 1.10
+**Version:** 1.11
 
 **Date:** 2021-02-14
 
-**Title:** Removed Full Duration
+**Title:** Cleaned form data and text rendering code
 
 **Description:**
 
-* Removed 'useFullDurationFormat' option.
-* Now 'Duration' form elements are all written the same way.
-	* **Before:** 7 Hours, 30 Minutes, 52 Seconds
-	* **After:** 7h 30m 52s
+* Started moving common output document functions to separate file.
+* Used to remove and merge redundant code.
+* This commit covers form description, submission data, and text elements.

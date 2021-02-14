@@ -1,33 +1,18 @@
-function handleTextRender(docBody, parsedText, previousParsedType, renderDefs)
+function handleTextRender(textPara, parsedText, previousParsedType, renderDefs)
 {
   var breakPrefixRequired = false;
-  var renderObject = null;
-  var preperationObject = null;
-  var fullCutoff = -1;
-  var textContents = null;
-
-  if (parsedText.enabledFlag >= 0)
-  {
-    breakPrefixRequired = getTextRenderLineBreakPrefix(previousParsedType, renderDefs);
-    
-    renderObject = docBody.appendParagraph("");
-    renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
-    renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
-
-    preperationObject = prepareTextElementConstruction(parsedText, breakPrefixRequired);
-
-    constructTextElementLineBreakPrefix(preperationObject);
-    constructTextElementQuestion(parsedText, preperationObject);
-    constructTextElementAnswer(parsedText, preperationObject);
-
-    fullCutoff = preperationObject.textString.length - 1;
-    textContents = renderObject.appendText(preperationObject.textString);
-    textContents.setBold(0, fullCutoff, false);
-    textContents.setItalic(0, fullCutoff, false);
-    textContents.setBold(preperationObject.boldStart, preperationObject.boldCutoff, true);
-    textContents.setFontSize(11);
-  }
+  var createdText = null;
   
+  breakPrefixRequired = getTextRenderLineBreakPrefix(previousParsedType, renderDefs);
+  createdText = prepareTextElementConstruction(parsedText, breakPrefixRequired);
+  
+  constructTextElementLineBreakPrefix(createdText);
+  constructTextElementQuestion(parsedText, createdText);
+  constructTextElementAnswer(parsedText, createdText);
+
+  createdText.textObject = textPara.appendText(createdText.textString);
+  
+  return createdText;
 }
 
 
@@ -53,6 +38,7 @@ function prepareTextElementConstruction(pObject, usePrefix)
   prepareRes["boldCutoff"] = -1;
   prepareRes["prefixLinebreak"] = false;
   prepareRes["blockFlag"] = -1;
+  prepareRes["textObject"] = null;
 
   if (pObject.elementAnswer.length > 0 && pObject.titleBreak === true)
   {
@@ -122,4 +108,13 @@ function constructTextElementAnswer(txtObj, prepObj)
   {
     prepObj.textString += "";
   }
+}
+
+
+function setTextParagraphBoldHeader(txtData)
+{
+  var bStart = txtData.boldStart;
+  var bCutoff = txtData.boldCutoff;
+
+  txtData.textObject.setBold(bStart, bCutoff, true);
 }

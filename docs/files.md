@@ -83,9 +83,15 @@ Decides the file name of the output document depending on the [chosen option](./
 
 ---
 
-**type-offset** ([link(../script/type-offset.js))
+**type-offset** ([link](../script/type-offset.js))
 
 Used to retrieve the render type of the previously answered form element when constructing the output document.
+
+---
+
+**render-common** ([link](../script/render-common.js))
+
+Stores common functions that are used when writing the output document.
 
 ---
 

@@ -256,51 +256,58 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, rTypesObj,
 
 function constructDocumentElement(eObject, prevType, documentBody, rendTypes, breakOptsObj, symbolObj, settingsObj)
 {
+  var createdParagraph = null;
+  var constructionData = null;
   var eType = eObject.elementType;
 
   if (eType === rendTypes.OVERALL_HEADING)
   {
     handleOverallHeadingRender(documentBody, eObject);
   }
-  else if (eType === rendTypes.FORM_DESCRIPTION)
+  else if (eType === rendTypes.FORM_DESCRIPTION && eObject.visible === true && eObject.descriptionText.length > 0)
   {
-    handleFormDescriptionRender(documentBody, eObject);
+    createdParagraph = initializeParagraphObject(documentBody);
+    handleFormDescriptionRender(createdParagraph, eObject);
   }
-  else if (eType === rendTypes.SUBMISSION_DATA)
+  else if (eType === rendTypes.SUBMISSION_DATA && eObject.visible === true)
   {
-    handleSubmissionDataRender(documentBody, eObject);
+    createdParagraph = initializeParagraphObject(documentBody);
+    handleSubmissionDataRender(createdParagraph, eObject);
   }
   else if (eType === rendTypes.END_FORM_HEADER)
   {
-    handleEndFormDataRender(documentBody);
+    documentBody.appendHorizontalRule();
   }
-  else if (eType === rendTypes.TEXT)
+  else if (eType === rendTypes.TEXT && eObject.enabledFlag >= 0)
   {
-    handleTextRender(documentBody, eObject, prevType, rendTypes);
+    createdParagraph = initializeParagraphObject(documentBody);
+    constructionData = handleTextRender(createdParagraph, eObject, prevType, rendTypes);
+    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
+    setTextParagraphBoldHeader(constructionData);
   }
   else if (eType === rendTypes.RADIO_LIST)
   {
-    handleRadioListRender(documentBody, eObject, settingsObj, symbolObj);
+    //handleRadioListRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.CHECK_LIST)
   {
-    handleCheckListRender(documentBody, eObject, settingsObj, symbolObj);
+    //handleCheckListRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
   {
-    handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
+    //handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.RADIO_GRID)
   {
-    handleRadioGridRenderLite(documentBody, eObject);
+    //handleRadioGridRenderLite(documentBody, eObject);
   }
   else if (eType === rendTypes.CHECK_GRID)
   {
-    handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
+    //handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
   }
   else if (eType === rendTypes.SECTION)
   {
-    handleSectionRender(documentBody, eObject, settingsObj, breakOptsObj);
+    //handleSectionRender(documentBody, eObject, settingsObj, breakOptsObj);
   }
 
 }
