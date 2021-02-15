@@ -285,13 +285,35 @@ function constructDocumentElement(eObject, prevType, documentBody, rendTypes, br
     standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
     setTextParagraphBoldHeader(constructionData);
   }
-  else if (eType === rendTypes.RADIO_LIST)
+  else if (eType === rendTypes.RADIO_LIST && eObject.enabledFlag >= 0)
   {
-    //handleRadioListRender(documentBody, eObject, settingsObj, symbolObj);
+    createdParagraph = initializeParagraphObject(documentBody);
+    constructionData = initializeListPreperationObject();
+    chooseListSymbols(settingsObj.useSymbols, symbolObj.radioPlain, symbolObj.radioSymbol, constructionData);
+    
+    constructListHeaderText(eObject.elementTitle, constructionData);
+    constructRadioListOptions(eObject, constructionData);
+    constructListOtherItem(eObject, constructionData);
+    
+    constructionData.textObject = createdParagraph.appendText(constructionData.textString);
+    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
+    setListBoldStatus(constructionData.textObject, constructionData.boldArray);
+    setListOtherItalic(constructionData.textObject, constructionData.otherRange, settingsObj.markOtherOption);
   }
-  else if (eType === rendTypes.CHECK_LIST)
+  else if (eType === rendTypes.CHECK_LIST && eObject.enabledFlag >= 0)
   {
-    //handleCheckListRender(documentBody, eObject, settingsObj, symbolObj);
+    createdParagraph = initializeParagraphObject(documentBody);
+    constructionData = initializeListPreperationObject();
+    chooseListSymbols(settingsObj.useSymbols, symbolObj.checkPlain, symbolObj.checkSymbol, constructionData);
+    
+    constructListHeaderText(eObject.elementTitle, constructionData);
+    constructCheckListOptions(eObject, constructionData);
+    constructListOtherItem(eObject, constructionData);
+    
+    constructionData.textObject = createdParagraph.appendText(constructionData.textString);
+    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
+    setListBoldStatus(constructionData.textObject, constructionData.boldArray);
+    setListOtherItalic(constructionData.textObject, constructionData.otherRange, settingsObj.markOtherOption);
   }
   else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
   {

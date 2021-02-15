@@ -1,66 +1,8 @@
-function handleCheckListRender(docBody, parsedCheckList, renderSettings, symbolDefs)
+function constructCheckListOptions(parsedCheck, dataObject)
 {
-  var checkEmpty = "";
-  var checkFilled = "";
-  var boldCheckSelectionText = null;
-
-  var renderObject = null;
-  var preperationObject = {textString: "", boldArray: [], otherRange: null};
-  var fullCutoff = -1;
-  var textContents = null;
-
-  checkEmpty = symbolDefs.checkPlain.empty;
-  checkFilled = symbolDefs.checkPlain.filled;
-  boldCheckSelectionText = true;
-
-  if (renderSettings.useSymbols === true)
-  {
-    checkEmpty = symbolDefs.checkSymbol.empty;
-    checkFilled = symbolDefs.checkSymbol.filled;
-    boldCheckSelectionText = false;
-  }
-
-  if (parsedCheckList.enabledFlag >= 0)
-  {
-    renderObject = docBody.appendParagraph("");
-    renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
-    renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
-
-    constructCheckListHeaderText(parsedCheckList, preperationObject);
-    constructCheckListOptions(parsedCheckList, preperationObject, checkFilled, checkEmpty, boldCheckSelectionText);
-    constructCheckListOther(parsedCheckList, preperationObject, checkFilled, boldCheckSelectionText);
-
-    fullCutoff = preperationObject.textString.length - 1;
-    textContents = renderObject.appendText(preperationObject.textString);
-
-    textContents.setBold(0, fullCutoff, false);
-    textContents.setItalic(0, fullCutoff, false);
-    setCheckListBoldStatus(textContents, preperationObject.boldArray);
-    setCheckListOtherItalic(textContents, preperationObject.otherRange, renderSettings.markOtherOption);
-    textContents.setFontSize(11);
-  }
-
-}
-
-
-function constructCheckListHeaderText(parsedCheck, prepObject)
-{
-  var localCutoff = -1;
-  var headerIndex = [];
-
-  prepObject.textString += "\r";
-  prepObject.textString += parsedCheck.elementTitle;
-  prepObject.textString += ":";
-
-  localCutoff = prepObject.textString.length - 1;
-  headerIndex = [1, localCutoff];
-  prepObject.boldArray.push(headerIndex);
-}
-
-
-
-function constructCheckListOptions(parsedCheck, prepObject, filledText, emptyText, boldSelection)
-{
+  var filledText = dataObject.filledItem;
+  var emptyText = dataObject.unfilledItem;
+  
   var optionIndex = 0;
   var currentOption = "";
   var currentChosen = false;
@@ -76,99 +18,28 @@ function constructCheckListOptions(parsedCheck, prepObject, filledText, emptyTex
     currentSelectEnd = -1;
     currentBold = [];
 
-    prepObject.textString += "\r";
-    currentSelectStart = prepObject.textString.length - 1;
+    dataObject.textString += "\r";
+    currentSelectStart = dataObject.textString.length - 1;
 
     if (currentChosen === true)
     {
-      prepObject.textString += filledText;
+      dataObject.textString += filledText;
     }
     else
     {
-      prepObject.textString += emptyText;
+      dataObject.textString += emptyText;
     }
 
-    currentSelectEnd = prepObject.textString.length - 1;
+    currentSelectEnd = dataObject.textString.length - 1;
 
-    prepObject.textString += "\t";
-    prepObject.textString += currentOption;
+    dataObject.textString += "\t";
+    dataObject.textString += currentOption;
 
-    if (boldSelection === true)
+    if (dataObject.boldSelection === true)
     {
       currentBold = [currentSelectStart, currentSelectEnd];
-      prepObject.boldArray.push(currentBold);
+      dataObject.boldArray.push(currentBold);
     }
 
-  }
-}
-
-
-
-function constructCheckListOther(parsedCheck, prepObject, filledText, boldSelection)
-{
-  var selectStart = -1;
-  var selectEnd = -1;
-  var optionStart = -1;
-  var optionEnd = -1;
-  var selectRange = [];
-  var customAdded = false;
-
-  if (parsedCheck.customEnabled === true && parsedCheck.customText.length > 0)
-  {
-    prepObject.textString += "\r";
-    selectStart = prepObject.textString.length - 1;
-
-    prepObject.textString += filledText;
-    selectEnd = prepObject.textString.length - 1;
-
-    prepObject.textString += "\t";
-    optionStart = prepObject.textString.length - 1;
-
-    prepObject.textString += parsedCheck.customText;
-    optionEnd = prepObject.textString.length - 1;
-
-    prepObject.otherRange = [optionStart, optionEnd];
-    customAdded = true;
-  }
-
-  if (customAdded === true && boldSelection === true)
-  {
-    selectRange = [selectStart, selectEnd];
-    prepObject.boldArray.push(selectRange);
-  }
-}
-
-
-
-function setCheckListBoldStatus(txtObj, boldArr)
-{
-  var boldIndex = 0;
-  var currentBold = [];
-  var currentStart = -1;
-  var currentEnd = -1;
-
-  for (boldIndex = 0; boldIndex < boldArr.length; boldIndex = boldIndex + 1)
-  {
-    currentBold = boldArr[boldIndex];
-    currentStart = currentBold[0];
-    currentEnd = currentBold[1];
-
-    txtObj.setBold(currentStart, currentEnd, true);
-  }
-}
-
-
-
-function setCheckListOtherItalic(txtObj, otherObj, markToggle)
-{
-  var otherDefined = Array.isArray(otherObj);
-  var otherStart = -1;
-  var otherEnd = -1;
-
-  if (otherDefined === true && otherObj.length >= 2 && markToggle === true)
-  {
-    otherStart = otherObj[0];
-    otherEnd = otherObj[1];
-    txtObj.setItalic(otherStart, otherEnd, true);
   }
 }

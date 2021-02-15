@@ -1,13 +1,12 @@
 # Summary
 
-**Version:** 1.11
+**Version:** 1.12
 
-**Date:** 2021-02-14
+**Date:** 2021-02-15
 
-**Title:** Cleaned form data and text rendering code
+**Title:** Cleaned radio and check list rendering code
 
 **Description:**
 
-* Started moving common output document functions to separate file.
-* Used to remove and merge redundant code.
-* This commit covers form description, submission data, and text elements.
+Removed and merged redundant code used to render radio and
+check list form elements.

@@ -1,97 +1,76 @@
-# Changelog
-
 **./script/code.js constructDocumentElement**
-* Declared new variables
-	* createdParagraph - Stores paragraph object.
-	* constructionData - Stores properties for constructed document element.
-* "FORM_DESCRIPTION" elements:
-	* Added visibility and length conditions.
-	* Assigned 'createdParagraph' with 'initializeParagraphObject'.
-	* Updated 'handleFormDescriptionRender' call to use 'createdParagraph' instead of 'documentBody'.
-* "SUBMISSION_DATA" elements:
-	* Added visbility condition.
-	* Assigned 'createdParagraph' with 'initializeParagraphObject'.
-	* Updated 'handleSubmissionDataRender' call to use 'createdParagraph' instead of 'documentBody'.
-* "END_FORM_DATA" element:
-	* Appends horizontal rule directy to document body.
-	* Does not call any functions.
-* "TEXT" elements:
-	* Assigned 'createdParagraph' with 'initializeParagraphObject'.
-	* Updated 'handleTextRender' call:
-		* Uses 'createdParagraph' instead of 'documentBody'
-		* Assigns 'constructionData'
-	* Adds calls to functions:
-		* standardizeParagraphFormatting
-		* setTextParagraphBoldHeader
-* Commented out calls to:
-	* handleRadioListRender
-	* handleCheckListRender
-	* handleRadioGridRenderFull
-	* handleRadioGridRenderLite
-	* handleCheckGridRender
-	* handleSectionRender
+* "RADIO_LIST" and "CHECK_LIST"
+	* Added 'enabled' condition.
+	* Rewrote inner code from scratch to use merged functions from 'render-common.js'
 
 ---
 
 **./script/render-common.js**
-* New file
-* Stores common functions that are used when writing the output document.
+* Wrote new functions for rendering radio and check lists.
+	* initializeListPreperationObject - Stores construction data.
+	* chooseListSymbols - Assigns symbol text.
+	* constructListHeaderText - Writes header text.
+	* constructListOtherItem - Writes other text.
+	* setListBoldStatus - Used to bold plain symbol text.
+	* setListOtherItalic - Used to italicize the *other* option text.
+* 'chooseListSymbols ' will also be used for when grid render code is merged. 
 
 ---
 
-**./script/render-form_data.js handleFormDescriptionRender**
-* Parameters:
-	* Removed 'docBody'
-	* Added 'descPara' - Form description paragraph object.
-* Removed IF condition.
-* Removed 'renderObject' variable.
-	* Moved underlying code into 'initializeParagraphObject' function (render-common.js)
-* This function only writes and formats description text.
+**./script/render-radio_list.js handleRadioListRender**
+* This function has been removed.
+* However, some of the code has been split into 'render-common.js'
+* The 'preperationObject' variable is used as the basis for 'initializeListPreperationObject'
+* The 'textContents' variable exists as 'textObject' property in 'initializeListPreperationObject'
+* Symbol assignment
+	* Variables:
+		* radioEmpty
+		* radioFilled
+		* boldRadioSelectionText
+	* They continue to exist as properties in 'initializeListPreperationObject'
+	* They are assigned in the 'chooseListSymbols' function (render-common.js)
+* The `parsedRadioList.enabledFlag` IF condition has been incorporated into 'code.js'
 
 ---
 
-**./script/render-form_data.js handleSubmissionDataRender**
-* Parameters:
-	* Removed 'docBody'
-	* Added 'descPara' - Submission data paragraph object.
-* Removed 'renderObject' variable.
-* Removed IF condition.
-* Replaced 'renderObject' with 'descPara' when calling 'constructSubmissionDataField'
-* This function only writes and formats submission data.
+**./script/render-radio_list.js constructRadioListHeaderText**
+* Removed function
+* Now exists as 'constructListHeaderText' in 'render-common.js'
 
 ---
 
-**./script/render-form_data.js handleEndFormDataRender**
-* Removed function.
+**./script/render-radio_list.js constructRadioListOptions**
+* Removed 'boldSelection' parameter.
+* Changed the following parameters to variables:
+	* emptyText
+	* filledText 
+* Renamed the 'prepObject' parameter to 'dataObject'
+* Replaced 'boldSelection' reference with 'dataObject.boldSelection'
 
 ---
 
-**./script/render-text.js handleTextRender**
-* Parameters:
-	* Removed 'docBody'
-	* Added 'textPara'
-* Removed 'renderObject' variable.
-* Moved IF condition into 'code.js'
-* Renamed 'preperationObject' variable to 'createdText'
-* Removed 'textContents' variable.
-	* Assigned into 'createdText'
-* Removed 'fullCutoff' variable.
-* Returns 'createdText' variable.
-* Moved`textContents.setBold([...]` into its own function 'setTextParagraphBoldHeader'
+**./script/render-radio_list.js constructRadioListOther**
+* Removed function
+* Now exists as 'constructListOtherItem' in 'render-common.js'
 
 ---
 
-**./script/render-text.js prepareTextElementConstruction**
-* Added 'textObject' property to result object.
+**./script/render-radio_list.js setRadioListBoldStatus**
+* Moved into 'render-common.js' as 'setListBoldStatus'
 
 ---
 
-**./script/render-text.js setTextParagraphBoldHeader**
-* New function.
-* Used to bold question title for TEXT elements.
+**./script/render-radio_list.js setRadioListOtherItalic**
+* Moved into 'render-common.js' as 'setListOtherItalic'
 
 ---
 
-**./docs/files.md**
-* Added missing square bracket to 'type-offset' link.
-* Added 'render-common' entry.
+**./script/render-check_list.js**
+* Removed all functions except for 'constructCheckListOptions'
+* As for 'constructCheckListOptions' itself:
+	* Removed the 'boldSelection' parameter.
+	* Declared these parameters as variables:
+		* filledText
+		* emptyText
+	* Renamed the 'prepObject' parameter to 'dataObject'
+	* Replaced 'boldSelection' reference with 'dataObject.boldSelection'
