@@ -1,13 +1,12 @@
 # Summary
 
-**Version:** 1.13
+**Version:** 1.14
 
 **Date:** 2021-02-20
 
-**Title:** Cleaned radio grid rendering code (Full)
+**Title:** Cleaned radio grid rendering code (Lite)
 
 **Description:**
 
-* Removed and merged redundant code used to render radio grids.
-* This only applies to the 'Full' grid.
-* 'Lite' grids will be cleaned next.
+Removed and merged redundant code used to render
+lite radio grids.

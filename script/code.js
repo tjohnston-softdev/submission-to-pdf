@@ -332,7 +332,18 @@ function constructDocumentElement(eObject, prevType, documentBody, rendTypes, br
   }
   else if (eType === rendTypes.RADIO_GRID && eObject.enabledFlag >= 0)
   {
-    //handleRadioGridRenderLite(documentBody, eObject);
+    createdParagraph = initializeParagraphObject(documentBody);
+    constructionData = initializeGridPreperationObject();
+    chooseSymbols(settingsObj.useSymbols, symbolObj.radioPlain, symbolObj.radioSymbol, constructionData);
+
+    constructGridHeading(createdParagraph, eObject);
+    prepareRadioGridCellsLite(eObject, constructionData);
+
+    constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
+    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
+    formatGridHeaderRow(constructionData.tableObject, 0);
+    formatGridHeaderColumn(constructionData.tableObject);
+
   }
   else if (eType === rendTypes.CHECK_GRID)
   {

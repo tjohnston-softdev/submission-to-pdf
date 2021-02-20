@@ -18,7 +18,7 @@ function handleRadioGridRenderLite(docBody, parsedRadioGrid)
 }
 
 
-function prepareRadioGridCellsLite(parsedRadGrid)
+function prepareRadioGridCellsLite(parsedRadGrid, dataObject)
 {
   var rowIndex = 0;
   var currentRowQuestion = "";
@@ -27,7 +27,8 @@ function prepareRadioGridCellsLite(parsedRadGrid)
   var currentGridRow = [];
 
   var headerRow = ["Question", "Answer"];
-  var prepRes = [headerRow];
+
+  dataObject.cellGrid.push(headerRow);
 
   for (rowIndex = 0; rowIndex < parsedRadGrid.rowList.length; rowIndex = rowIndex + 1)
   {
@@ -47,10 +48,8 @@ function prepareRadioGridCellsLite(parsedRadGrid)
     }
 
     currentGridRow = [currentRowQuestion, currentAnswerText];
-    prepRes.push(currentGridRow);
+    dataObject.cellGrid.push(currentGridRow);
   }
-
-  return prepRes;
 }
 
 
