@@ -41,7 +41,7 @@ var scriptSettings =
   displayRadioList: true,
   displayCheckList: true,
   markOtherOption: true,
-  radioGridMode: radioGridModeOpts.LITE,
+  radioGridMode: radioGridModeOpts.FULL,
   sectionBreak: sectionBreakOpts.RULE,
   includeSectionHeader: sectionHeaderOpts.TITLE_ONLY,
   ignoreEmptySections: false,

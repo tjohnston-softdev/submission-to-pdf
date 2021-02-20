@@ -1,23 +1,3 @@
-function handleRadioGridRenderLite(docBody, parsedRadioGrid)
-{
-  var cellGrid = null;
-  var tableObject = null;
-  var handleRes = false;
-
-  if (parsedRadioGrid.enabledFlag >= 0)
-  {
-    constructRadioGridHeaderText(docBody, parsedRadioGrid);
-    cellGrid = prepareRadioGridCellsLite(parsedRadioGrid);
-    tableObject = docBody.appendTable(cellGrid);
-    formatRadioGridCells(tableObject);
-    formatRadioGridHeaderRow(tableObject, 1);
-    handleRes = true;
-  }
-
-  return handleRes;
-}
-
-
 function prepareRadioGridCellsLite(parsedRadGrid, dataObject)
 {
   var rowIndex = 0;

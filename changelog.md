@@ -1,21 +1,39 @@
 # Changelog
 
 **./script/code.js constructDocumentElement**
-* Rewrote inner code for 'RADIO_GRID - Full'
-	* `eType === rendTypes.RADIO_GRID && eObject.enabledFlag >= 0`
+* CHECK_GRID
+	* Added 'enabled' condition.
+	* Rewrote inner code using merged functionality.
 
 ---
 
 **./script/render-radio_grid.js**
 * Removed the 'handleRadioGridRenderLite' function.
-* Changes to the 'prepareRadioGridCellsLite' function:
-	* Added 'dataObject' parameter.
-	* Removed the 'prepRes' variable.
-	* Replaced 'prepRes' with 'dataObject.cellGrid'
-	* Removed return.
+
+---
+
+**./script/render-check_grid.js**
+* Removed functions:
+	* List:
+		* handleCheckGridRender
+		* constructCheckGridHeaderText
+		* prepareCheckGridHeaderRow
+		* formatCheckGridCells
+		* formatCheckGridHeaderRow
+		* formatCheckGridHeaderColumns
+		* formatCheckGridInnerCells
+	* This is because of merged functionality in 'render-common.js'
+* Changes to 'prepareCheckGridCells'
+	* Parameters:
+		* Removed 'filledText', 'emptyText', and 'gObject'
+		* Added 'dataObject'
+	* Replaced references:
+		* 'filledText' with 'dataObject.filledItem'
+		* 'emptyText' with 'dataObject.unfilledItem'
+		* 'gObject' with 'dataObject.cellGrid'
 
 ---
 
 
 **./script/options.js**
-* Changed 'radioGridMode' in 'scriptSettings' to "LITE"
+* Changed 'radioGridMode' in 'scriptSettings' to "FULL"

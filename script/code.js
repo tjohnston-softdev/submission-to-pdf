@@ -345,9 +345,20 @@ function constructDocumentElement(eObject, prevType, documentBody, rendTypes, br
     formatGridHeaderColumn(constructionData.tableObject);
 
   }
-  else if (eType === rendTypes.CHECK_GRID)
+  else if (eType === rendTypes.CHECK_GRID && eObject.enabledFlag >= 0)
   {
-    //handleCheckGridRender(documentBody, eObject, settingsObj, symbolObj);
+    createdParagraph = initializeParagraphObject(documentBody);
+    constructionData = initializeGridPreperationObject();
+    chooseSymbols(settingsObj.useSymbols, symbolObj.checkPlain, symbolObj.checkSymbol, constructionData);
+
+    constructGridHeading(createdParagraph, eObject);
+    prepareGridHeaderRow(eObject, constructionData);
+    prepareCheckGridCells(eObject, constructionData);
+
+    constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
+    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
+    formatGridHeaderRow(constructionData.tableObject, 1);
+    formatGridHeaderColumn(constructionData.tableObject);
   }
   else if (eType === rendTypes.SECTION)
   {
