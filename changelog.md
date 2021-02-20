@@ -1,76 +1,89 @@
+# Changelog
+
 **./script/code.js constructDocumentElement**
-* "RADIO_LIST" and "CHECK_LIST"
-	* Added 'enabled' condition.
-	* Rewrote inner code from scratch to use merged functions from 'render-common.js'
+* RADIO_GRID - Full
+	* Rewrote IF condition to add the 'enabled' flag.
+		* **Before:** `settingsObj.radioGridMode > 0`
+		* **After:** `eObject.enabledFlag >= 0 && settingsObj.radioGridMode > 0`
+	* Rewrote the inner code using merged functions from 'render-common.js'
+* RADIO_GRID - Lite
+	* Added the 'enabled' flag to the IF condition.
+	* Inner code has not been rewritten yet.
+	* The call to 'handleRadioGridRenderLite' remains commented out.
 
 ---
 
 **./script/render-common.js**
-* Wrote new functions for rendering radio and check lists.
-	* initializeListPreperationObject - Stores construction data.
-	* chooseListSymbols - Assigns symbol text.
-	* constructListHeaderText - Writes header text.
-	* constructListOtherItem - Writes other text.
-	* setListBoldStatus - Used to bold plain symbol text.
-	* setListOtherItalic - Used to italicize the *other* option text.
-* 'chooseListSymbols ' will also be used for when grid render code is merged. 
+* Renamed the 'chooseListSymbols' function to 'chooseSymbols'
+* Corrected 'boldSelection' to 'boldArray' in 'constructListOtherItem'
+* New functions for grid rendering:
+	* initializeGridPreperationObject
+		* Stores construction data.
+	* constructGridHeading
+		* Writes and formats heading text.
+	* prepareGridHeaderRow
+		* Writes header row based on column list.
+	* standardizeCellFormatting
+		* Handles base cell formatting.
+		* Bolds inner cells if applicable.
+		* Does not bold header cells.
+	* formatGridHeaderRow
+		* Bolds grid header row.
+		* Can either start at the first or second cell.
+		* 'RADIO_GRID - Lite' starts at the first.
+		* Others start at the second.
+	* formatGridHeaderColumn
+		* Bolds grid header column.
+		* First cell from second row onwards.
 
 ---
 
-**./script/render-radio_list.js handleRadioListRender**
-* This function has been removed.
-* However, some of the code has been split into 'render-common.js'
-* The 'preperationObject' variable is used as the basis for 'initializeListPreperationObject'
-* The 'textContents' variable exists as 'textObject' property in 'initializeListPreperationObject'
-* Symbol assignment
-	* Variables:
-		* radioEmpty
-		* radioFilled
-		* boldRadioSelectionText
-	* They continue to exist as properties in 'initializeListPreperationObject'
-	* They are assigned in the 'chooseListSymbols' function (render-common.js)
-* The `parsedRadioList.enabledFlag` IF condition has been incorporated into 'code.js'
+**./script/render-radio_grid handleRadioGridRenderFull**
+* Removed function - Split across 'render-common.js'
 
 ---
 
-**./script/render-radio_list.js constructRadioListHeaderText**
-* Removed function
-* Now exists as 'constructListHeaderText' in 'render-common.js'
+**./script/render-radio_grid.js constructRadioGridHeaderText**
+* Removed function.
+* Now exists as 'constructGridHeading' (render-common.js)
 
 ---
 
-**./script/render-radio_list.js constructRadioListOptions**
-* Removed 'boldSelection' parameter.
-* Changed the following parameters to variables:
-	* emptyText
-	* filledText 
-* Renamed the 'prepObject' parameter to 'dataObject'
-* Replaced 'boldSelection' reference with 'dataObject.boldSelection'
+**./script/render-radio_grid.js prepareRadioGridCellsHeader**
+* Removed function.
+* Now exists as 'prepareGridHeaderRow' (render-common.js)
 
 ---
 
-**./script/render-radio_list.js constructRadioListOther**
-* Removed function
-* Now exists as 'constructListOtherItem' in 'render-common.js'
+**./script/render-radio_grid.js prepareRadioGridCellsSelection**
+* Parameters:
+	* Removed 'filledText', 'emptyText' and 'gObject'
+	* Added 'dataObject'
+* Replaced references:
+	* 'filledText' with 'dataObject.filledItem'
+	* 'emptyText' with 'dataObject.unfilledItem'
+	* 'gObject' with 'dataObject.cellGrid'
 
 ---
 
-**./script/render-radio_list.js setRadioListBoldStatus**
-* Moved into 'render-common.js' as 'setListBoldStatus'
+**./script/render-radio_grid.js formatRadioGridCells**
+* Removed function.
+* Now exists as 'standardizeCellFormatting' (render-common.js)
 
 ---
 
-**./script/render-radio_list.js setRadioListOtherItalic**
-* Moved into 'render-common.js' as 'setListOtherItalic'
+**./script/render-radio_grid.js formatRadioGridInnerCells**
+* Removed function.
+* Merged into 'standardizeCellFormatting' (render-common.js)
 
 ---
 
-**./script/render-check_list.js**
-* Removed all functions except for 'constructCheckListOptions'
-* As for 'constructCheckListOptions' itself:
-	* Removed the 'boldSelection' parameter.
-	* Declared these parameters as variables:
-		* filledText
-		* emptyText
-	* Renamed the 'prepObject' parameter to 'dataObject'
-	* Replaced 'boldSelection' reference with 'dataObject.boldSelection'
+**./script/render-radio_grid.js formatRadioGridHeaderRow**
+* Removed function.
+* Now exists as 'formatGridHeaderRow' (render-common.js)
+
+---
+
+**./script/render-radio_grid.js formatRadioGridHeaderColumn**
+* Removed function.
+* Now exists as 'formatGridHeaderColumn' (render-common.js)

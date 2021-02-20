@@ -1,12 +1,13 @@
 # Summary
 
-**Version:** 1.12
+**Version:** 1.13
 
-**Date:** 2021-02-15
+**Date:** 2021-02-20
 
-**Title:** Cleaned radio and check list rendering code
+**Title:** Cleaned radio grid rendering code (Full)
 
 **Description:**
 
-Removed and merged redundant code used to render radio and
-check list form elements.
+* Removed and merged redundant code used to render radio grids.
+* This only applies to the 'Full' grid.
+* 'Lite' grids will be cleaned next.

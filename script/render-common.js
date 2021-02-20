@@ -34,7 +34,7 @@ function initializeListPreperationObject()
 }
 
 
-function chooseListSymbols(symbolsEnabled, plainSymbols, unicodeSymbols, listConstructData)
+function chooseSymbols(symbolsEnabled, plainSymbols, unicodeSymbols, listConstructData)
 {
   listConstructData.filledItem = plainSymbols.filled;
   listConstructData.unfilledItem = plainSymbols.empty;
@@ -99,7 +99,7 @@ function constructListOtherItem(parsedListObject, listConstructData)
   if (customAdded === true && listConstructData.boldSelection === true)
   {
     otherSelectRange = [selectStart, selectEnd];
-    listConstructData.boldSelection.push(otherSelectRange);
+    listConstructData.boldArray.push(otherSelectRange);
   }
 }
 
@@ -134,5 +134,124 @@ function setListOtherItalic(txtObj, otherObj, markToggle)
     otherBegin = otherObj[0];
     otherCutoff = otherObj[1];
     txtObj.setItalic(otherBegin, otherCutoff, true);
+  }
+}
+
+
+
+function initializeGridPreperationObject()
+{
+  var intlRes = {};
+
+  intlRes["filledItem"] = "";
+  intlRes["unfilledItem"] = "";
+  intlRes["boldSelection"] = null;
+  intlRes["cellGrid"] = [];
+  intlRes["tableObject"] = null;
+
+  return intlRes;
+}
+
+
+function constructGridHeading(headPara, parsedGridObject)
+{
+  var headingString = "\r" + parsedGridObject.elementTitle + ":";
+  var textCutoff = headingString.length - 1;
+  var textObject = headPara.appendText(headingString);
+
+  textObject.setBold(0, textCutoff, false);
+  textObject.setItalic(0, textCutoff, false);
+  textObject.setBold(1, textCutoff, true);
+  textObject.setFontSize(11);
+}
+
+
+function prepareGridHeaderRow(parsedGridObject, gridConstructionData)
+{
+  var headerRow = [];
+
+  headerRow = parsedGridObject.columnList.slice();
+  headerRow.unshift("");
+  gridConstructionData.cellGrid.push(headerRow);
+}
+
+
+
+function standardizeCellFormatting(tblObj, boldInner)
+{
+  var rowIndex = 0;
+  var rowCount = tblObj.getNumRows();
+  var currentRow = null;
+
+  var colIndex = 0;
+  var colCount = -1;
+  var currentCell = null;
+  var currentText = null;
+  var currentBold = false;
+
+  for (rowIndex = 0; rowIndex < rowCount; rowIndex = rowIndex + 1)
+  {
+    currentRow = tblObj.getRow(rowIndex);
+
+    colIndex = 0;
+    colCount = currentRow.getNumCells();
+    currentCell = null;
+    currentText = null;
+    currentBold = false;
+
+    while (colIndex >= 0 && colIndex < colCount)
+    {
+      currentCell = currentRow.getCell(colIndex);
+      currentText = currentCell.editAsText();
+      currentBold = false;
+
+      if (rowIndex > 0 && colIndex > 0 && boldInner === true)
+      {
+        currentBold = true;
+      }
+
+      currentText.setBold(currentBold);
+      currentText.setItalic(false);
+      currentText.setFontSize(11);
+
+      colIndex = colIndex + 1;
+    }
+  }
+}
+
+
+
+function formatGridHeaderRow(tblObj, startCell)
+{
+  var headerRow = tblObj.getRow(0);
+
+  var cellIndex = startCell;
+  var cellCount = headerRow.getNumCells();
+  var currentCell = null;
+  var currentText = null;
+
+  for (cellIndex = startCell; cellIndex < cellCount; cellIndex = cellIndex + 1)
+  {
+    currentCell = headerRow.getCell(cellIndex);
+    currentText = currentCell.editAsText();
+    currentText.setBold(true);
+  }
+}
+
+
+function formatGridHeaderColumn(tblObj)
+{
+  var rowIndex = 1;
+  var rowCount = tblObj.getNumRows();
+  var currentRow = null;
+  var currentCell = null;
+  var currentText = null;
+
+  for (rowIndex = 1; rowIndex < rowCount; rowIndex = rowIndex + 1)
+  {
+    currentRow = tblObj.getRow(rowIndex);
+    currentCell = currentRow.getCell(0);
+    currentText = currentCell.editAsText();
+    currentText.setBold(true);
   }
 }

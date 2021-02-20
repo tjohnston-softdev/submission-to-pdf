@@ -1,47 +1,3 @@
-function handleRadioGridRenderFull(docBody, parsedRadioGrid, renderSettings, symbolDefs)
-{
-  var cellFilledText = "";
-  var cellEmptyText = "";
-  var boldIndividualCells = null;
-  
-  var cellGrid = null;
-  var tableObject = null;
-  var tableConstructed = false;
-
-  cellFilledText = symbolDefs.radioPlain.filled;
-  cellEmptyText = symbolDefs.radioPlain.empty;
-  boldIndividualCells = true;
-
-  if (renderSettings.useSymbols === true)
-  {
-    cellFilledText = symbolDefs.radioSymbol.filled;
-    cellEmptyText = symbolDefs.radioSymbol.empty;
-    boldIndividualCells = false;
-  }
-
-  if (parsedRadioGrid.enabledFlag >= 0)
-  {
-    constructRadioGridHeaderText(docBody, parsedRadioGrid);
-    cellGrid = [];
-    prepareRadioGridCellsHeader(parsedRadioGrid, cellGrid);
-    prepareRadioGridCellsSelection(parsedRadioGrid, cellFilledText, cellEmptyText, cellGrid);
-    
-    tableObject = docBody.appendTable(cellGrid);
-    formatRadioGridCells(tableObject);
-    formatRadioGridHeaderRow(tableObject, 1);
-    formatRadioGridHeaderColumn(tableObject);
-
-    tableConstructed = true;
-  }
-
-  if (tableConstructed === true && boldIndividualCells === true)
-  {
-    formatRadioGridInnerCells(tableObject);
-  }
-  
-}
-
-
 function handleRadioGridRenderLite(docBody, parsedRadioGrid)
 {
   var cellGrid = null;
@@ -59,24 +15,6 @@ function handleRadioGridRenderLite(docBody, parsedRadioGrid)
   }
 
   return handleRes;
-}
-
-
-function constructRadioGridHeaderText(dBody, parsedRadGrid)
-{
-  var renderObject = dBody.appendParagraph("");
-  var headingString = "\r" + parsedRadGrid.elementTitle + ":";
-  var textCutoff = headingString.length - 1;
-  var textObject = null;
-
-  renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
-  renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
-
-  textObject = renderObject.appendText(headingString);
-  textObject.setBold(0, textCutoff, false);
-  textObject.setItalic(0, textCutoff, false);
-  textObject.setBold(1, textCutoff, true);
-  textObject.setFontSize(11);
 }
 
 
@@ -116,18 +54,7 @@ function prepareRadioGridCellsLite(parsedRadGrid)
 }
 
 
-
-function prepareRadioGridCellsHeader(parsedRadGrid, gObject)
-{
-  var headerRow = [];
-
-  headerRow = parsedRadGrid.columnList.slice();
-  headerRow.unshift("");
-  gObject.push(headerRow);
-}
-
-
-function prepareRadioGridCellsSelection(parsedRadGrid, filledText, emptyText, gObject)
+function prepareRadioGridCellsSelection(parsedRadGrid, dataObject)
 {
   var rowIndex = 0;
   var currentRowHeader = "";
@@ -154,121 +81,18 @@ function prepareRadioGridCellsSelection(parsedRadGrid, filledText, emptyText, gO
 
     while (columnIndex >= 0 && columnIndex < parsedRadGrid.columnList.length)
     {
-      currentCellText = emptyText;
+      currentCellText = dataObject.unfilledItem;
 
       if (columnIndex === currentSelection)
       {
-        currentCellText = filledText;
+        currentCellText = dataObject.filledItem;
       }
 
       currentRowObject.push(currentCellText);
       columnIndex = columnIndex + 1;
     }
 
-    gObject.push(currentRowObject);
+    dataObject.cellGrid.push(currentRowObject);
   }
 
-}
-
-
-
-function formatRadioGridCells(tblObj)
-{
-  var rowIndex = 0;
-  var rowCount = tblObj.getNumRows();
-  var currentRow = null;
-
-  var cellIndex = 0;
-  var cellCount = -1;
-  var currentCell = null;
-  var currentText = null;
-
-  for (rowIndex = 0; rowIndex < rowCount; rowIndex = rowIndex + 1)
-  {
-    currentRow = tblObj.getRow(rowIndex);
-
-    cellIndex = 0;
-    cellCount = currentRow.getNumCells();
-    currentCell = null;
-    currentText = null;
-
-    while (cellIndex >= 0 && cellIndex < cellCount)
-    {
-      currentCell = currentRow.getCell(cellIndex);
-      currentText = currentCell.editAsText();
-      currentText.setBold(false);
-      currentText.setItalic(false);
-      currentText.setFontSize(11);
-
-      cellIndex = cellIndex + 1;
-    }
-  }
-}
-
-
-function formatRadioGridHeaderRow(tblObj, startCell)
-{
-  var headerRowObject = tblObj.getRow(0);
-
-  var cellIndex = startCell;
-  var cellCount = headerRowObject.getNumCells();
-  var currentCell = null;
-  var currentText = null;
-
-  for (cellIndex = startCell; cellIndex < cellCount; cellIndex = cellIndex + 1)
-  {
-    currentCell = headerRowObject.getCell(cellIndex);
-    currentText = currentCell.editAsText();
-    currentText.setBold(true);
-  }
-}
-
-
-function formatRadioGridHeaderColumn(tblObj)
-{
-  var rowIndex = 1;
-  var rowCount = tblObj.getNumRows();
-  var currentRow = null;
-  var currentHeaderCell = null;
-  var currentText = null;
-
-  for (rowIndex = 1; rowIndex < rowCount; rowIndex = rowIndex + 1)
-  {
-    currentRow = tblObj.getRow(rowIndex);
-    currentHeaderCell = currentRow.getCell(0);
-    currentText = currentHeaderCell.editAsText();
-    currentText.setBold(true);
-  }
-}
-
-
-
-function formatRadioGridInnerCells(tblObj)
-{
-  var rowIndex = 1;
-  var rowCount = tblObj.getNumRows();
-  var currentRow = null;
-
-  var cellIndex = -1;
-  var cellCount = -1;
-  var currentCell = null;
-  var currentText = null;
-
-  for (rowIndex = 1; rowIndex < rowCount; rowIndex = rowIndex + 1)
-  {
-    currentRow = tblObj.getRow(rowIndex);
-
-    cellIndex = 1;
-    cellCount = currentRow.getNumCells();
-    currentCell = null;
-    currentText = null;
-
-    while (cellIndex > 0 && cellIndex < cellCount)
-    {
-      currentCell = currentRow.getCell(cellIndex);
-      currentText = currentCell.editAsText();
-      currentText.setBold(true);
-      cellIndex = cellIndex + 1;
-    }
-  }
 }

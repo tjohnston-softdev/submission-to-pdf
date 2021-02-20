@@ -289,7 +289,7 @@ function constructDocumentElement(eObject, prevType, documentBody, rendTypes, br
   {
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = initializeListPreperationObject();
-    chooseListSymbols(settingsObj.useSymbols, symbolObj.radioPlain, symbolObj.radioSymbol, constructionData);
+    chooseSymbols(settingsObj.useSymbols, symbolObj.radioPlain, symbolObj.radioSymbol, constructionData);
     
     constructListHeaderText(eObject.elementTitle, constructionData);
     constructRadioListOptions(eObject, constructionData);
@@ -304,7 +304,7 @@ function constructDocumentElement(eObject, prevType, documentBody, rendTypes, br
   {
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = initializeListPreperationObject();
-    chooseListSymbols(settingsObj.useSymbols, symbolObj.checkPlain, symbolObj.checkSymbol, constructionData);
+    chooseSymbols(settingsObj.useSymbols, symbolObj.checkPlain, symbolObj.checkSymbol, constructionData);
     
     constructListHeaderText(eObject.elementTitle, constructionData);
     constructCheckListOptions(eObject, constructionData);
@@ -315,11 +315,22 @@ function constructDocumentElement(eObject, prevType, documentBody, rendTypes, br
     setListBoldStatus(constructionData.textObject, constructionData.boldArray);
     setListOtherItalic(constructionData.textObject, constructionData.otherRange, settingsObj.markOtherOption);
   }
-  else if (eType === rendTypes.RADIO_GRID && settingsObj.radioGridMode > 0)
+  else if (eType === rendTypes.RADIO_GRID && eObject.enabledFlag >= 0 && settingsObj.radioGridMode > 0)
   {
-    //handleRadioGridRenderFull(documentBody, eObject, settingsObj, symbolObj);
+    createdParagraph = initializeParagraphObject(documentBody);
+    constructionData = initializeGridPreperationObject();
+    chooseSymbols(settingsObj.useSymbols, symbolObj.radioPlain, symbolObj.radioSymbol, constructionData);
+
+    constructGridHeading(createdParagraph, eObject);
+    prepareGridHeaderRow(eObject, constructionData);
+    prepareRadioGridCellsSelection(eObject, constructionData);
+    
+    constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
+    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
+    formatGridHeaderRow(constructionData.tableObject, 1);
+    formatGridHeaderColumn(constructionData.tableObject);
   }
-  else if (eType === rendTypes.RADIO_GRID)
+  else if (eType === rendTypes.RADIO_GRID && eObject.enabledFlag >= 0)
   {
     //handleRadioGridRenderLite(documentBody, eObject);
   }
