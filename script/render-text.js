@@ -20,7 +20,7 @@ function getTextRenderLineBreakPrefix(pType, rDefs)
 {
   var prefixRes = false;
 
-  if (pType === rDefs.RADIO_LIST || pType === rDefs.CHECK_LIST)
+  if (pType === rDefs.RADIO_LIST || pType === rDefs.CHECK_LIST || pType === rDefs.SECTION)
   {
     prefixRes = true;
   }

@@ -1,39 +1,22 @@
 # Changelog
 
-**./script/code.js constructDocumentElement**
-* CHECK_GRID
-	* Added 'enabled' condition.
-	* Rewrote inner code using merged functionality.
+**./script/code.js**
+* Uncommented 'handleSectionRender' call.
+* Added 'renderTypesObject' argument to 'getPreviousElementRenderType' call.
 
 ---
-
-**./script/render-radio_grid.js**
-* Removed the 'handleRadioGridRenderLite' function.
-
----
-
-**./script/render-check_grid.js**
-* Removed functions:
-	* List:
-		* handleCheckGridRender
-		* constructCheckGridHeaderText
-		* prepareCheckGridHeaderRow
-		* formatCheckGridCells
-		* formatCheckGridHeaderRow
-		* formatCheckGridHeaderColumns
-		* formatCheckGridInnerCells
-	* This is because of merged functionality in 'render-common.js'
-* Changes to 'prepareCheckGridCells'
-	* Parameters:
-		* Removed 'filledText', 'emptyText', and 'gObject'
-		* Added 'dataObject'
-	* Replaced references:
-		* 'filledText' with 'dataObject.filledItem'
-		* 'emptyText' with 'dataObject.unfilledItem'
-		* 'gObject' with 'dataObject.cellGrid'
-
----
-
 
 **./script/options.js**
-* Changed 'radioGridMode' in 'scriptSettings' to "FULL"
+* 'includeSectionHeader' in 'scriptSettings' is now "FULL" (options.js)
+
+---
+
+**./script/type-offset.js getPreviousElementRenderType**
+* Added 'rTypes' parameter - Render types object.
+* Renamed the 'currentPreviousObject' variable to 'currentPrev'
+* Added `else if` condition to cover visible section objects.
+
+---
+
+**./script/render-text.js getTextRenderLineBreakPrefix**
+* Added "SECTION" to prefix condition.

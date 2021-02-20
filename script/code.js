@@ -109,7 +109,7 @@ function runSubmissionToPDF()
   for (renderIndex = 0; renderIndex < parsedElements.overall.length; renderIndex = renderIndex + 1)
   {
     currentRender = parsedElements.overall[renderIndex];
-    currentPrevType = getPreviousElementRenderType(renderIndex, parsedElements.overall);
+    currentPrevType = getPreviousElementRenderType(renderIndex, parsedElements.overall, renderTypesObject);
 
     if (currentRender !== null)
     {
@@ -362,7 +362,7 @@ function constructDocumentElement(eObject, prevType, documentBody, rendTypes, br
   }
   else if (eType === rendTypes.SECTION)
   {
-    //handleSectionRender(documentBody, eObject, settingsObj, breakOptsObj);
+    handleSectionRender(documentBody, eObject, settingsObj, breakOptsObj);
   }
 
 }
