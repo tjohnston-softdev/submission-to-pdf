@@ -1,3 +1,7 @@
+// Contains script settings (config.md)
+
+
+// Document naming.
 var nameOpts =
 {
   "FORM_NAME_WITH_SUBMISSION_TIMESTAMP": 1,
@@ -8,12 +12,15 @@ var nameOpts =
   "SUBMISSION_NUMBER": 6
 };
 
+
+// Radio grid display.
 var radioGridModeOpts =
 {
   "FULL": 1,
   "LITE": 0
 };
 
+// Section break.
 var sectionBreakOpts =
 {
   "PAGE": 1,
@@ -22,6 +29,7 @@ var sectionBreakOpts =
   "SKIP": -1
 };
 
+// Section header.
 var sectionHeaderOpts =
 {
   "FULL": 1,
@@ -30,6 +38,7 @@ var sectionHeaderOpts =
 }
 
 
+// Script settings.
 var scriptSettings =
 {
   outputFolderID: "",
@@ -41,7 +50,7 @@ var scriptSettings =
   displayRadioList: true,
   displayCheckList: true,
   markOtherOption: true,
-  radioGridMode: radioGridModeOpts.FULL,
+  radioGridMode: radioGridModeOpts.LITE,
   sectionBreak: sectionBreakOpts.RULE,
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: false,
@@ -50,18 +59,21 @@ var scriptSettings =
 
 
 
+// GET 'nameOpts'
 function getNameOptions()
 {
   return nameOpts;
 }
 
 
+// GET 'sectionBreakOpts'
 function getSectionBreakOptions()
 {
   return sectionBreakOpts;
 }
 
 
+// GET 'getScriptSettings'
 function getScriptSettings()
 {
   return scriptSettings;

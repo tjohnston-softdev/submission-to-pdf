@@ -1,11 +1,9 @@
 # Summary
 
-**Version:** 1.19
+**Version:** 1.20
 
 **Date:** 2021-02-21
 
-**Title:** Commented document render files.
+**Title:** Commented options and definitions.
 
 **Description:**
-
-See [changelog](./changelog.md) for affected files.

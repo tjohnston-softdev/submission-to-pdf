@@ -1,3 +1,11 @@
+/*
+  Contains definitions for:
+    * Element rendering types.
+    * Symbol characters for radio buttons and checkboxes.
+*/
+
+
+// Object render types.
 var renderTypeDefinitions =
 {
   "OVERALL_HEADING": -1,
@@ -13,6 +21,8 @@ var renderTypeDefinitions =
 };
 
 
+
+// GET 'renderTypeDefinitions'
 function getRenderTypes()
 {
   return renderTypeDefinitions;
@@ -20,6 +30,7 @@ function getRenderTypes()
 
 
 
+// Text symbols for radio buttons and check lists.
 function getSymbolDefinitions()
 {
   var definitionRes = {};
