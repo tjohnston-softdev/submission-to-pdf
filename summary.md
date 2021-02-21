@@ -1,12 +1,9 @@
 # Summary
 
-**Version:** 1.16
+**Version:** 1.17
 
-**Date:** 2021-02-20
+**Date:** 2021-02-21
 
-**Title:** Cleaned section rendering code
+**Title:** Added comments to main code file.
 
 **Description:**
-
-Removed and merged redundant code used to render
-section headings where applicable.

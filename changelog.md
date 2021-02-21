@@ -1,22 +1,34 @@
 # Changelog
 
 **./script/code.js**
-* Uncommented 'handleSectionRender' call.
-* Added 'renderTypesObject' argument to 'getPreviousElementRenderType' call.
+* Added comments.
+* See below for specific changes.
 
 ---
 
-**./script/options.js**
-* 'includeSectionHeader' in 'scriptSettings' is now "FULL" (options.js)
+**runSubmissionToPDF**
+* Re-ordered 'settingsObject' variable.
+	* Between 'breakOptsObject' and 'renderTypesObject'
+* Added break between 'settingsObject' and 'renderTypesObject' variables.
+* Grouped the following variables:
+	* prevSubmission
+	* subEmail
+	* subTime
+* Removed break between 'formItemList' and 'formSubmissionArray' assignments.
+* Added break between 'subCount' and 'prevSubmission' assignments.
+* Swapped 'subEmail' and 'subTime' variable declaration order.
+* Removed break between 'currentParseSuccessful' and 'parsedElements' declarations.
+* Removed break between 'targetForm' and 'formName' assignments.
+* Moved 'outputName' variable to before 'outputDocumentObject'
+	* Applies for both declaration and assignment.
 
 ---
 
-**./script/type-offset.js getPreviousElementRenderType**
-* Added 'rTypes' parameter - Render types object.
-* Renamed the 'currentPreviousObject' variable to 'currentPrev'
-* Added `else if` condition to cover visible section objects.
+**parseFormElement**
+* Variables are now declared and assigned on separate lines.
+	* Applies to 'eName' and 'eType'
 
 ---
 
-**./script/render-text.js getTextRenderLineBreakPrefix**
-* Added "SECTION" to prefix condition.
+**constructDocumentElement**
+* Removed the 'chooseSymbols' call when rendering lite radio grids.
