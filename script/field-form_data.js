@@ -1,3 +1,10 @@
+/*
+  Reads the form name and description so that they can be displayed in the output document.
+  This file also saves the number, timestamp, and E-Mail address of the submission being converted.
+*/
+
+
+// Main function - Form name heading.
 function handleOverallHeadingField(frmName, rTypes)
 {
   var fieldRes =
@@ -15,6 +22,7 @@ function handleOverallHeadingField(frmName, rTypes)
 }
 
 
+// Main function - Form description.
 function handleFormDescriptionField(frmDesc, includeOption, rTypes)
 {
   var fieldRes =
@@ -24,6 +32,7 @@ function handleFormDescriptionField(frmDesc, includeOption, rTypes)
     visible: false
   };
 
+  // Add description text if applicable.
   if (frmDesc.length > 0 && includeOption === true)
   {
     fieldRes.descriptionText = frmDesc;
@@ -34,7 +43,7 @@ function handleFormDescriptionField(frmDesc, includeOption, rTypes)
 }
 
 
-
+// Main function - Submission data.
 function handleSubmissionDataField(subNumber, sTimeObj, givenEmailAddress, settingsObj, rTypes)
 {
   var fieldRes =
@@ -58,6 +67,7 @@ function handleSubmissionDataField(subNumber, sTimeObj, givenEmailAddress, setti
 }
 
 
+// Main function - End form header.
 function handleEndFormHeaderField(rTypes)
 {
   var fieldRes =
@@ -70,6 +80,7 @@ function handleEndFormHeaderField(rTypes)
 
 
 
+// Writes submission timestamp for data field.
 function writeFormattedTimestamp(tsObject)
 {
   var datePart = [tsObject.year, tsObject.month, tsObject.day].join("-");
@@ -80,6 +91,7 @@ function writeFormattedTimestamp(tsObject)
 }
 
 
+// Writes submitter E-Mail for data field.
 function setSubmissionEmail(eText, eIncluded)
 {
   var valueRes = "";

@@ -1,10 +1,23 @@
+/*
+  Decides the file name of the output document depending on the chosen option.
+  Refer to 'config.md' for options.
+*/
+
+
+// Main function.
 function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, sTimeObj, pElements, rTypesObj)
 {
-  var writtenTimestamp = writeTimestampFileName(sTimeObj);
-  var modeFlag = settingsObj.documentNameMode;
+  var writtenTimestamp = "";
+  var modeFlag = null;
   var textAns = "";
   var nameRes = "";
 
+  // Reads submission timestamp, and chosen name mode.
+  writtenTimestamp = writeTimestampFileName(sTimeObj);
+  modeFlag = settingsObj.documentNameMode;
+
+  
+  // IF structure decides name.
   if (modeFlag === nameObj.FORM_NAME_WITH_SUBMISSION_TIMESTAMP)
   {
     nameRes = incorporateFormName(frmName, writtenTimestamp);
@@ -28,10 +41,12 @@ function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, sTimeObj
   }
   else if (modeFlag >= 0)
   {
+    // Submission number only (Default)
     nameRes = subNumber;
   }
   else
   {
+    // Current timestamp (Debug)
     nameRes = writeCurrentTimeOfDay();
   }
 
@@ -39,6 +54,7 @@ function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, sTimeObj
 }
 
 
+// Reads current time of day for debug.
 function writeCurrentTimeOfDay()
 {
   var dateObj = new Date();
@@ -48,7 +64,7 @@ function writeCurrentTimeOfDay()
 }
 
 
-
+// Writes submission timestamp into a suitable file name.
 function writeTimestampFileName(tsObject)
 {
   var datePart = [tsObject.year, tsObject.month, tsObject.day].join("");
@@ -60,6 +76,7 @@ function writeTimestampFileName(tsObject)
 
 
 
+// Retrieves first 'Short answer' for document name.
 function getFirstTextAnswer(eList, sNum, rTypes)
 {
   var elementIndex = 0;
@@ -76,6 +93,8 @@ function getFirstTextAnswer(eList, sNum, rTypes)
   var textAnswerFound = false;
   var textRes = sNum;
 
+  
+  // Loop parsed elements.
   while (elementIndex >= 0 && elementIndex < eList.length && textAnswerFound !== true)
   {
     currentElement = eList[elementIndex];
@@ -88,6 +107,7 @@ function getFirstTextAnswer(eList, sNum, rTypes)
     currentBox = false;
     currentBreak = false;
 
+    // IF element is text.
     if (currentElement !== null && currentElement.elementType === rTypes.TEXT)
     {
       currentText = true;
@@ -95,6 +115,7 @@ function getFirstTextAnswer(eList, sNum, rTypes)
       currentLength = currentElement.elementAnswer.length;
     }
 
+    // IF text element has been answered.
     if (currentText === true && currentEnabled > 0 && currentLength > 0)
     {
       currentAnswered = true;
@@ -102,8 +123,10 @@ function getFirstTextAnswer(eList, sNum, rTypes)
       currentBreak = currentElement.titleBreak;
     }
 
+    // IF text element corresponds to 'Short answer'.
     if (currentAnswered === true && currentBox === true && currentBreak !== true)
     {
+      // Answer found.
       textAnswerFound = true;
       textRes = currentElement.elementAnswer;
     }
@@ -116,17 +139,19 @@ function getFirstTextAnswer(eList, sNum, rTypes)
 }
 
 
-
+// Writes document names involving the form title.
 function incorporateFormName(nText, vText)
 {
   var fullNameRes = "";
 
   if (nText.length > 0)
   {
+    // Use form name.
     fullNameRes = nText + " ### " + vText;
   }
   else
   {
+    // Use value only.
     fullNameRes = vText;
   }
 

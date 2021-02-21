@@ -1,3 +1,6 @@
+// Used to convert the form submission timestamp into a readable string.
+
+
 function readSubmissionTimestamp(submissionObj)
 {
   var retrievedTimestamp = submissionObj.getTimestamp();
@@ -30,10 +33,12 @@ function stringifyTimestampNumber(origNum)
 
   if (origNum < 10)
   {
+    // Ensures double-digit numbers.
     stringRes = "0" + origNum;
   }
   else
   {
+    // Already double.
     stringRes = String(origNum);
   }
 

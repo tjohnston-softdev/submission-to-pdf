@@ -1,3 +1,12 @@
+/*
+  This file is used to:
+    * Retrieve submitted answers for a corresponding form element.
+    * Format 'Linear scale' and 'Time / Duration' answers into readable text.
+    * Prepare form element names.
+*/
+
+
+// Retrieves answer as string from most form elements.
 function getStringAnswer(eObj, subObj)
 {
   var answerObject = subObj.getResponseForItem(eObj);
@@ -12,6 +21,7 @@ function getStringAnswer(eObj, subObj)
 }
 
 
+// Retrieves answer as object from grid elements.
 function getObjectAnswer(eObj, subObj)
 {
   var answerObject = subObj.getResponseForItem(eObj);
@@ -27,7 +37,7 @@ function getObjectAnswer(eObj, subObj)
 
 
 
-
+// Writes 'Linear scale' answer text.
 function prepareScaleText(scaleAnswer, scaleElement)
 {
   var upperLimit = -1;
@@ -43,7 +53,7 @@ function prepareScaleText(scaleAnswer, scaleElement)
 }
 
 
-
+// Writes 'Time / Duration' answer text.
 function prepareDurationText(durationAnswer)
 {
   var prepRes = "";
@@ -63,14 +73,17 @@ function prepareDurationText(durationAnswer)
 
 
 
+// Adds title to parsed element object.
 function setParsedElementTitle(parseObj, origTitle, typeDesc, orderNumber)
 {
   if (origTitle.length > 0)
   {
+    // Use given title.
     parseObj.elementTitle = origTitle;
   }
   else
   {
+    // Use default title.
     parseObj.elementTitle = typeDesc + " " + orderNumber
   }
 }

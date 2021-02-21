@@ -1,3 +1,12 @@
+/*
+  Reads the answers for 'Multiple choice' questions when they are set
+  to be displayed as a full list with the selected option marked.
+  If 'displayRadioList' is not enabled, the selected option will be
+  read as a 'Short answer' (field-text)
+*/
+
+
+// Main function.
 function handleRadioListField(rdoAnswer, rdoElement, skipBlank, rTypes)
 {
   var fieldRes =
@@ -19,6 +28,7 @@ function handleRadioListField(rdoAnswer, rdoElement, skipBlank, rTypes)
 }
 
 
+// Reads radio list options into an array.
 function readRadioListOptions(eObj, oList)
 {
   var choiceArray = eObj.getChoices();
@@ -28,12 +38,15 @@ function readRadioListOptions(eObj, oList)
   var currentChoiceText = "";
   var currentUsed = false;
 
+  // Loops choice objects.
   for (choiceIndex = 0; choiceIndex < choiceArray.length; choiceIndex = choiceIndex + 1)
   {
+    // Reads text from choice object.
     currentChoiceObject = choiceArray[choiceIndex];
     currentChoiceText = currentChoiceObject.getValue();
     currentUsed = oList.includes(currentChoiceText);
 
+    // Adds choice text to list.
     if (currentUsed !== true)
     {
       oList.push(currentChoiceText);
@@ -44,27 +57,33 @@ function readRadioListOptions(eObj, oList)
 }
 
 
+// Reads selected radio list option.
 function setRadioChoice(origAnswer, sBlank, resObj)
 {
+  // Finds index number of chosen option.
   var matchIndex = resObj.optionList.indexOf(origAnswer);
 
   if (matchIndex >= 0 && matchIndex < resObj.optionList.length)
   {
+    // Known option chosen.
     resObj.chosenOption = matchIndex;
     resObj.enabledFlag = 1;
   }
   else if (origAnswer.length > 0 && resObj.customEnabled === true)
   {
+    // Other option entered.
     resObj.customText = origAnswer;
     resObj.enabledFlag = 1;
   }
   else if (sBlank === true)
   {
+    // Skip blank answer.
     resObj.customText = "";
     resObj.enabledFlag = -1;
   }
   else
   {
+    // Include blank answer.
     resObj.chosenOption = -1;
     resObj.enabledFlag = 0;
   }

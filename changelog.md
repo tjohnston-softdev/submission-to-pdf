@@ -1,34 +1,30 @@
 # Changelog
 
-**./script/code.js**
-* Added comments.
-* See below for specific changes.
+**Commented Files**
+* field-text.js
+* field-radio_list.js
+* field-check_list.js
+* field-radio_grid.js
+* field-check_grid.js
+* field-section.js
+* field-form_data.js
+* form-element-help.js
+* parsed-section.js
+* submission-timestamp.js
 
 ---
 
-**runSubmissionToPDF**
-* Re-ordered 'settingsObject' variable.
-	* Between 'breakOptsObject' and 'renderTypesObject'
-* Added break between 'settingsObject' and 'renderTypesObject' variables.
-* Grouped the following variables:
-	* prevSubmission
-	* subEmail
-	* subTime
-* Removed break between 'formItemList' and 'formSubmissionArray' assignments.
-* Added break between 'subCount' and 'prevSubmission' assignments.
-* Swapped 'subEmail' and 'subTime' variable declaration order.
-* Removed break between 'currentParseSuccessful' and 'parsedElements' declarations.
-* Removed break between 'targetForm' and 'formName' assignments.
-* Moved 'outputName' variable to before 'outputDocumentObject'
-	* Applies for both declaration and assignment.
+**./script/field-text.js**
+* Renamed the 'multipleLines' parameter to 'useParaText'
 
 ---
 
-**parseFormElement**
-* Variables are now declared and assigned on separate lines.
-	* Applies to 'eName' and 'eType'
+**./script/parsed-section.js handleParsedElementSectionBreak**
+* Variable assignments and declarations are now on separate lines.
+	* Applies to 'sectionFilled' and 'saveAllowed'
 
 ---
 
-**constructDocumentElement**
-* Removed the 'chooseSymbols' call when rendering lite radio grids.
+**./script/submission-name.js decideSubmissionName**
+* Variable assignments and declarations are now on separate lines.
+	* Applies to 'writtenTimestamp' and 'modeFlag'
