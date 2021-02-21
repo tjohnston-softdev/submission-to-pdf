@@ -1,3 +1,7 @@
+// Writes submitted form answers that have been interpreted as text (field-text) to the output document.
+
+
+// Main function.
 function handleTextRender(textPara, parsedText, previousParsedType, renderDefs)
 {
   var breakPrefixRequired = false;
@@ -16,6 +20,7 @@ function handleTextRender(textPara, parsedText, previousParsedType, renderDefs)
 }
 
 
+// Checks whether there should be a line break before this element based on previous type.
 function getTextRenderLineBreakPrefix(pType, rDefs)
 {
   var prefixRes = false;
@@ -29,6 +34,7 @@ function getTextRenderLineBreakPrefix(pType, rDefs)
 }
 
 
+// Initializes construction data and decides text structure.
 function prepareTextElementConstruction(pObject, usePrefix)
 {
   var prepareRes = {};
@@ -42,21 +48,25 @@ function prepareTextElementConstruction(pObject, usePrefix)
 
   if (pObject.elementAnswer.length > 0 && pObject.titleBreak === true)
   {
+    // Paragraph text - Use line break, block answer.
     prepareRes.prefixLinebreak = true;
     prepareRes.blockFlag = 1;
   }
   else if (pObject.elementAnswer.length > 0 && usePrefix === true)
   {
+    // Previous element flagged - Use line break, inline answer.
     prepareRes.prefixLinebreak = true;
     prepareRes.blockFlag = 0;
   }
   else if (pObject.elementAnswer.length > 0)
   {
+    // Regular short text - No line break, inline answer.
     prepareRes.prefixLinebreak = false;
     prepareRes.blockFlag = 0;
   }
   else
   {
+    // No answer given.
     prepareRes.prefixLinebreak = false;
     prepareRes.blockFlag = -1;
   }
@@ -65,6 +75,7 @@ function prepareTextElementConstruction(pObject, usePrefix)
 }
 
 
+// Adds prefix line break if required.
 function constructTextElementLineBreakPrefix(prepObj)
 {
   if (prepObj.prefixLinebreak === true)
@@ -78,7 +89,7 @@ function constructTextElementLineBreakPrefix(prepObj)
   }
 }
 
-
+// Writes question text.
 function constructTextElementQuestion(txtObj, prepObj)
 {
   var localCutoff = -1;
@@ -91,26 +102,31 @@ function constructTextElementQuestion(txtObj, prepObj)
 }
 
 
+// Writes answer text.
 function constructTextElementAnswer(txtObj, prepObj)
 {
   if (prepObj.blockFlag > 0)
   {
+    // Separate line.
     prepObj.textString += "\r";
     prepObj.textString += txtObj.elementAnswer;
     prepObj.textString += "\r";
   }
   else if (prepObj.blockFlag === 0)
   {
+    // Inline.
     prepObj.textString += " ";
     prepObj.textString += txtObj.elementAnswer;
   }
   else
   {
+    // No answer.
     prepObj.textString += "";
   }
 }
 
 
+// Bolds question text.
 function setTextParagraphBoldHeader(txtData)
 {
   var bStart = txtData.boldStart;

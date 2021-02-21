@@ -1,30 +1,24 @@
 # Changelog
 
 **Commented Files**
-* field-text.js
-* field-radio_list.js
-* field-check_list.js
-* field-radio_grid.js
-* field-check_grid.js
-* field-section.js
-* field-form_data.js
-* form-element-help.js
-* parsed-section.js
-* submission-timestamp.js
+* type-offset.js
+* render-common.js
+* render-form_data.js
+* render-text.js
+* render-radio_list.js
+* render-check_list.js
+* render-radio_grid.js
+* render-check_grid.js
+* render-section.js
 
 ---
 
-**./script/field-text.js**
-* Renamed the 'multipleLines' parameter to 'useParaText'
+**./script/render-common.js constructListOtherItem**
+* Variable declarations and assignments are now on separate lines.
+	* Applies to 'otherFilledText'
 
 ---
 
-**./script/parsed-section.js handleParsedElementSectionBreak**
-* Variable assignments and declarations are now on separate lines.
-	* Applies to 'sectionFilled' and 'saveAllowed'
-
----
-
-**./script/submission-name.js decideSubmissionName**
-* Variable assignments and declarations are now on separate lines.
-	* Applies to 'writtenTimestamp' and 'modeFlag'
+**./script/render-radio_grid.js prepareRadioGridCellsLite**
+* Variable declarations and assignments are now on separate lines.
+	* Applies to 'headerRow'

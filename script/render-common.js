@@ -1,3 +1,7 @@
+// Stores common functions that are used when writing the output document.
+
+
+// Creates text paragraph object.
 function initializeParagraphObject(docBody)
 {
   var paraRes = null;
@@ -9,7 +13,7 @@ function initializeParagraphObject(docBody)
   return paraRes;
 }
 
-
+// Sets text paragraph bold, italic, and font size.
 function standardizeParagraphFormatting(txtObj, paraCutoff)
 {
   txtObj.setBold(0, paraCutoff, false);
@@ -18,6 +22,7 @@ function standardizeParagraphFormatting(txtObj, paraCutoff)
 }
 
 
+// Construction data object for radio and check lists.
 function initializeListPreperationObject()
 {
   var intlRes = {};
@@ -34,14 +39,18 @@ function initializeListPreperationObject()
 }
 
 
+// Sets symbol text for list and grid data objects.
 function chooseSymbols(symbolsEnabled, plainSymbols, unicodeSymbols, listConstructData)
 {
+  
+  // Plain text.
   listConstructData.filledItem = plainSymbols.filled;
   listConstructData.unfilledItem = plainSymbols.empty;
   listConstructData.boldSelection = true;
 
   if (symbolsEnabled === true)
   {
+    // Unicode symbols.
     listConstructData.filledItem = unicodeSymbols.filled;
     listConstructData.unfilledItem = unicodeSymbols.empty;
     listConstructData.boldSelection = false;
@@ -50,6 +59,7 @@ function chooseSymbols(symbolsEnabled, plainSymbols, unicodeSymbols, listConstru
 
 
 
+// Writes header text for list objects.
 function constructListHeaderText(listName, listConstructData)
 {
   var localCutoff = -1;
@@ -66,6 +76,7 @@ function constructListHeaderText(listName, listConstructData)
 
 
 
+// Writes 'other' option text for lists.
 function constructListOtherItem(parsedListObject, listConstructData)
 {
   var otherFilledText = listConstructData.filledItem;
@@ -80,31 +91,37 @@ function constructListOtherItem(parsedListObject, listConstructData)
 
   if (parsedListObject.customEnabled === true && parsedListObject.customText.length > 0)
   {
+    // Writes line break.
     listConstructData.textString += "\r";
     selectStart = listConstructData.textString.length - 1;
 
+    // Writes selected symbol.
     listConstructData.textString += otherFilledText;
     selectEnd = listConstructData.textString.length - 1;
 
+    // Writes tab separator between symbol and answer.
     listConstructData.textString += "\t";
     optionStart = listConstructData.textString.length - 1;
 
+    // Writes answer text. 
     listConstructData.textString += parsedListObject.customText;
     optionEnd = listConstructData.textString.length - 1;
 
+    // Indicates answer text index range.
     listConstructData.otherRange = [optionStart, optionEnd];
     customAdded = true;
   }
 
   if (customAdded === true && listConstructData.boldSelection === true)
   {
+    // Indicates symbol text index range for bolding.
     otherSelectRange = [selectStart, selectEnd];
     listConstructData.boldArray.push(otherSelectRange);
   }
 }
 
 
-
+// Bolds list object text for header and selection.
 function setListBoldStatus(txtObj, boldArr)
 {
   var boldIndex = 0;
@@ -112,8 +129,10 @@ function setListBoldStatus(txtObj, boldArr)
   var currentStart = -1;
   var currentEnd = -1;
 
+  // Loops marked index ranges.
   for (boldIndex = 0; boldIndex < boldArr.length; boldIndex = boldIndex + 1)
   {
+    // Reads current bold range.
     currentBold = boldArr[boldIndex];
     currentStart = currentBold[0];
     currentEnd = currentBold[1];
@@ -123,6 +142,7 @@ function setListBoldStatus(txtObj, boldArr)
 }
 
 
+// Sets other text to italics if applicable.
 function setListOtherItalic(txtObj, otherObj, markToggle)
 {
   var otherDefined = Array.isArray(otherObj);
@@ -138,7 +158,7 @@ function setListOtherItalic(txtObj, otherObj, markToggle)
 }
 
 
-
+// Construction data object for grids.
 function initializeGridPreperationObject()
 {
   var intlRes = {};
@@ -153,6 +173,7 @@ function initializeGridPreperationObject()
 }
 
 
+// Writes header text for grid objects.
 function constructGridHeading(headPara, parsedGridObject)
 {
   var headingString = "\r" + parsedGridObject.elementTitle + ":";
@@ -166,6 +187,7 @@ function constructGridHeading(headPara, parsedGridObject)
 }
 
 
+// Writes header row for grid cells.
 function prepareGridHeaderRow(parsedGridObject, gridConstructionData)
 {
   var headerRow = [];
@@ -176,7 +198,7 @@ function prepareGridHeaderRow(parsedGridObject, gridConstructionData)
 }
 
 
-
+// Sets bold, italic, and font size for grid cells.
 function standardizeCellFormatting(tblObj, boldInner)
 {
   var rowIndex = 0;
@@ -189,6 +211,8 @@ function standardizeCellFormatting(tblObj, boldInner)
   var currentText = null;
   var currentBold = false;
 
+  
+  // Loops grid rows.
   for (rowIndex = 0; rowIndex < rowCount; rowIndex = rowIndex + 1)
   {
     currentRow = tblObj.getRow(rowIndex);
@@ -199,17 +223,21 @@ function standardizeCellFormatting(tblObj, boldInner)
     currentText = null;
     currentBold = false;
 
+    // Loops row cells.
     while (colIndex >= 0 && colIndex < colCount)
     {
+      // Reads current cell.
       currentCell = currentRow.getCell(colIndex);
       currentText = currentCell.editAsText();
       currentBold = false;
 
+      // Checks whether inner cell should be bolded.
       if (rowIndex > 0 && colIndex > 0 && boldInner === true)
       {
         currentBold = true;
       }
 
+      // Formats current cell.
       currentText.setBold(currentBold);
       currentText.setItalic(false);
       currentText.setFontSize(11);
@@ -221,6 +249,7 @@ function standardizeCellFormatting(tblObj, boldInner)
 
 
 
+// Bolds grid header row cells.
 function formatGridHeaderRow(tblObj, startCell)
 {
   var headerRow = tblObj.getRow(0);
@@ -230,6 +259,7 @@ function formatGridHeaderRow(tblObj, startCell)
   var currentCell = null;
   var currentText = null;
 
+  // Loops header row cells from start point.
   for (cellIndex = startCell; cellIndex < cellCount; cellIndex = cellIndex + 1)
   {
     currentCell = headerRow.getCell(cellIndex);
@@ -238,7 +268,7 @@ function formatGridHeaderRow(tblObj, startCell)
   }
 }
 
-
+// Bolds grid header column cells.
 function formatGridHeaderColumn(tblObj)
 {
   var rowIndex = 1;
@@ -247,8 +277,10 @@ function formatGridHeaderColumn(tblObj)
   var currentCell = null;
   var currentText = null;
 
+  // Loops from second row onwards.
   for (rowIndex = 1; rowIndex < rowCount; rowIndex = rowIndex + 1)
   {
+    // Reads and bolds current header column.
     currentRow = tblObj.getRow(rowIndex);
     currentCell = currentRow.getCell(0);
     currentText = currentCell.editAsText();

@@ -1,18 +1,30 @@
+/*
+  Used to add separators between different form sections,
+  and write the section header to the output document.
+  There are options as to how this is performed.
+*/
+
+
+// Main function.
 function handleSectionRender(docBody, parsedSection, renderSettings, breakModes)
 {
   var sectionEnabled = false;
 
+  // IF structure decides rendering based on section order.
   if (parsedSection.orderFlag > 0)
   {
+    // Between - Both break and header.
     prepareSectionBreak(docBody, renderSettings.sectionBreak, breakModes);
     sectionEnabled = true;
   }
   else if (parsedSection.orderFlag === 0)
   {
+    // First - Header only.
     sectionEnabled = true;
   }
   else
   {
+    // Last - Ignore.
     sectionEnabled = false;
   }
   
@@ -26,7 +38,7 @@ function handleSectionRender(docBody, parsedSection, renderSettings, breakModes)
 }
 
 
-
+// Adds section break.
 function prepareSectionBreak(dBody, chosenFlag, modeObject)
 {
   var constructRes = true;
@@ -50,7 +62,7 @@ function prepareSectionBreak(dBody, chosenFlag, modeObject)
 }
 
 
-
+// Writes section heading.
 function prepareRenderedSectionHeading(dBody, titleText)
 {
   var headingObject = dBody.appendParagraph(titleText);
@@ -59,6 +71,7 @@ function prepareRenderedSectionHeading(dBody, titleText)
 }
 
 
+// Writes section description.
 function prepareRenderedSectionDescription(dBody, descText)
 {
   var selectCutoff = -1;
@@ -67,12 +80,15 @@ function prepareRenderedSectionDescription(dBody, descText)
 
   if (descText.length > 0)
   {
+    // Initializes paragraph object.
     selectCutoff = descText.length - 1;
     renderObject = dBody.appendParagraph("");
 
+    // Sets level and alignment.
     renderObject.setHeading(DocumentApp.ParagraphHeading.NORMAL);
     renderObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
 
+    // Formats text.
     textObject = renderObject.appendText(descText);
     textObject.setBold(0, selectCutoff, false);
     textObject.setItalic(0, selectCutoff, true);

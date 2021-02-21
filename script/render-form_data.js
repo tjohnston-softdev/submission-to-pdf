@@ -1,3 +1,7 @@
+// Writes the form name, form description, and submission data at the start of the output document.
+
+
+// Main function - Form name heading.
 function handleOverallHeadingRender(docBody, parsedHeading)
 {
   var renderObject = null;
@@ -12,7 +16,7 @@ function handleOverallHeadingRender(docBody, parsedHeading)
 }
 
 
-
+// Main function - Form description.
 function handleFormDescriptionRender(descPara, parsedDesc)
 {
   var selectCutoff = -1;
@@ -26,7 +30,7 @@ function handleFormDescriptionRender(descPara, parsedDesc)
 }
 
 
-
+// Main function - Submission data.
 function handleSubmissionDataRender(subPara, parsedData)
 {
   constructSubmissionDataField("Number", parsedData.submissionNumber, subPara);
@@ -34,6 +38,8 @@ function handleSubmissionDataRender(subPara, parsedData)
   constructSubmissionDataField("E-Mail Address", parsedData.submitterEmail, subPara);
 }
 
+
+// Writes submission data field.
 function constructSubmissionDataField(dataName, dataValue, rendObj)
 {
   var fieldText = "";
@@ -41,16 +47,20 @@ function constructSubmissionDataField(dataName, dataValue, rendObj)
   var fullCutoff = -1;
   var fieldObject = null;
 
+  // Checks if value has been entered.
   if (dataValue.length > 0)
   {
+    // Writes field name.
     fieldText += "\r";
     fieldText += dataName;
     fieldText += ": ";
     boldCutoff = fieldText.length - 1;
 
+    // Writes field value.
     fieldText += dataValue;
     fullCutoff = fieldText.length - 1;
     
+    // Formats field text.
     fieldObject = rendObj.appendText(fieldText);
     fieldObject.setBold(0, fullCutoff, false);
     fieldObject.setItalic(0, fullCutoff, false);
