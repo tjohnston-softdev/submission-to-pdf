@@ -42,7 +42,7 @@ var sectionHeaderOpts =
 var scriptSettings =
 {
   outputFolderID: "",
-  documentNameMode: -1,
+  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP,
   includeFormDesc: true,
   includeSubmissionData: true,
   includeEmailAddress: true,
@@ -50,10 +50,10 @@ var scriptSettings =
   displayRadioList: true,
   displayCheckList: true,
   markOtherOption: true,
-  radioGridMode: radioGridModeOpts.LITE,
+  radioGridMode: radioGridModeOpts.FULL,
   sectionBreak: sectionBreakOpts.RULE,
   includeSectionHeader: sectionHeaderOpts.FULL,
-  ignoreEmptySections: false,
+  ignoreEmptySections: true,
   useSymbols: true
 };
 

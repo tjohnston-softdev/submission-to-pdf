@@ -1,10 +1,7 @@
 # Changelog
 
-**./script/definitions.js**
-* Added comments.
-
----
-
 **./script/options.js**
-* Added comments.
-* 'radioGridMode' in 'scriptSettings' is now "LITE"
+* scriptSettings
+	* 'documentNameMode' is now "FORM_NAME_WITH_SUBMISSION_TIMESTAMP"
+	* 'radioGridMode' is now "FULL"
+	* 'ignoreEmptySections' is now true.
