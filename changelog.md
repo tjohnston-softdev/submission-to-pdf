@@ -1,7 +1,10 @@
 # Changelog
 
-**./script/options.js**
-* scriptSettings
-	* 'documentNameMode' is now "FORM_NAME_WITH_SUBMISSION_TIMESTAMP"
-	* 'radioGridMode' is now "FULL"
-	* 'ignoreEmptySections' is now true.
+### Major changes (V1 -> 2)
+
+* Formatted file descriptions.
+* Updated text question parsing.
+* Fixed rendering glitches related to section headers if they are the first or last element.
+* Added default form element names.
+* Removed and merged redundant rendering code.
+* Added comments to files.
