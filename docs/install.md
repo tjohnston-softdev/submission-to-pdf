@@ -1,4 +1,4 @@
-### Installing 'Submission-to-PDF'
+## Installing 'Submission-to-PDF'
 
 This file contains instructions on how to install the script hosted in this project for your own use. There is no proper 'install' feature for Google Drive so manual action is required.
 
