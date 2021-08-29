@@ -1,3 +1,4 @@
 # Changelog
 
-Opened 'dev-version3' branch.
+**./summary.md**
+* Deleted file.
