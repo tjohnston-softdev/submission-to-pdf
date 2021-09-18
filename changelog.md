@@ -1,78 +1,98 @@
 # Changelog
 
-**./scripts/Code.gs - runSubmissionToPDF**
-* Merged the following into new variable 'globalsObject'
-	* 'nameOptsObject' --> `nameOpts`
-	* 'breakOptsObject' --> `breakOpts`
-	* 'settingsObject' --> `mainSettings`
-	* 'coloursObject' --> `colours`
-	* 'renderTypesObject' --> `renderTypes`
-	* 'symbolObject' --> `symbols`
+**./script/definitions.gs**
+* Restructured 'getSymbolDefinitions' object.
+	* Nesting for list and symbol types.
+
+---
+
+**./scripts/Code.gs**
 * Corrected arguments in function calls:
-	* decideSubmissionName (submission-name.gs)
-	* parseFormElement
-	* constructDocumentElement
-	* handleFormDescriptionField (field-form_data.gs)
-	* handleSubmissionDataField (field-form_data.gs)
-	* handleParsedElementSectionBreak (parsed-section.gs)
-	* DriveApp.getFolderById
-	* handleOverallHeadingField (field-form_data.gs)
-	* handleEndFormHeaderField (field-form_data.gs)
-	* getPreviousElementRenderType (type-offset.gs)
+	* handleTextField (field-text.gs)
+	* handleRadioListField (field-radio_list.gs)
+	* handleCheckListField (field-check_list.gs)
+	* handleRadioGridField (field-radio_grid.gs)
+	* handleCheckGridField (field-check_grid.gs)
+	* handleSectionField (field-section.gs)
+	* chooseSymbols (render-common.gs)
+	* setListOtherItalic (render-common.gs)
+* Declared new variable 'eVis' (constructDocumentElement)
+	* Indicates whether this element is visible.
+	* Used to save space.
+	* Replaces references to `eObject.visible`
+* Declared new variable 'radioGridFlag' (constructDocumentElement)
+	* Shortcut for 'radioGridMode' setting.
 
 ---
 
-**./scripts/Code.gs - parseFormElement**
-* Changes to parameters:
-	* Removed 'rTypesObj' and 'settingsObj'
-	* Added 'globalsObj'
-* Replaced references:
-	* 'rTypesObj' with 'globalsObj.renderTypes'
-	* 'settingsObj' with 'globalsObj.mainSettings'
-
----
-
-**./scripts/Code.gs - constructDocumentElement**
-* Changes to parameters:
-	* Removed 'rendTypes', 'breakOptsObj', 'symbolObj', 'settingsObj'
-	* Added 'globalsObj'
-* Replaced references:
-	* 'rendTypes' with 'globalsObj.renderTypes'
-	* 'breakOptsObj' with 'globalsObj.breakOpts'
-	* 'symbolObj' with 'globalsObj.symbols'
-	* 'settingsObj' with 'globalsObj.mainSettings'
-
----
-
-**./scripts/submission-name.gs - decideSubmissionName**
-* Changes to parameters:
-	* Removed 'settingsObj', 'nameObj', 'rTypesObj'
-	* Added 'globalsObj'
-* Replaced references:
-	* 'settingsObj' with 'globalsObj.mainSettings'
-	* 'nameObj' with 'globalsObj.nameOpts'
-	* 'rTypesObj' with 'globalsObj.renderTypes'
-
----
-
-**./scripts/field-form_data.gs - handleFormDescriptionField**
+**./scripts/field-text.gs - handleTextField**
 * Removed 'rTypes' parameter.
-* Added 'globalsObj' parameter.
-* 'includeOption' is now a variable instead of a parameter.
-	* Reads the desired property from 'globalObj'
-* Replaced 'rTypes' reference with 'globalObj.renderTypes'
+* Added 'parseGlobal' parameter.
+* 'skipBlank' parameter is now a variable.
+	* Reads desired value from 'parseGlobal'
+* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+
 ---
 
-**./scripts/field-form_data.gs - handleSubmissionDataField**
-* Removed parameters: 'settingsObj' and 'rTypes'
-* Added 'globalsObj' parameter.
-* Declared new variable 'includeOption'
-	* Indicates whether submission data should be included.
-	* Reads the desired property from 'globalObj'
-* Declared new variable 'includeEmail'
-	* Indicates whether the submission E-Mail address should be shown.
-	* Reads the desired property from 'globalObj'
-* Replaced references:
-	* 'settingsObj.includeSubmissionData' with 'includeOption'
-	* 'settingsObj.includeEmailAddress' with 'includeEmail'
-	* 'rTypes' with 'globalObj.renderTypes'
+**./scripts/field-radio_list.gs - handleRadioListField**
+* Removed 'rTypes' parameter.
+* Added 'parseGlobal' parameter.
+* 'skipBlank' parameter is now a variable.
+	* Reads desired value from 'parseGlobal'
+* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+
+---
+
+**./scripts/field-check_list.gs - handleCheckListField**
+* Removed 'rTypes' parameter.
+* Added 'parseGlobal' parameter.
+* 'skipBlank' parameter is now a variable.
+	* Reads desired value from 'parseGlobal'
+* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+
+---
+
+**./scripts/field-radio_grid.gs - handleRadioGridField**
+* Removed 'rTypes' parameter.
+* Added 'parseGlobal' parameter.
+* 'skipBlank' parameter is now a variable.
+	* Reads desired value from 'parseGlobal'
+* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+
+---
+
+**./scripts/field-check_grid.gs - handleCheckGridField**
+* Removed 'rTypes' parameter.
+* Added 'parseGlobal' parameter.
+* 'skipBlank' parameter is now a variable.
+	* Reads desired value from 'parseGlobal'
+* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+
+---
+
+**./scripts/field-section.gs - handleSectionField**
+* Removed 'rTypes' parameter.
+* Added 'parseGlobal' parameter.
+* 'headerUsageFlag' parameter is now a variable.
+	* Reads desired value from 'parseGlobal'
+* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+
+---
+
+**./scripts/render-common.gs - chooseSymbols**
+* Added parameters:
+	* renderGlobal
+	* listType
+* The following parameters are now variables:
+	* symbolsEnabled
+	* plainSymbols
+	* unicodeSymbols
+* Declared new variable 'listSymbols'
+	* Reads symbol definitions for respective list.
+
+---
+
+**./scripts/render-common.gs - setListOtherItalic**
+* Added 'renderGlobal' parameter.
+* 'markToggle' parameter is now a variable.
+	* Reads desired value from 'renderGlobal'

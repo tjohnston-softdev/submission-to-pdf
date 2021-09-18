@@ -2,11 +2,13 @@
 
 
 // Main function.
-function handleRadioGridField(gridAnswers, gridElement, skipBlank, rTypes)
+function handleRadioGridField(gridAnswers, gridElement, parseGlobal)
 {
+  var skipBlank = parseGlobal.mainSettings.skipBlankQuestions;
+  
   var fieldRes =
   {
-    elementType: rTypes.RADIO_GRID,
+    elementType: parseGlobal.renderTypes.RADIO_GRID,
     elementTitle: "",
     rowList: [],
     columnList: [],

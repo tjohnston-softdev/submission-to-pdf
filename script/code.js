@@ -190,14 +190,14 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
   {
     // Short answer.
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(givenAnswer, true, false, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(givenAnswer, true, false, globalsObj);
     setParsedElementTitle(parseRes, eName, "Short answer", eNumber);
   }
   else if (eType === FormApp.ItemType.PARAGRAPH_TEXT)
   {
     // Paragraph.
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(givenAnswer, true, true, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(givenAnswer, true, true, globalsObj);
     setParsedElementTitle(parseRes, eName, "Paragraph", eNumber);
   }
   else if (eType === FormApp.ItemType.MULTIPLE_CHOICE && globalsObj.mainSettings.displayRadioList === true)
@@ -205,14 +205,14 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
     // Multiple choice - Displayed as list.
     eCast = elementObj.asMultipleChoiceItem();
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleRadioListField(givenAnswer, eCast, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleRadioListField(givenAnswer, eCast, globalsObj);
     setParsedElementTitle(parseRes, eName, "Multiple choice list", eNumber);
   }
   else if (eType === FormApp.ItemType.MULTIPLE_CHOICE)
   {
     // Multiple choice - Displayed as text.
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(givenAnswer, false, false, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(givenAnswer, false, false, globalsObj);
     setParsedElementTitle(parseRes, eName, "Multiple choice", eNumber);
   }
   else if (eType === FormApp.ItemType.CHECKBOX && globalsObj.mainSettings.displayCheckList === true)
@@ -220,7 +220,7 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
     // Checkboxes - Displayed as list.
     eCast = elementObj.asCheckboxItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckListField(givenAnswer, eCast, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleCheckListField(givenAnswer, eCast, globalsObj);
     setParsedElementTitle(parseRes, eName, "Checkbox list", eNumber);
   }
   else if (eType === FormApp.ItemType.CHECKBOX)
@@ -228,14 +228,14 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
     // Checkboxes - Displayed as text. Selected answers comma-separated.
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
     preparedText = givenAnswer.join();
-    parseRes = handleTextField(preparedText, false, true, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(preparedText, false, true, globalsObj);
     setParsedElementTitle(parseRes, eName, "Checkbox", eNumber);
   }
   else if (eType === FormApp.ItemType.LIST)
   {
     // Drop-down.
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(givenAnswer, false, false, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(givenAnswer, false, false, globalsObj);
     setParsedElementTitle(parseRes, eName, "Drop-down", eNumber);
   }
   else if (eType === FormApp.ItemType.SCALE)
@@ -244,7 +244,7 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
     eCast = elementObj.asScaleItem();
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     preparedText = prepareScaleText(givenAnswer, eCast);
-    parseRes = handleTextField(preparedText, false, false, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(preparedText, false, false, globalsObj);
     setParsedElementTitle(parseRes, eName, "Linear scale", eNumber);
   }
   else if (eType === FormApp.ItemType.GRID)
@@ -252,7 +252,7 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
     // Multiple-choice grid.
     eCast = elementObj.asGridItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleRadioGridField(givenAnswer, eCast, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleRadioGridField(givenAnswer, eCast, globalsObj);
     setParsedElementTitle(parseRes, eName, "Multiple-choice grid", eNumber);
   }
   else if (eType === FormApp.ItemType.CHECKBOX_GRID)
@@ -260,21 +260,21 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
     // Tick box grid.
     eCast = elementObj.asCheckboxGridItem();
     givenAnswer = getObjectAnswer(elementObj, submissionObj);
-    parseRes = handleCheckGridField(givenAnswer, eCast, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleCheckGridField(givenAnswer, eCast, globalsObj);
     setParsedElementTitle(parseRes, eName, "Tick box grid", eNumber);
   }
   else if (eType === FormApp.ItemType.DATE)
   {
     // Date - Base.
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(givenAnswer, false, false, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(givenAnswer, false, false, globalsObj);
     setParsedElementTitle(parseRes, eName, "Date", eNumber);
   }
   else if (eType === FormApp.ItemType.TIME)
   {
     // Time - Base.
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(givenAnswer, false, false, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(givenAnswer, false, false, globalsObj);
     setParsedElementTitle(parseRes, eName, "Time", eNumber);
   }
   else if (eType === FormApp.ItemType.DURATION)
@@ -282,27 +282,27 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
     // Time - Duration.
     givenAnswer = getStringAnswer(elementObj, submissionObj);
     preparedText = prepareDurationText(givenAnswer);
-    parseRes = handleTextField(preparedText, false, false, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(preparedText, false, false, globalsObj);
     setParsedElementTitle(parseRes, eName, "Duration", eNumber);
   }
   else if (eType === FormApp.ItemType.DATETIME)
   {
     // Date - Include time.
     givenAnswer = getStringAnswer(elementObj, submissionObj);
-    parseRes = handleTextField(givenAnswer, false, false, globalsObj.mainSettings.skipBlankQuestions, globalsObj.renderTypes);
+    parseRes = handleTextField(givenAnswer, false, false, globalsObj);
     setParsedElementTitle(parseRes, eName, "Timestamp", eNumber);
   }
   else if (eType === FormApp.ItemType.PAGE_BREAK)
   {
     // Section - Active.
     eCast = elementObj.asPageBreakItem();
-    parseRes = handleSectionField(eNumber, eCount, eName, eCast, globalsObj.mainSettings.includeSectionHeader, globalsObj.renderTypes);
+    parseRes = handleSectionField(eNumber, eCount, eName, eCast, globalsObj);
   }
   else if (eType === FormApp.ItemType.SECTION_HEADER)
   {
     // Section - Depreciated.
     eCast = elementObj.asSectionHeaderItem();
-    parseRes = handleSectionField(eNumber, eCount, eName, eCast, globalsObj.mainSettings.includeSectionHeader, globalsObj.renderTypes);
+    parseRes = handleSectionField(eNumber, eCount, eName, eCast, globalsObj);
   }
   else
   {
@@ -324,6 +324,8 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
   var createdParagraph = null;
   var constructionData = null;
   var eType = eObject.elementType;
+  var eVis = eObject.visible;
+  var radioGridFlag = globalsObj.mainSettings.radioGridMode;
 
   
   // IF structure builds element differently based on parse type.
@@ -332,13 +334,13 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     // Document heading.
     handleOverallHeadingRender(documentBody, eObject);
   }
-  else if (eType === globalsObj.renderTypes.FORM_DESCRIPTION && eObject.visible === true && eObject.descriptionText.length > 0)
+  else if (eType === globalsObj.renderTypes.FORM_DESCRIPTION && eVis === true && eObject.descriptionText.length > 0)
   {
     // Form description.
     createdParagraph = initializeParagraphObject(documentBody);
     handleFormDescriptionRender(createdParagraph, eObject);
   }
-  else if (eType === globalsObj.renderTypes.SUBMISSION_DATA && eObject.visible === true)
+  else if (eType === globalsObj.renderTypes.SUBMISSION_DATA && eVis === true)
   {
     // Submission data (Number, Timestamp, E-Mail)
     createdParagraph = initializeParagraphObject(documentBody);
@@ -364,7 +366,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     // Initializes data and chooses radio button symbols.
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = initializeListPreperationObject();
-    chooseSymbols(globalsObj.mainSettings.useSymbols, globalsObj.symbols.radioPlain, globalsObj.symbols.radioSymbol, constructionData);
+    chooseSymbols(constructionData, "radio", globalsObj);
     
     // Write text.
     constructListHeaderText(eObject.elementTitle, constructionData);
@@ -375,7 +377,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     constructionData.textObject = createdParagraph.appendText(constructionData.textString);
     standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
     setListBoldStatus(constructionData.textObject, constructionData.boldArray);
-    setListOtherItalic(constructionData.textObject, constructionData.otherRange, globalsObj.mainSettings.markOtherOption);
+    setListOtherItalic(constructionData.textObject, constructionData.otherRange, globalsObj);
   }
   else if (eType === globalsObj.renderTypes.CHECK_LIST && eObject.enabledFlag >= 0)
   {
@@ -384,7 +386,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     // Initializes data and chooses checkbox symbols.
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = initializeListPreperationObject();
-    chooseSymbols(globalsObj.mainSettings.useSymbols, globalsObj.symbols.checkPlain, globalsObj.symbols.checkSymbol, constructionData);
+    chooseSymbols(constructionData, "check", globalsObj);
     
     // Write text.
     constructListHeaderText(eObject.elementTitle, constructionData);
@@ -395,16 +397,16 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     constructionData.textObject = createdParagraph.appendText(constructionData.textString);
     standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
     setListBoldStatus(constructionData.textObject, constructionData.boldArray);
-    setListOtherItalic(constructionData.textObject, constructionData.otherRange, globalsObj.mainSettings.markOtherOption);
+    setListOtherItalic(constructionData.textObject, constructionData.otherRange, globalsObj);
   }
-  else if (eType === globalsObj.renderTypes.RADIO_GRID && eObject.enabledFlag >= 0 && globalsObj.mainSettings.radioGridMode > 0)
+  else if (eType === globalsObj.renderTypes.RADIO_GRID && eObject.enabledFlag >= 0 && radioGridFlag > 0)
   {
     // Radio button grid - Full.
     
     // Initializes data and chooses radio button symbols.
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = initializeGridPreperationObject();
-    chooseSymbols(globalsObj.mainSettings.useSymbols, globalsObj.symbols.radioPlain, globalsObj.symbols.radioSymbol, constructionData);
+    chooseSymbols(constructionData, "radio", globalsObj);
 
     // Writes heading and prepares grid cells.
     constructGridHeading(createdParagraph, eObject);
@@ -443,7 +445,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     // Initializes data and chooses checkbox symbols.
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = initializeGridPreperationObject();
-    chooseSymbols(globalsObj.mainSettings.useSymbols, globalsObj.symbols.checkPlain, globalsObj.symbols.checkSymbol, constructionData);
+    chooseSymbols(constructionData, "check", globalsObj);
 
     // Writes heading and prepares cells.
     constructGridHeading(createdParagraph, eObject);

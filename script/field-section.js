@@ -2,11 +2,13 @@
 
 
 // Main function.
-function handleSectionField(headerNum, totalCount, headerName, headerElement, headerUsageFlag, rTypes)
+function handleSectionField(headerNum, totalCount, headerName, headerElement, parseGlobal)
 {
+  var headerUsageFlag = parseGlobal.mainSettings.includeSectionHeader;
+  
   var fieldRes =
   {
-    elementType: rTypes.SECTION,
+    elementType: parseGlobal.renderTypes.SECTION,
     elementTitle: "",
     sectionDesc: "",
     orderFlag: 0,

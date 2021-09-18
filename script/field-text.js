@@ -12,11 +12,13 @@
 */
 
 
-function handleTextField(txtAnswer, textboxUsed, useParaText, skipBlank, rTypes)
+function handleTextField(txtAnswer, textboxUsed, useParaText, parseGlobal)
 {
+  var skipBlank = parseGlobal.mainSettings.skipBlankQuestions;
+  
   var fieldRes =
   {
-    elementType: rTypes.TEXT,
+    elementType: parseGlobal.renderTypes.TEXT,
     elementTitle: "",
     elementAnswer: "",
     textbox: textboxUsed,
@@ -41,7 +43,6 @@ function handleTextField(txtAnswer, textboxUsed, useParaText, skipBlank, rTypes)
     fieldRes.elementAnswer = "";
     fieldRes.enabledFlag = 0;
   }
-
 
   return fieldRes;
 }

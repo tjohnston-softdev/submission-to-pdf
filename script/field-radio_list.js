@@ -7,11 +7,13 @@
 
 
 // Main function.
-function handleRadioListField(rdoAnswer, rdoElement, skipBlank, rTypes)
+function handleRadioListField(rdoAnswer, rdoElement, parseGlobal)
 {
+  var skipBlank = parseGlobal.mainSettings.skipBlankQuestions;
+  
   var fieldRes =
   {
-    elementType: rTypes.RADIO_LIST,
+    elementType: parseGlobal.renderTypes.RADIO_LIST,
     elementTitle: "",
     optionList: [],
     chosenOption: -1,

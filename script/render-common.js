@@ -40,8 +40,13 @@ function initializeListPreperationObject()
 
 
 // Sets symbol text for list and grid data objects.
-function chooseSymbols(symbolsEnabled, plainSymbols, unicodeSymbols, listConstructData)
+function chooseSymbols(listConstructData, listType, renderGlobal)
 {
+  var listSymbols = renderGlobal.symbols[listType];
+
+  var symbolsEnabled = renderGlobal.mainSettings.useSymbols;
+  var plainSymbols = listSymbols["plain"];
+  var unicodeSymbols = listSymbols["symbol"];
   
   // Plain text.
   listConstructData.filledItem = plainSymbols.filled;
@@ -143,8 +148,9 @@ function setListBoldStatus(txtObj, boldArr)
 
 
 // Sets other text to italics if applicable.
-function setListOtherItalic(txtObj, otherObj, markToggle)
+function setListOtherItalic(txtObj, otherObj, renderGlobal)
 {
+  var markToggle = renderGlobal.mainSettings.markOtherOption;
   var otherDefined = Array.isArray(otherObj);
   var otherBegin = -1;
   var otherCutoff = -1;

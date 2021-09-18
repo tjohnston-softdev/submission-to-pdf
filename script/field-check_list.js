@@ -7,11 +7,13 @@
 
 
 // Main function.
-function handleCheckListField(chkAnswers, chkElement, skipBlank, rTypes)
+function handleCheckListField(chkAnswers, chkElement, parseGlobal)
 {
+  var skipBlank = parseGlobal.mainSettings.skipBlankQuestions;
+  
   var fieldRes =
   {
-    elementType: rTypes.CHECK_LIST,
+    elementType: parseGlobal.renderTypes.CHECK_LIST,
     elementTitle: "",
     checkboxList: [],
     chosenItems: [],

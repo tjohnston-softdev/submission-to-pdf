@@ -35,10 +35,14 @@ function getSymbolDefinitions()
 {
   var definitionRes = {};
 
-  definitionRes["radioSymbol"] = {filled: "\u29BF", empty: "\u29BE"};
-  definitionRes["checkSymbol"] = {filled: "\u2611", empty: "\u2610"};
-  definitionRes["radioPlain"] = {filled: "(O)", empty: "(  )"};
-  definitionRes["checkPlain"] = {filled: "[X]", empty: "[  ]"};
+  definitionRes["radio"] = {};
+  definitionRes["check"] = {};
+
+  definitionRes.radio["plain"] = {filled: "(O)", empty: "(  )"};
+  definitionRes.radio["symbol"] = {filled: "\u29BF", empty: "\u29BE"};
+
+  definitionRes.check["plain"] = {filled: "[X]", empty: "[  ]"};
+  definitionRes.check["symbol"] = {filled: "\u2611", empty: "\u2610"};
 
   return definitionRes;
 }

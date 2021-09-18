@@ -2,11 +2,13 @@
 
 
 // Main function.
-function handleCheckGridField(gridAnswers, gridElement, skipBlank, rTypes)
+function handleCheckGridField(gridAnswers, gridElement, parseGlobal)
 {
+  var skipBlank = parseGlobal.mainSettings.skipBlankQuestions;
+  
   var fieldRes =
   {
-    elementType: rTypes.CHECK_GRID,
+    elementType: parseGlobal.renderTypes.CHECK_GRID,
     elementTitle: "",
     rowList: [],
     columnList: [],
