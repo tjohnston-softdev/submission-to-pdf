@@ -12,6 +12,7 @@ function runSubmissionToPDF()
   var nameOptsObject = {};
   var breakOptsObject = {};
   var settingsObject = {};
+  var coloursObject = {};
   
   // Definition object variables.
   var renderTypesObject = {};
@@ -66,6 +67,7 @@ function runSubmissionToPDF()
   nameOptsObject = getNameOptions();
   breakOptsObject = getSectionBreakOptions();
   settingsObject = getScriptSettings();
+  coloursObject = getTextColours();
   renderTypesObject = getRenderTypes();
   symbolObject = getSymbolDefinitions();
 
@@ -326,6 +328,7 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, rTypesObj,
 // Adds current parsed element to the output document.
 function constructDocumentElement(eObject, prevType, documentBody, rendTypes, breakOptsObj, symbolObj, settingsObj)
 {
+  var elementStyling = null;
   var createdParagraph = null;
   var constructionData = null;
   var eType = eObject.elementType;

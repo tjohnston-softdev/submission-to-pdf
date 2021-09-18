@@ -41,7 +41,7 @@ var sectionHeaderOpts =
 // Script settings.
 var scriptSettings =
 {
-  outputFolderID: "",
+  outputFolderID: "1438ccdTouENBrkwyP1zeAmP1Krcs74Jf",
   documentNameMode: -1,
   includeFormDesc: true,
   includeSubmissionData: true,
@@ -55,6 +55,22 @@ var scriptSettings =
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true,
   useSymbols: true
+};
+
+
+// Colour options
+var textColours =
+{
+  global: "#000000",
+  mainHeading: "#EBA834",
+  formDesc: "#A834EB",
+  sectionHeading: "#EBA834",
+  sectionDesc: "#3A34EB",
+  question: "#EBA834",
+  answer: "",
+  tableHeader: "",
+  metaProp: "#754F5D",
+  metaValue: "#754F5D"
 };
 
 
@@ -73,8 +89,15 @@ function getSectionBreakOptions()
 }
 
 
-// GET 'getScriptSettings'
+// GET 'scriptSettings'
 function getScriptSettings()
 {
   return scriptSettings;
+}
+
+
+// GET 'textColours'
+function getTextColours()
+{
+  return textColours;
 }
