@@ -73,6 +73,21 @@ var textColours =
   metaValue: "#754F5D"
 };
 
+// Font options
+var textFonts =
+{
+  global: "Arial",
+  mainHeading: "Impact",
+  formDesc: "Oswald",
+  sectionHeading: "Impact",
+  sectionDesc: "Oswald",
+  question: "Quicksand",
+  answer: "Work Sans",
+  tableHeader: "",
+  metaProp: "Dosis",
+  metaValue: "Dosis"
+};
+
 
 
 // GET 'nameOpts'
@@ -100,4 +115,10 @@ function getScriptSettings()
 function getTextColours()
 {
   return textColours;
+}
+
+// GET 'textFonts'
+function getTextFonts()
+{
+  return textFonts;
 }
