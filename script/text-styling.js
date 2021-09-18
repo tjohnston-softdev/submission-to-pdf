@@ -15,17 +15,16 @@ function setStyleColour(colSettings, sProp)
 {
   var colourString = colSettings[sProp];
   var entryType = typeof colourString;
-  var hexValid = false;
+  var hexValid = -1;
 
   var setRes = colSettings.global;
 
   if (entryType === "string" && colourString.length > 0)
   {
-    //hexValid = colourRegex.test(colourString);
-    hexValid = true;
+    hexValid = colourString.search(colourRegex);
   }
 
-  if (hexValid === true)
+  if (hexValid === 0)
   {
     setRes = colourString;
   }
