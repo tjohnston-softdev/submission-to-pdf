@@ -41,7 +41,7 @@ var sectionHeaderOpts =
 // Script settings.
 var scriptSettings =
 {
-  outputFolderID: "1438ccdTouENBrkwyP1zeAmP1Krcs74Jf",
+  outputFolderID: "",
   documentNameMode: -1,
   includeFormDesc: true,
   includeSubmissionData: true,
