@@ -42,7 +42,7 @@ var sectionHeaderOpts =
 var scriptSettings =
 {
   outputFolderID: "",
-  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP,
+  documentNameMode: nameOpts.SUBMISSION_NUMBER,
   includeFormDesc: true,
   includeSubmissionData: true,
   includeEmailAddress: true,

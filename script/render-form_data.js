@@ -5,12 +5,16 @@
 function handleOverallHeadingRender(docBody, parsedHeading)
 {
   var renderObject = null;
+  var colourObject = {};
 
   if (parsedHeading.headingText.length > 0)
   {
     renderObject = docBody.insertParagraph(0, parsedHeading.headingText);
     renderObject.setHeading(DocumentApp.ParagraphHeading.TITLE);
     renderObject.setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+
+    colourObject[DocumentApp.Attribute.FOREGROUND_COLOR] = "#eba834";
+    renderObject.setAttributes(colourObject);
   }
 
 }
