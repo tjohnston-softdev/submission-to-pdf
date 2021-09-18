@@ -5,7 +5,7 @@
 
 
 // Main function.
-function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, sTimeObj, pElements, rTypesObj)
+function decideSubmissionName(globalsObj, frmName, subNumber, sTimeObj, pElements)
 {
   var writtenTimestamp = "";
   var modeFlag = null;
@@ -14,28 +14,28 @@ function decideSubmissionName(settingsObj, nameObj, frmName, subNumber, sTimeObj
 
   // Reads submission timestamp, and chosen name mode.
   writtenTimestamp = writeTimestampFileName(sTimeObj);
-  modeFlag = settingsObj.documentNameMode;
+  modeFlag = globalsObj.mainSettings.documentNameMode;
 
   
   // IF structure decides name.
-  if (modeFlag === nameObj.FORM_NAME_WITH_SUBMISSION_TIMESTAMP)
+  if (modeFlag === globalsObj.nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP)
   {
     nameRes = incorporateFormName(frmName, writtenTimestamp);
   }
-  else if (modeFlag === nameObj.FORM_NAME_WITH_SUBMISSION_NUMBER)
+  else if (modeFlag === globalsObj.nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER)
   {
     nameRes = incorporateFormName(frmName, subNumber);
   }
-  else if (modeFlag === nameObj.FORM_NAME_WITH_FIRST_TEXT)
+  else if (modeFlag === globalsObj.nameOpts.FORM_NAME_WITH_FIRST_TEXT)
   {
-    textAns = getFirstTextAnswer(pElements.overall, subNumber, rTypesObj);
+    textAns = getFirstTextAnswer(pElements.overall, subNumber, globalsObj.renderTypes);
     nameRes = incorporateFormName(frmName, textAns);
   }
-  else if (modeFlag === nameObj.FIRST_TEXT)
+  else if (modeFlag === globalsObj.nameOpts.FIRST_TEXT)
   {
-    nameRes = getFirstTextAnswer(pElements.overall, subNumber, rTypesObj);
+    nameRes = getFirstTextAnswer(pElements.overall, subNumber, globalsObj.renderTypes);
   }
-  else if (modeFlag === nameObj.SUBMISSION_TIMESTAMP)
+  else if (modeFlag === globalsObj.nameOpts.SUBMISSION_TIMESTAMP)
   {
     nameRes = writtenTimestamp;
   }

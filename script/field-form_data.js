@@ -23,11 +23,13 @@ function handleOverallHeadingField(frmName, rTypes)
 
 
 // Main function - Form description.
-function handleFormDescriptionField(frmDesc, includeOption, rTypes)
+function handleFormDescriptionField(frmDesc, globalsObj)
 {
+  var includeOption = globalsObj.mainSettings.includeFormDesc;
+  
   var fieldRes =
   {
-    elementType: rTypes.FORM_DESCRIPTION,
+    elementType: globalsObj.renderTypes.FORM_DESCRIPTION,
     descriptionText: "",
     visible: false
   };
@@ -44,22 +46,25 @@ function handleFormDescriptionField(frmDesc, includeOption, rTypes)
 
 
 // Main function - Submission data.
-function handleSubmissionDataField(subNumber, sTimeObj, givenEmailAddress, settingsObj, rTypes)
+function handleSubmissionDataField(subNumber, sTimeObj, givenEmailAddress, globalsObj)
 {
+  var includeOption = globalsObj.mainSettings.includeSubmissionData;
+  var includeEmail = globalsObj.mainSettings.includeEmailAddress;
+  
   var fieldRes =
   {
-    elementType: rTypes.SUBMISSION_DATA,
+    elementType: globalsObj.renderTypes.SUBMISSION_DATA,
     submissionNumber: "",
     submissionTimestamp: "",
     submitterEmail: "",
     visible: false
   };
 
-  if (settingsObj.includeSubmissionData === true)
+  if (includeOption === true)
   {
     fieldRes.submissionNumber = String(subNumber);
     fieldRes.submissionTimestamp = writeFormattedTimestamp(sTimeObj);
-    fieldRes.submitterEmail = setSubmissionEmail(givenEmailAddress, settingsObj.includeEmailAddress);
+    fieldRes.submitterEmail = setSubmissionEmail(givenEmailAddress, includeEmail);
     fieldRes.visible = true;
   }
 
