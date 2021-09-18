@@ -67,10 +67,8 @@ var textColours =
   sectionHeading: "#EBA834",
   sectionDesc: "#3A34EB",
   question: "#EBA834",
-  answer: "",
-  tableHeader: "",
-  metaProp: "#754F5D",
-  metaValue: "#754F5D"
+  tableHeader: "#ABCDEF",
+  meta: "#754F5D"
 };
 
 // Font options
@@ -82,10 +80,8 @@ var textFonts =
   sectionHeading: "Impact",
   sectionDesc: "Oswald",
   question: "Quicksand",
-  answer: "Work Sans",
   tableHeader: "",
-  metaProp: "Dosis",
-  metaValue: "Dosis"
+  meta: "Dosis"
 };
 
 

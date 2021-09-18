@@ -62,6 +62,7 @@ function runSubmissionToPDF()
   globalsObject["colours"] = getTextColours();
   globalsObject["renderTypes"] = getRenderTypes();
   globalsObject["symbols"] = getSymbolDefinitions();
+  globalsObject["fonts"] = getTextFonts();
 
   // Reads attatched form details.
   targetForm = FormApp.getActiveForm();
@@ -320,7 +321,9 @@ function parseFormElement(eNumber, eCount, elementObj, submissionObj, globalsObj
 // Adds current parsed element to the output document.
 function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
 {
-  var elementStyling = null;
+  var primaryStyle = null;
+  var secondaryStyle = null;
+
   var createdParagraph = null;
   var constructionData = null;
   var eType = eObject.elementType;
@@ -332,19 +335,22 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
   if (eType === globalsObj.renderTypes.OVERALL_HEADING)
   {
     // Document heading.
-    handleOverallHeadingRender(documentBody, eObject);
+    primaryStyle = prepareTextStyling(globalsObj, "mainHeading");
+    handleOverallHeadingRender(documentBody, eObject, primaryStyle);
   }
   else if (eType === globalsObj.renderTypes.FORM_DESCRIPTION && eVis === true && eObject.descriptionText.length > 0)
   {
     // Form description.
+    primaryStyle = prepareTextStyling(globalsObj, "formDesc");
     createdParagraph = initializeParagraphObject(documentBody);
-    handleFormDescriptionRender(createdParagraph, eObject);
+    handleFormDescriptionRender(createdParagraph, eObject, primaryStyle);
   }
   else if (eType === globalsObj.renderTypes.SUBMISSION_DATA && eVis === true)
   {
     // Submission data (Number, Timestamp, E-Mail)
+    primaryStyle = prepareTextStyling(globalsObj, "meta");
     createdParagraph = initializeParagraphObject(documentBody);
-    handleSubmissionDataRender(createdParagraph, eObject);
+    handleSubmissionDataRender(createdParagraph, eObject, primaryStyle);
   }
   else if (eType === globalsObj.renderTypes.END_FORM_HEADER)
   {
@@ -354,9 +360,10 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
   else if (eType === globalsObj.renderTypes.TEXT && eObject.enabledFlag >= 0)
   {
     // Plain text.
+    primaryStyle = prepareTextStyling(globalsObj, "question");
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = handleTextRender(createdParagraph, eObject, prevType, globalsObj.renderTypes);
-    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
+    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1, primaryStyle);
     setTextParagraphBoldHeader(constructionData);
   }
   else if (eType === globalsObj.renderTypes.RADIO_LIST && eObject.enabledFlag >= 0)
@@ -375,7 +382,8 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     
     // Format text.
     constructionData.textObject = createdParagraph.appendText(constructionData.textString);
-    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
+    primaryStyle = prepareTextStyling(globalsObj, "question");
+    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1, primaryStyle);
     setListBoldStatus(constructionData.textObject, constructionData.boldArray);
     setListOtherItalic(constructionData.textObject, constructionData.otherRange, globalsObj);
   }
@@ -394,8 +402,9 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     constructListOtherItem(eObject, constructionData);
     
     // Format text.
+    primaryStyle = prepareTextStyling(globalsObj, "question");
     constructionData.textObject = createdParagraph.appendText(constructionData.textString);
-    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1);
+    standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1, primaryStyle);
     setListBoldStatus(constructionData.textObject, constructionData.boldArray);
     setListOtherItalic(constructionData.textObject, constructionData.otherRange, globalsObj);
   }
@@ -403,44 +412,56 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
   {
     // Radio button grid - Full.
     
+    // Creates grid text styling
+    primaryStyle = prepareTextStyling(globalsObj, "question");
+    secondaryStyle = prepareTextStyling(globalsObj, "tableHeader");
+    
     // Initializes data and chooses radio button symbols.
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = initializeGridPreperationObject();
     chooseSymbols(constructionData, "radio", globalsObj);
 
     // Writes heading and prepares grid cells.
-    constructGridHeading(createdParagraph, eObject);
+    constructGridHeading(createdParagraph, eObject, primaryStyle);
     prepareGridHeaderRow(eObject, constructionData);
     prepareRadioGridCellsSelection(eObject, constructionData);
     
     // Format grid table.
     constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
     standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
-    formatGridHeaderRow(constructionData.tableObject, 1);
-    formatGridHeaderColumn(constructionData.tableObject);
+    formatGridHeaderRow(constructionData.tableObject, 1, secondaryStyle);
+    formatGridHeaderColumn(constructionData.tableObject, secondaryStyle);
   }
   else if (eType === globalsObj.renderTypes.RADIO_GRID && eObject.enabledFlag >= 0)
   {
     // Radio button grid - Lite.
+    
+    // Creates grid text styling
+    primaryStyle = prepareTextStyling(globalsObj, "question");
+    secondaryStyle = prepareTextStyling(globalsObj, "tableHeader");
     
     // Initializes data.
     createdParagraph = initializeParagraphObject(documentBody);
     constructionData = initializeGridPreperationObject();
 
     // Writes heading and prepares cells.
-    constructGridHeading(createdParagraph, eObject);
+    constructGridHeading(createdParagraph, eObject, primaryStyle);
     prepareRadioGridCellsLite(eObject, constructionData);
 
     // Format table.
     constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
     standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
-    formatGridHeaderRow(constructionData.tableObject, 0);
-    formatGridHeaderColumn(constructionData.tableObject);
+    formatGridHeaderRow(constructionData.tableObject, 0, secondaryStyle);
+    formatGridHeaderColumn(constructionData.tableObject, secondaryStyle);
 
   }
   else if (eType === globalsObj.renderTypes.CHECK_GRID && eObject.enabledFlag >= 0)
   {
     // Checkbox grid.
+    
+    // Creates grid text styling
+    primaryStyle = prepareTextStyling(globalsObj, "question");
+    secondaryStyle = prepareTextStyling(globalsObj, "tableHeader");
     
     // Initializes data and chooses checkbox symbols.
     createdParagraph = initializeParagraphObject(documentBody);
@@ -448,20 +469,24 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     chooseSymbols(constructionData, "check", globalsObj);
 
     // Writes heading and prepares cells.
-    constructGridHeading(createdParagraph, eObject);
+    constructGridHeading(createdParagraph, eObject, primaryStyle);
     prepareGridHeaderRow(eObject, constructionData);
     prepareCheckGridCells(eObject, constructionData);
 
     // Format table.
     constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
     standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
-    formatGridHeaderRow(constructionData.tableObject, 1);
-    formatGridHeaderColumn(constructionData.tableObject);
+    formatGridHeaderRow(constructionData.tableObject, 1, secondaryStyle);
+    formatGridHeaderColumn(constructionData.tableObject, secondaryStyle);
   }
   else if (eType === globalsObj.renderTypes.SECTION)
   {
+    // Creates section head styling
+    primaryStyle = prepareTextStyling(globalsObj, "sectionHeading");
+    secondaryStyle = prepareTextStyling(globalsObj, "sectionDesc");
+    
     // Section header object.
-    handleSectionRender(documentBody, eObject, globalsObj.mainSettings, globalsObj.breakOpts);
+    handleSectionRender(documentBody, eObject, globalsObj, primaryStyle, secondaryStyle);
   }
 
 }

@@ -1,98 +1,91 @@
 # Changelog
 
-**./script/definitions.gs**
-* Restructured 'getSymbolDefinitions' object.
-	* Nesting for list and symbol types.
+**./scripts/options.js - textColours, textFonts**
+* Merged text elements:
+	* 'answer' into 'question'
+	* 'metaProp' and 'metaValue' into 'meta'
+* Added value to 'textColours.tableHeader'
 
 ---
 
-**./scripts/Code.gs**
-* Corrected arguments in function calls:
-	* handleTextField (field-text.gs)
-	* handleRadioListField (field-radio_list.gs)
-	* handleCheckListField (field-check_list.gs)
-	* handleRadioGridField (field-radio_grid.gs)
-	* handleCheckGridField (field-check_grid.gs)
-	* handleSectionField (field-section.gs)
-	* chooseSymbols (render-common.gs)
-	* setListOtherItalic (render-common.gs)
-* Declared new variable 'eVis' (constructDocumentElement)
-	* Indicates whether this element is visible.
-	* Used to save space.
-	* Replaces references to `eObject.visible`
-* Declared new variable 'radioGridFlag' (constructDocumentElement)
-	* Shortcut for 'radioGridMode' setting.
+**./scripts/Code.js - globalsObject**
+* Added 'fonts' property
+	* Assigned with 'getTextFonts'
+	* Contains font settings.
 
 ---
 
-**./scripts/field-text.gs - handleTextField**
-* Removed 'rTypes' parameter.
-* Added 'parseGlobal' parameter.
-* 'skipBlank' parameter is now a variable.
-	* Reads desired value from 'parseGlobal'
-* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+**./scripts/Code.js - constructDocumentElement**
+* Renamed 'elementStyling' variable to 'primaryStyle'
+* Declared 'secondaryStyle' variable.
+* Applied 'primaryStyle' and 'secondaryStyle' to cases as needed
+* Affected calls:
+	* handleOverallHeadingRender (render-form_data.js)
+	* handleFormDescriptionRender (render-form_data.js)
+	* handleSubmissionDataRender (render-form_data.js)
+	* standardizeParagraphFormatting (render-common.js)
+	* constructGridHeading (render-common.js)
+	* formatGridHeaderRow (render-common.js)
+	* formatGridHeaderColumn (render-common.js)
+	* handleSectionRender (render-section.js)
 
 ---
 
-**./scripts/field-radio_list.gs - handleRadioListField**
-* Removed 'rTypes' parameter.
-* Added 'parseGlobal' parameter.
-* 'skipBlank' parameter is now a variable.
-	* Reads desired value from 'parseGlobal'
-* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+**./scripts/text-styling.js**
+* New file - Sets colour and font for different text elements.
+* Hex colour validation is supported but dummied out for now.
 
 ---
 
-**./scripts/field-check_list.gs - handleCheckListField**
-* Removed 'rTypes' parameter.
-* Added 'parseGlobal' parameter.
-* 'skipBlank' parameter is now a variable.
-	* Reads desired value from 'parseGlobal'
-* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+**./scripts/render-form_data.js**
+* handleOverallHeadingRender
+	* Added 'styleObject' parameter.
+	* Declared 'preparedStyle' variable.
+	* Removed 'colourObject' variable.
+	* Replaced 'colourObject' reference with 'preparedStyle'
+	* 'preparedStyle' is 'styleObject' in a docs-ready format.
+* handleFormDescriptionRender
+	* Added 'styleObject' parameter.
+	* Applied font and colour from 'styleObject' to 'textContents'
+* handleSubmissionDataRender
+	* Added 'styleObject' parameter.
+	* Added 'styleObject' as argument to 'constructSubmissionDataField' calls.
+* constructSubmissionDataField
+	* Added 'styleObj' parameter.
+	* Applied font and colour from 'styleObj' to 'fieldObject'
 
 ---
 
-**./scripts/field-radio_grid.gs - handleRadioGridField**
-* Removed 'rTypes' parameter.
-* Added 'parseGlobal' parameter.
-* 'skipBlank' parameter is now a variable.
-	* Reads desired value from 'parseGlobal'
-* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
+**./scripts/render-common.js**
+* standardizeParagraphFormatting
+	* Added 'styleObject' parameter.
+	* Applied font and colour from 'styleObject' to 'txtObj'
+* constructGridHeading
+	* Added 'styleObject' parameter.
+	* Applied font and colour from 'styleObject' to 'textObject'
+	* Moved bold setting to after font and colour.
+	* Added comments throughout formatting.
+* formatGridHeaderRow, formatGridHeaderColumn
+	* Added 'styleObject' parameter.
+	* Applied font and colour from 'styleObject' to 'currentText'
+	* Moved bold setting to after font and colour.
 
 ---
 
-**./scripts/field-check_grid.gs - handleCheckGridField**
-* Removed 'rTypes' parameter.
-* Added 'parseGlobal' parameter.
-* 'skipBlank' parameter is now a variable.
-	* Reads desired value from 'parseGlobal'
-* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
-
----
-
-**./scripts/field-section.gs - handleSectionField**
-* Removed 'rTypes' parameter.
-* Added 'parseGlobal' parameter.
-* 'headerUsageFlag' parameter is now a variable.
-	* Reads desired value from 'parseGlobal'
-* Replaced 'rTypes' reference with 'parseGlobal.renderTypes'
-
----
-
-**./scripts/render-common.gs - chooseSymbols**
-* Added parameters:
-	* renderGlobal
-	* listType
-* The following parameters are now variables:
-	* symbolsEnabled
-	* plainSymbols
-	* unicodeSymbols
-* Declared new variable 'listSymbols'
-	* Reads symbol definitions for respective list.
-
----
-
-**./scripts/render-common.gs - setListOtherItalic**
-* Added 'renderGlobal' parameter.
-* 'markToggle' parameter is now a variable.
-	* Reads desired value from 'renderGlobal'
+**./scripts/render-section.js**
+* handleSectionRender
+	* Removed parameters: renderSettings, breakModes
+	* Added parameters: renderGlobal, headStyle, descStyle
+	* Declared new variable 'secBreakFlag', reads from main settings.
+	* Replaced 'renderSettings.sectionBreak' reference with 'secBreakFlag'
+	* Replaced 'breakModes' reference with 'renderGlobal.breakOpts'
+	* Added 'headStyle' argument to 'prepareRenderedSectionHeading' call.
+	* Added 'descStyle' argument to 'prepareRenderedSectionDescription' call.
+* prepareRenderedSectionHeading
+	* Added 'styleObj' parameter.
+	* Declared 'preparedStyle' variable.
+	* 'preparedStyle' is 'styleObj' in a docs-ready format.
+	* Applied styling from 'preparedStyle' to 'headingObject'
+* prepareRenderedSectionDescription
+	* Added 'styleObj' parameter.
+	* Applied styling from 'styleObj' to 'textObject'

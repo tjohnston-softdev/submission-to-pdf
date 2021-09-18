@@ -6,15 +6,16 @@
 
 
 // Main function.
-function handleSectionRender(docBody, parsedSection, renderSettings, breakModes)
+function handleSectionRender(docBody, parsedSection, renderGlobal, headStyle, descStyle)
 {
+  var secBreakFlag = renderGlobal.mainSettings.sectionBreak;
   var sectionEnabled = false;
 
   // IF structure decides rendering based on section order.
   if (parsedSection.orderFlag > 0)
   {
     // Between - Both break and header.
-    prepareSectionBreak(docBody, renderSettings.sectionBreak, breakModes);
+    prepareSectionBreak(docBody, secBreakFlag, renderGlobal.breakOpts);
     sectionEnabled = true;
   }
   else if (parsedSection.orderFlag === 0)
@@ -31,8 +32,8 @@ function handleSectionRender(docBody, parsedSection, renderSettings, breakModes)
 
   if (sectionEnabled === true && parsedSection.visible === true)
   {
-    prepareRenderedSectionHeading(docBody, parsedSection.elementTitle);
-    prepareRenderedSectionDescription(docBody, parsedSection.sectionDesc);
+    prepareRenderedSectionHeading(docBody, parsedSection.elementTitle, headStyle);
+    prepareRenderedSectionDescription(docBody, parsedSection.sectionDesc, descStyle);
   }
 
 }
@@ -63,16 +64,21 @@ function prepareSectionBreak(dBody, chosenFlag, modeObject)
 
 
 // Writes section heading.
-function prepareRenderedSectionHeading(dBody, titleText)
+function prepareRenderedSectionHeading(dBody, titleText, styleObj)
 {
+  var preparedStyle = {};
+  preparedStyle[DocumentApp.Attribute.FONT_FAMILY] = styleObj.font;
+  preparedStyle[DocumentApp.Attribute.FOREGROUND_COLOR] = styleObj.colour;
+  
   var headingObject = dBody.appendParagraph(titleText);
   headingObject.setHeading(DocumentApp.ParagraphHeading.HEADING2);
   headingObject.setAlignment(DocumentApp.HorizontalAlignment.LEFT);
+  headingObject.setAttributes(preparedStyle);
 }
 
 
 // Writes section description.
-function prepareRenderedSectionDescription(dBody, descText)
+function prepareRenderedSectionDescription(dBody, descText, styleObj)
 {
   var selectCutoff = -1;
   var renderObject = null;
@@ -93,5 +99,7 @@ function prepareRenderedSectionDescription(dBody, descText)
     textObject.setBold(0, selectCutoff, false);
     textObject.setItalic(0, selectCutoff, true);
     textObject.setFontSize(11);
+    textObject.setFontFamily(0, selectCutoff, styleObj.font);
+    textObject.setForegroundColor(0, selectCutoff, styleObj.colour);
   }
 }

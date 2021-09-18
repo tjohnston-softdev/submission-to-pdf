@@ -14,11 +14,13 @@ function initializeParagraphObject(docBody)
 }
 
 // Sets text paragraph bold, italic, and font size.
-function standardizeParagraphFormatting(txtObj, paraCutoff)
+function standardizeParagraphFormatting(txtObj, paraCutoff, styleObject)
 {
   txtObj.setBold(0, paraCutoff, false);
   txtObj.setItalic(0, paraCutoff, false);
   txtObj.setFontSize(11);
+  txtObj.setFontFamily(0, paraCutoff, styleObject.font);
+  txtObj.setForegroundColor(0, paraCutoff, styleObject.colour);
 }
 
 
@@ -180,16 +182,23 @@ function initializeGridPreperationObject()
 
 
 // Writes header text for grid objects.
-function constructGridHeading(headPara, parsedGridObject)
+function constructGridHeading(headPara, parsedGridObject, styleObject)
 {
   var headingString = "\r" + parsedGridObject.elementTitle + ":";
   var textCutoff = headingString.length - 1;
   var textObject = headPara.appendText(headingString);
 
+  // Remove pre-existing bold and italic.
   textObject.setBold(0, textCutoff, false);
   textObject.setItalic(0, textCutoff, false);
-  textObject.setBold(1, textCutoff, true);
+  
+  // Set font type and size.
   textObject.setFontSize(11);
+  textObject.setFontFamily(0, textCutoff, styleObject.font);
+
+  // Set colour and bold.
+  textObject.setForegroundColor(0, textCutoff, styleObject.colour);
+  textObject.setBold(1, textCutoff, true);
 }
 
 
@@ -256,7 +265,7 @@ function standardizeCellFormatting(tblObj, boldInner)
 
 
 // Bolds grid header row cells.
-function formatGridHeaderRow(tblObj, startCell)
+function formatGridHeaderRow(tblObj, startCell, styleObject)
 {
   var headerRow = tblObj.getRow(0);
 
@@ -270,12 +279,14 @@ function formatGridHeaderRow(tblObj, startCell)
   {
     currentCell = headerRow.getCell(cellIndex);
     currentText = currentCell.editAsText();
+    currentText.setFontFamily(styleObject.font);
+    currentText.setForegroundColor(styleObject.colour);
     currentText.setBold(true);
   }
 }
 
 // Bolds grid header column cells.
-function formatGridHeaderColumn(tblObj)
+function formatGridHeaderColumn(tblObj, styleObject)
 {
   var rowIndex = 1;
   var rowCount = tblObj.getNumRows();
@@ -290,6 +301,8 @@ function formatGridHeaderColumn(tblObj)
     currentRow = tblObj.getRow(rowIndex);
     currentCell = currentRow.getCell(0);
     currentText = currentCell.editAsText();
+    currentText.setFontFamily(styleObject.font);
+    currentText.setForegroundColor(styleObject.colour);
     currentText.setBold(true);
   }
 }
