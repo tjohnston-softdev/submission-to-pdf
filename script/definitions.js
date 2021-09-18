@@ -39,10 +39,10 @@ function getSymbolDefinitions()
   definitionRes["check"] = {};
 
   definitionRes.radio["plain"] = {filled: "(O)", empty: "(  )"};
-  definitionRes.radio["symbol"] = {filled: "\u29BF", empty: "\u29BE"};
+  definitionRes.radio["glyph"] = {filled: "\u29BF", empty: "\u29BE"};
 
   definitionRes.check["plain"] = {filled: "[X]", empty: "[  ]"};
-  definitionRes.check["symbol"] = {filled: "\u2611", empty: "\u2610"};
+  definitionRes.check["glyph"] = {filled: "\u2611", empty: "\u2610"};
 
   return definitionRes;
 }

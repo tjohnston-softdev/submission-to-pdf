@@ -48,7 +48,7 @@ function chooseSymbols(listConstructData, listType, renderGlobal)
 
   var symbolsEnabled = renderGlobal.mainSettings.useSymbols;
   var plainSymbols = listSymbols["plain"];
-  var unicodeSymbols = listSymbols["symbol"];
+  var glyphSymbols = listSymbols["glyph"];
   
   // Plain text.
   listConstructData.filledItem = plainSymbols.filled;
@@ -57,9 +57,9 @@ function chooseSymbols(listConstructData, listType, renderGlobal)
 
   if (symbolsEnabled === true)
   {
-    // Unicode symbols.
-    listConstructData.filledItem = unicodeSymbols.filled;
-    listConstructData.unfilledItem = unicodeSymbols.empty;
+    // Glyph symbols.
+    listConstructData.filledItem = glyphSymbols.filled;
+    listConstructData.unfilledItem = glyphSymbols.empty;
     listConstructData.boldSelection = false;
   }
 }
