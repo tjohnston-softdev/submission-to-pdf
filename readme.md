@@ -14,6 +14,7 @@ At the start of 2021, I decided to write a new version of the script from scratc
 
 * [Installing](./docs/install.md)
 * [Configuration](./docs/config.md)
+* [Styling](./docs/style.md)
 * [Files](./docs/files.md)
 
 ## Disclaimer

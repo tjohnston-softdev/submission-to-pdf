@@ -1,8 +1,10 @@
 ## Configuration
 
-This script enables several customization options as to how the script functions. This includes how the form is parsed, how the document is rendered, and where output PDF files will be stored.
+This script enables several customization options as to how the script functions. This includes how the form is parsed, how the document is rendered, and where the output PDFs will be stored.
 
 To configure the script, open the [options.gs](../script/options.js) file and navigate to the `scriptSettings` global object.
+
+See [here](./style.md) for information about setting colours and fonts, which is also performed in 'options.gs'
 
 ---
 
