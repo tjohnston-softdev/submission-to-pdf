@@ -6,9 +6,12 @@ var colourRegex = /^#[0-9A-Fa-f]{6}$/gi;
 
 function validateStylingInput(renderGlobal)
 {
-  var globalColour = readColourInput(renderGlobal.colours, "global", "#000000");
-  var globalFont = readFontInput(renderGlobal.fonts, "global", "Arial");
-  var elementProps = ["mainHeading", "formDesc", "sectionHeading", "sectionDesc", "question", "tableHeader", "meta"];
+  var origColour = "#000000";
+  var origFont = "Arial";
+  
+  var globalColour = readColourInput(renderGlobal.colours, "global", origColour);
+  var globalFont = readFontInput(renderGlobal.fonts, "global", origFont);
+  var elementProps = ["mainHeading", "formDesc", "sectionHeading", "sectionDesc", "question", "gridHeader", "meta"];
 
   var propIndex = 0;
   var currentProp = "";
@@ -27,7 +30,7 @@ function validateStylingInput(renderGlobal)
 }
 
 
-// Main function.
+// Prepare style object for current element.
 function prepareTextStyling(renderGlobal, styleProp)
 {
   var styleRes = {};
@@ -39,7 +42,7 @@ function prepareTextStyling(renderGlobal, styleProp)
 }
 
 
-// Set text colour.
+// Read text colour.
 function readColourInput(colSettings, sProp, defaultColour)
 {
   var colourString = "";
@@ -68,7 +71,7 @@ function readColourInput(colSettings, sProp, defaultColour)
 }
 
 
-// Set text font.
+// Read text font.
 function readFontInput(fontSettings, sProp, defaultFont)
 {
   var fontString = fontSettings[sProp];

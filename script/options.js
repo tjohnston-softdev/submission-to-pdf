@@ -67,7 +67,7 @@ var textColours =
   sectionHeading: "#FFFF00",
   sectionDesc: "#00FF00",
   question: "#0000FF",
-  tableHeader: "#2E2B5F",
+  gridHeader: "#2E2B5F",
   meta: "#8B00FF"
 };
 
@@ -80,7 +80,7 @@ var textFonts =
   sectionHeading: "Impact",
   sectionDesc: "Oswald",
   question: "Quicksand",
-  tableHeader: "",
+  gridHeader: "",
   meta: "Dosis"
 };
 

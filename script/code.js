@@ -417,7 +417,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     
     // Creates grid text styling
     primaryStyle = prepareTextStyling(globalsObj, "question");
-    secondaryStyle = prepareTextStyling(globalsObj, "tableHeader");
+    secondaryStyle = prepareTextStyling(globalsObj, "gridHeader");
     
     // Initializes data and chooses radio button symbols.
     createdParagraph = initializeParagraphObject(documentBody);
@@ -441,7 +441,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     
     // Creates grid text styling
     primaryStyle = prepareTextStyling(globalsObj, "question");
-    secondaryStyle = prepareTextStyling(globalsObj, "tableHeader");
+    secondaryStyle = prepareTextStyling(globalsObj, "gridHeader");
     
     // Initializes data.
     createdParagraph = initializeParagraphObject(documentBody);
@@ -464,7 +464,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     
     // Creates grid text styling
     primaryStyle = prepareTextStyling(globalsObj, "question");
-    secondaryStyle = prepareTextStyling(globalsObj, "tableHeader");
+    secondaryStyle = prepareTextStyling(globalsObj, "gridHeader");
     
     // Initializes data and chooses checkbox symbols.
     createdParagraph = initializeParagraphObject(documentBody);
