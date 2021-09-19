@@ -64,6 +64,9 @@ function runSubmissionToPDF()
   globalsObject["symbols"] = getSymbolDefinitions();
   globalsObject["fonts"] = getTextFonts();
 
+  // Validates colour and font input
+  validateStylingInput(globalsObject);
+
   // Reads attatched form details.
   targetForm = FormApp.getActiveForm();
   formName = targetForm.getTitle();
