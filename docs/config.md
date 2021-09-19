@@ -31,11 +31,9 @@ To configure the script, open the [options.gs](../script/options.js) file and na
 
 | Option | Description |
 |---|---|
-| FORM_NAME_WITH_SUBMISSION_TIMESTAMP | Includes the name of the form, and the timestamp of that particular submission. |
 | FORM_NAME_WITH_SUBMISSION_NUMBER | Includes the name of the form, and the number of that particular submission. |
 | FORM_NAME_WITH_FIRST_TEXT | Includes the name of the form, and the first filled 'Short answer' question. |
 | FIRST_TEXT | The first filled 'Short answer' question. |
-| TIMESTAMP | The timestamp of the form submission. |
 | SUBMISSION_NUMBER | The number of the form submission. |
 
 
