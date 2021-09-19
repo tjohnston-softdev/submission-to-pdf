@@ -1,6 +1,5 @@
 # Changelog
 
-**./docs/config.md**
-* Removed discontinued options for 'Name'
-	* FORM_NAME_WITH_SUBMISSION_TIMESTAMP
-	* TIMESTAMP
+**./docs/files.md**
+* Added depreciation suffix to 'submission-timestamp'
+* Added entry for 'text-styling'

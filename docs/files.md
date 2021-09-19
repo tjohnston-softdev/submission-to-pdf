@@ -63,7 +63,7 @@ When the end of a section on the form is reached, this file checks whether any q
 \
 **submission-timestamp** ([link](../script/submission-timestamp.js))
 
-Used to convert the form submission timestamp into a readable string.
+Used to convert the form submission timestamp into a readable string. (DEPRECIATED)
 
 \
 **submission-name** ([link](../script/submission-name.js))
@@ -74,6 +74,11 @@ Decides the file name of the output document depending on the [chosen option](./
 **type-offset** ([link](../script/type-offset.js))
 
 Used to retrieve the render type of the previously answered form element when constructing the output document.
+
+\
+**text-styling** ([link](../script/text-styling.js))
+
+Used to validate input for custom element colours and fonts. Also handles style preparation for form elements before they are rendered. This does not apply the styling to the document itself. It only prepares the input arguments.
 
 \
 **render-common** ([link](../script/render-common.js))
