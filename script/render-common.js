@@ -31,6 +31,7 @@ function initializeListPreperationObject()
 
   intlRes["textString"] = "";
   intlRes["boldArray"] = [];
+  intlRes["symbolArray"] = [];
   intlRes["otherRange"] = null;
   intlRes["filledItem"] = "";
   intlRes["unfilledItem"] = "";
@@ -124,6 +125,27 @@ function constructListOtherItem(parsedListObject, listConstructData)
     // Indicates symbol text index range for bolding.
     otherSelectRange = [selectStart, selectEnd];
     listConstructData.boldArray.push(otherSelectRange);
+  }
+}
+
+
+// Sets colour and font for symbols.
+function setListSymbolStyling(txtObj, symbolArr, styleObject)
+{
+  var symbolIndex = 0;
+  var currentSymbol = [];
+  var currentStart = -1;
+  var currentEnd = -1;
+
+  // Loops marked index ranges.
+  for (symbolIndex = 0; symbolIndex < symbolArr.length; symbolIndex = symbolIndex + 1)
+  {
+    currentSymbol = symbolArr[symbolIndex];
+    currentStart = currentSymbol[0];
+    currentEnd = currentSymbol[1];
+
+    txtObj.setFontFamily(currentStart, currentEnd, styleObject.font);
+    txtObj.setForegroundColor(currentStart, currentEnd, styleObject.colour);
   }
 }
 

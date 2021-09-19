@@ -123,6 +123,7 @@ function constructTextElementAnswer(txtObj, prepObj)
     // No answer.
     prepObj.textString += "";
   }
+  
 }
 
 

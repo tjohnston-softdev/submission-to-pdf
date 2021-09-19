@@ -21,7 +21,7 @@ function constructCheckListOptions(parsedCheck, dataObject)
     currentChosen = parsedCheck.chosenItems.includes(optionIndex);
     currentSelectStart = -1;
     currentSelectEnd = -1;
-    currentBold = [];
+    currentSymbolLocation = [];
     dataObject.textString += "\r";
 
     // Begin symbol text.
@@ -38,6 +38,10 @@ function constructCheckListOptions(parsedCheck, dataObject)
 
     // End symbol text.
     currentSelectEnd = dataObject.textString.length - 1;
+    
+    // Save symbol location.
+    currentSymbolLocation = [currentSelectStart, currentSelectEnd];
+    dataObject.symbolArray.push(currentSymbolLocation);
 
     // Writes answer text.
     dataObject.textString += "\t";
@@ -47,8 +51,7 @@ function constructCheckListOptions(parsedCheck, dataObject)
     // Marks symbol text as bold if applicable.
     if (dataObject.boldSelection === true)
     {
-      currentBold = [currentSelectStart, currentSelectEnd];
-      dataObject.boldArray.push(currentBold);
+      dataObject.boldArray.push(currentSymbolLocation);
     }
 
   }

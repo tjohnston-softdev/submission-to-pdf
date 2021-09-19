@@ -386,7 +386,9 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     // Format text.
     constructionData.textObject = createdParagraph.appendText(constructionData.textString);
     primaryStyle = prepareTextStyling(globalsObj, "question");
+    secondaryStyle = prepareTextStyling(globalsObj, "listSymbol");
     standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1, primaryStyle);
+    setListSymbolStyling(constructionData.textObject, constructionData.symbolArray, secondaryStyle);
     setListBoldStatus(constructionData.textObject, constructionData.boldArray);
     setListOtherItalic(constructionData.textObject, constructionData.otherRange, globalsObj);
   }
@@ -406,8 +408,10 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     
     // Format text.
     primaryStyle = prepareTextStyling(globalsObj, "question");
+    secondaryStyle = prepareTextStyling(globalsObj, "listSymbol");
     constructionData.textObject = createdParagraph.appendText(constructionData.textString);
     standardizeParagraphFormatting(constructionData.textObject, constructionData.textString.length - 1, primaryStyle);
+    setListSymbolStyling(constructionData.textObject, constructionData.symbolArray, secondaryStyle);
     setListBoldStatus(constructionData.textObject, constructionData.boldArray);
     setListOtherItalic(constructionData.textObject, constructionData.otherRange, globalsObj);
   }

@@ -10,7 +10,7 @@ function constructRadioListOptions(parsedRadio, dataObject)
   var currentOption = "";
   var currentSelectStart = -1;
   var currentSelectEnd = -1;
-  var currentBold = [];
+  var currentSymbolLocation = [];
 
   // Loops list options.
   for (optionIndex = 0; optionIndex < parsedRadio.optionList.length; optionIndex = optionIndex + 1)
@@ -22,7 +22,7 @@ function constructRadioListOptions(parsedRadio, dataObject)
     // Begin symbol text.
     currentSelectStart = dataObject.textString.length - 1;
     currentSelectEnd = -1;
-    currentBold = [];
+    currentSymbolLocation = [];
 
     if (optionIndex === parsedRadio.chosenOption)
     {
@@ -37,6 +37,10 @@ function constructRadioListOptions(parsedRadio, dataObject)
 
     // End symbol text.
     currentSelectEnd = dataObject.textString.length - 1;
+    
+    // Save symbol location.
+    currentSymbolLocation = [currentSelectStart, currentSelectEnd];
+    dataObject.symbolArray.push(currentSymbolLocation);
 
     // Writes answer text.
     dataObject.textString += "\t";
@@ -46,8 +50,7 @@ function constructRadioListOptions(parsedRadio, dataObject)
     // Marks symbol text as bold if applicable.
     if (dataObject.boldSelection === true)
     {
-      currentBold = [currentSelectStart, currentSelectEnd];
-      dataObject.boldArray.push(currentBold);
+      dataObject.boldArray.push(currentSymbolLocation);
     }
 
   }
