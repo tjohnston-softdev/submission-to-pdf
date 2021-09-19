@@ -13,7 +13,7 @@ function initializeParagraphObject(docBody)
   return paraRes;
 }
 
-// Sets text paragraph bold, italic, and font size.
+// Applies standard styling to text elements.
 function standardizeParagraphFormatting(txtObj, paraCutoff, styleObject)
 {
   txtObj.setBold(0, paraCutoff, false);
@@ -58,7 +58,7 @@ function chooseSymbols(listConstructData, listType, renderGlobal)
 
   if (symbolsEnabled === true)
   {
-    // Glyph symbols.
+    // Glyphs.
     listConstructData.filledItem = glyphSymbols.filled;
     listConstructData.unfilledItem = glyphSymbols.empty;
     listConstructData.boldSelection = false;
@@ -149,6 +149,7 @@ function setListSymbolStyling(txtObj, symbolArr, styleObject)
   // Loops marked index ranges.
   for (symbolIndex = 0; symbolIndex < symbolArr.length; symbolIndex = symbolIndex + 1)
   {
+    // Reads current symbol range.
     currentSymbol = symbolArr[symbolIndex];
     currentStart = currentSymbol[0];
     currentEnd = currentSymbol[1];
@@ -244,7 +245,7 @@ function prepareGridHeaderRow(parsedGridObject, gridConstructionData)
 }
 
 
-// Sets bold, italic, and font size for grid cells.
+// Applies standard styling to grid cells.
 function standardizeCellFormatting(tblObj, boldInner, styleObject)
 {
   var rowIndex = 0;

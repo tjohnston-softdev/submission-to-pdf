@@ -4,20 +4,27 @@
 var colourRegex = /^#[0-9A-Fa-f]{6}$/gi;
 
 
+// Validates input for custom element styling.
 function validateStylingInput(renderGlobal)
 {
-  var origColour = "#000000";
-  var origFont = "Arial";
-  
-  var globalColour = readColourInput(renderGlobal.colours, "global", origColour);
-  var globalFont = readFontInput(renderGlobal.fonts, "global", origFont);
-  var elementProps = ["mainHeading", "formDesc", "sectionHeading", "sectionDesc", "question", "gridHeader", "meta", "listSymbol", "gridSymbol"];
+  var globalColour = "";
+  var globalFont = "";
+  var elementProps = [];
 
   var propIndex = 0;
   var currentProp = "";
   var currentColour = "";
   var currentFont = "";
 
+  // Set hard-coded default values.
+  globalColour = readColourInput(renderGlobal.colours, "global", "#000000");
+  globalFont = readFontInput(renderGlobal.fonts, "global", "Arial");
+
+  // Customizable elements.
+  elementProps.push("mainHeading", "formDesc", "sectionHeading", "sectionDesc");
+  elementProps.push("question", "gridHeader", "meta", "listSymbol", "gridSymbol");
+
+  // Loop properties and validate contents for colour and font.
   for (propIndex = 0; propIndex < elementProps.length; propIndex = propIndex + 1)
   {
     currentProp = elementProps[propIndex];
@@ -42,7 +49,7 @@ function prepareTextStyling(renderGlobal, styleProp)
 }
 
 
-// Read text colour.
+// Read input text colour for given element.
 function readColourInput(colSettings, sProp, defaultColour)
 {
   var colourString = "";
@@ -71,7 +78,7 @@ function readColourInput(colSettings, sProp, defaultColour)
 }
 
 
-// Read text font.
+// Read input text font for given element.
 function readFontInput(fontSettings, sProp, defaultFont)
 {
   var fontString = fontSettings[sProp];

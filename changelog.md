@@ -1,21 +1,37 @@
 # Changelog
 
-**./script/options.js**
-* Removed from 'nameOpts'
-	* FORM_NAME_WITH_SUBMISSION_TIMESTAMP
-	* SUBMISSION_TIMESTAMP
-* Changed 'scriptSettings.documentNameMode'
-	* Before: -1
-	* After: FORM_NAME_WITH_SUBMISSION_NUMBER
-* Re-ordered 'nameOpts' flags.
+**./script/text-styling.js - validateStylingInput**
+* Replaced variables with literal strings:
+	* origColour
+	* origFont
+* 'elementProps' population is split onto two lines.
+* Variable declaration and assignment is now separate.
+* Added commenting to both header and body. 
 
 ---
 
-**./script/submission-name.js - decideSubmissionName**
-* Removed cases from IF structure.
-	* `globalsObj.nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP`
-	* `globalsObj.nameOpts.SUBMISSION_TIMESTAMP`
-* Removed 'writtenTimestamp' assignment.
-* Changed comment.
-	* Before: "Reads submission timestamp, and chosen name mode."
-	* After: "Reads chosen name mode."
+**./script/text-styling.js - readColourInput**
+* Changed header comment.
+	* Before: "Read text colour."
+	* After: "Read input text colour for given element."
+
+---
+
+**./script/text-styling.js - readFontInput**
+* Changed header comment.
+	* Before: "Read text font."
+	* After: "Read input text font for given element."
+
+---
+
+**./script/render-common.js**
+* Changed 'standardizeParagraphFormatting' header comment.
+	* Before "Sets text paragraph bold, italic, and font size."
+	* After: "Applies standard styling to text elements."
+* Changed 'standardizeCellFormatting' header comment.
+	* Before: "Sets bold, italic, and font size for grid cells."
+	* After: "Applies standard styling to grid cells."
+* Changed 'Glyph' comment in 'chooseSymbols'
+	* Before "Glyph symbols."
+	* After: "Glyphs."
+* Added "Reads current symbol range." comment to 'setListSymbolStyling'
