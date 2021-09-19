@@ -1,5 +1,6 @@
 # Changelog
 
-**./script/options.js**
-* Emptied all values from 'textColours' except for 'global'
-* Emptied all values from 'textFonts' except for 'global'
+### Health Check
+
+**Timestamp:** 2021-09-19 14:02  
+**Status:** Passed
