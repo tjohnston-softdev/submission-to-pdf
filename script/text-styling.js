@@ -11,7 +11,7 @@ function validateStylingInput(renderGlobal)
   
   var globalColour = readColourInput(renderGlobal.colours, "global", origColour);
   var globalFont = readFontInput(renderGlobal.fonts, "global", origFont);
-  var elementProps = ["mainHeading", "formDesc", "sectionHeading", "sectionDesc", "question", "gridHeader", "meta"];
+  var elementProps = ["mainHeading", "formDesc", "sectionHeading", "sectionDesc", "question", "gridHeader", "meta", "listSymbol", "gridSymbol"];
 
   var propIndex = 0;
   var currentProp = "";

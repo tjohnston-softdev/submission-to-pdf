@@ -62,13 +62,15 @@ var scriptSettings =
 var textColours =
 {
   global: "#000000",
-  mainHeading: "#FF0000",
-  formDesc: "#FF7F00",
-  sectionHeading: "#FFFF00",
-  sectionDesc: "#00FF00",
-  question: "#0000FF",
-  gridHeader: "#2E2B5F",
-  meta: "#8B00FF"
+  mainHeading: "#B90000",
+  formDesc: "#D46900",
+  sectionHeading: "#F2DB0A",
+  sectionDesc: "#208C20",
+  question: "#3B5FD9",
+  gridHeader: "#555287",
+  meta: "#6008A8",
+  listSymbol: "",
+  gridSymbol: ""
 };
 
 // Font options
@@ -81,7 +83,9 @@ var textFonts =
   sectionDesc: "Oswald",
   question: "Quicksand",
   gridHeader: "",
-  meta: "Dosis"
+  meta: "Dosis",
+  listSymbol: "",
+  gridSymbol: ""
 };
 
 
