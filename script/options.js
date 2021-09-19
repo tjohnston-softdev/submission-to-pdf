@@ -60,28 +60,28 @@ var scriptSettings =
 var textColours =
 {
   global: "#000000",
-  mainHeading: "#B90000",
-  formDesc: "#D46900",
-  sectionHeading: "#F2DB0A",
-  sectionDesc: "#208C20",
-  question: "#3B5FD9",
-  gridHeader: "#555287",
-  meta: "#6008A8",
+  mainHeading: "",
+  formDesc: "",
+  sectionHeading: "",
+  sectionDesc: "",
+  question: "",
+  gridHeader: "",
+  meta: "",
   listSymbol: "",
-  gridSymbol: "#13CEC1"
+  gridSymbol: ""
 };
 
 // Font options
 var textFonts =
 {
   global: "Arial",
-  mainHeading: "Impact",
-  formDesc: "Oswald",
-  sectionHeading: "Impact",
-  sectionDesc: "Oswald",
-  question: "Quicksand",
+  mainHeading: "",
+  formDesc: "",
+  sectionHeading: "",
+  sectionDesc: "",
+  question: "",
   gridHeader: "",
-  meta: "Dosis",
+  meta: "",
   listSymbol: "",
   gridSymbol: ""
 };
