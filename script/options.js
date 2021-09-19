@@ -41,7 +41,7 @@ var sectionHeaderOpts =
 // Script settings.
 var scriptSettings =
 {
-  outputFolderID: "",
+  outputFolderID: "1438ccdTouENBrkwyP1zeAmP1Krcs74Jf",
   documentNameMode: -1,
   includeFormDesc: true,
   includeSubmissionData: true,
@@ -70,7 +70,7 @@ var textColours =
   gridHeader: "#555287",
   meta: "#6008A8",
   listSymbol: "",
-  gridSymbol: ""
+  gridSymbol: "#13cec1"
 };
 
 // Font options

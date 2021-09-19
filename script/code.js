@@ -326,6 +326,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
 {
   var primaryStyle = null;
   var secondaryStyle = null;
+  var tertiaryStyle = null;
 
   var createdParagraph = null;
   var constructionData = null;
@@ -422,6 +423,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     // Creates grid text styling
     primaryStyle = prepareTextStyling(globalsObj, "question");
     secondaryStyle = prepareTextStyling(globalsObj, "gridHeader");
+    tertiaryStyle = prepareTextStyling(globalsObj, "gridSymbol");
     
     // Initializes data and chooses radio button symbols.
     createdParagraph = initializeParagraphObject(documentBody);
@@ -435,7 +437,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     
     // Format grid table.
     constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
-    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
+    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection, tertiaryStyle);
     formatGridHeaderRow(constructionData.tableObject, 1, secondaryStyle);
     formatGridHeaderColumn(constructionData.tableObject, secondaryStyle);
   }
@@ -446,6 +448,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     // Creates grid text styling
     primaryStyle = prepareTextStyling(globalsObj, "question");
     secondaryStyle = prepareTextStyling(globalsObj, "gridHeader");
+    tertiaryStyle = prepareTextStyling(globalsObj, "gridSymbol");
     
     // Initializes data.
     createdParagraph = initializeParagraphObject(documentBody);
@@ -457,7 +460,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
 
     // Format table.
     constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
-    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
+    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection, tertiaryStyle);
     formatGridHeaderRow(constructionData.tableObject, 0, secondaryStyle);
     formatGridHeaderColumn(constructionData.tableObject, secondaryStyle);
 
@@ -469,6 +472,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
     // Creates grid text styling
     primaryStyle = prepareTextStyling(globalsObj, "question");
     secondaryStyle = prepareTextStyling(globalsObj, "gridHeader");
+    tertiaryStyle = prepareTextStyling(globalsObj, "gridSymbol");
     
     // Initializes data and chooses checkbox symbols.
     createdParagraph = initializeParagraphObject(documentBody);
@@ -482,7 +486,7 @@ function constructDocumentElement(eObject, prevType, documentBody, globalsObj)
 
     // Format table.
     constructionData.tableObject = documentBody.appendTable(constructionData.cellGrid);
-    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection);
+    standardizeCellFormatting(constructionData.tableObject, constructionData.boldSelection, tertiaryStyle);
     formatGridHeaderRow(constructionData.tableObject, 1, secondaryStyle);
     formatGridHeaderColumn(constructionData.tableObject, secondaryStyle);
   }

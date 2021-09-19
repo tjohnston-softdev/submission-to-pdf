@@ -236,7 +236,7 @@ function prepareGridHeaderRow(parsedGridObject, gridConstructionData)
 
 
 // Sets bold, italic, and font size for grid cells.
-function standardizeCellFormatting(tblObj, boldInner)
+function standardizeCellFormatting(tblObj, boldInner, styleObject)
 {
   var rowIndex = 0;
   var rowCount = tblObj.getNumRows();
@@ -275,6 +275,8 @@ function standardizeCellFormatting(tblObj, boldInner)
       }
 
       // Formats current cell.
+      currentText.setFontFamily(styleObject.font);
+      currentText.setForegroundColor(styleObject.colour);
       currentText.setBold(currentBold);
       currentText.setItalic(false);
       currentText.setFontSize(11);

@@ -1,38 +1,24 @@
 # Changelog
 
-**./script/render-common.js**
-* Added 'symbolArray' variable to 'initializeListPreperationObject'
-	* Defines locations to apply symbol styling.
-	* Applies on top of the 'question' element.
-* Wrote new function 'setListSymbolStyling'
-	* Applies styling to symbols on radio and checklists.
-	* Overrides 'question' element styling.
-	* Before any text is bolded.
-
----
-
-**./script/render-text.js**
-* Minor changes to whitespacing.
-
----
-
-**./script/render-radio_list.js**
-* Renamed 'currentBold' variable to 'currentSymbolLocation'
-	* Assigned after 'currentSelectEnd'
-	* Added to 'dataObject.symbolArray' regardless.
-	* Added to 'dataObject.boldArray' if enabled.
-
----
-
-**./script/render-check_list.js**
-* Renamed 'currentBold' variable to 'currentSymbolLocation' (same as above).
+**./script/render-common.js - standardizeCellFormatting**
+* Added 'styleObject' parameter. Affects styling of inner grid symbols.
+* Applied 'styleObject' to 'currentText'
+	* Takes place first.
+	* Before any bolding.
 
 ---
 
 **./script/code.js - constructDocumentElement**
-* Changes:
-	* Assigned 'secondaryStyle' for 'listSymbol'
-	* Added call to 'setListSymbolStyling'
+* Declared 'tertiaryStyle' variable.
+* Changes to styling:
+	* Assigns 'tertiaryStyle' as 'gridSymbol' element.
+	* Added 'tertiaryStyle' as argument to 'standardizeCellFormatting' call.
 * Affected cases:
-	* `globalsObj.renderTypes.RADIO_LIST`
-	* `globalsObj.renderTypes.CHECK_LIST`
+	* `radioGridFlag > 0`
+	* `globalsObj.renderTypes.RADIO_GRID`
+	* `globalsObj.renderTypes.CHECK_GRID`
+
+---
+
+**./script/options.js**
+* Set 'textColours.gridSymbol' to a Cyan colour for testing (`#13cec1`)
