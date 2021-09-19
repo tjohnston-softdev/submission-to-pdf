@@ -54,7 +54,8 @@ var scriptSettings =
   sectionBreak: sectionBreakOpts.RULE,
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true,
-  useSymbols: true
+  useSymbols: true,
+  utcOffset: 600
 };
 
 
