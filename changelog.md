@@ -1,3 +1,5 @@
 # Changelog
 
-Snapshot 2021-09-18 15:22
+**./script/options.js**
+* textColours
+	* Changed element values to rainbow colours.

@@ -62,13 +62,13 @@ var scriptSettings =
 var textColours =
 {
   global: "#000000",
-  mainHeading: "#EBA834",
-  formDesc: "#A834EB",
-  sectionHeading: "#EBA834",
-  sectionDesc: "#3A34EB",
-  question: "#EBA834",
-  tableHeader: "#ABCDEF",
-  meta: "#754F5D"
+  mainHeading: "#FF0000",
+  formDesc: "#FF7F00",
+  sectionHeading: "#FFFF00",
+  sectionDesc: "#00FF00",
+  question: "#0000FF",
+  tableHeader: "#2E2B5F",
+  meta: "#8B00FF"
 };
 
 // Font options
