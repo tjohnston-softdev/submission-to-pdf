@@ -64,9 +64,8 @@ function runSubmissionToPDF()
   globalsObject["symbols"] = getSymbolDefinitions();
   globalsObject["fonts"] = getTextFonts();
 
-  // Validates colour, font, and UTC offset input
+  // Validates colour and font input.
   validateStylingInput(globalsObject);
-  validateUtcOffset(globalsObject);
 
   // Reads attatched form details.
   targetForm = FormApp.getActiveForm();
@@ -79,7 +78,7 @@ function runSubmissionToPDF()
 
   // Reads previous submission.
   prevSubmission = formSubmissionArray[subCount - 1];
-  subTime = readSubmissionTimestamp(prevSubmission, globalsObject);
+  subTime = readSubmissionTimestamp(prevSubmission);
 
   // Counts form elements.
   elementCount = formItemList.length;

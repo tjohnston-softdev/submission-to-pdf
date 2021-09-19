@@ -43,7 +43,7 @@ function handleFormDescriptionRender(descPara, parsedDesc, styleObject)
 function handleSubmissionDataRender(subPara, parsedData, styleObject)
 {
   constructSubmissionDataField("Number", parsedData.submissionNumber, subPara, styleObject);
-  constructSubmissionDataField("Timestamp", parsedData.submissionTimestamp, subPara, styleObject);
+  //constructSubmissionDataField("Timestamp", parsedData.submissionTimestamp, subPara, styleObject);
   constructSubmissionDataField("E-Mail Address", parsedData.submitterEmail, subPara, styleObject);
 }
 

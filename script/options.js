@@ -54,8 +54,7 @@ var scriptSettings =
   sectionBreak: sectionBreakOpts.RULE,
   includeSectionHeader: sectionHeaderOpts.FULL,
   ignoreEmptySections: true,
-  useSymbols: true,
-  utcOffset: 600
+  useSymbols: true
 };
 
 
@@ -71,7 +70,7 @@ var textColours =
   gridHeader: "#555287",
   meta: "#6008A8",
   listSymbol: "",
-  gridSymbol: "#13cec1"
+  gridSymbol: "#13CEC1"
 };
 
 // Font options

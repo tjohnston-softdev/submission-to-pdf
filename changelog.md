@@ -1,27 +1,25 @@
 # Changelog
 
-**./script/options.js - scriptSettings**
-* Added new option: 'utcOffset'
-	* Offset in minutes from UTC.
-	* Used to render submission timestamps in the desired time-zone.
-	* eg. +600 refers to Eastern Australian time (GMT +10)
+**./script/code.js**
+* Removed call to 'validateUtcOffset'
+* Removed 'globalsObject' argument from 'readSubmissionTimestamp' call.
 
 ---
 
 **./script/submission-timestamp.js**
-* Wrote new function 'validateUtcOffset'
-	* Used to validate 'utcOffset' setting.
-	* Values within 20 hours are considered valid. (1200 minutes)
-	* If the input value is unsafe, it will default to zero (UTC)
-* Added 'globalObj' parameter to 'readSubmissionTimestamp'
-* New variables in 'readSubmissionTimestamp'
-	* 'utcMs' - Submission timestamp in UTC milliseconds.
-	* 'convertedMs' - Submission timestamp in set timezone milliseconds.
-	* 'convertedTimestamp' - Submission timestamp object in set timezone.
-* Replaced references to 'retrievedTimestamp' with 'convertedTimestamp'
+* Removed 'validateUtcOffset' function.
+* Removed from 'readSubmissionTimestamp'
+	* 'globalObj' parameter.
+	* Variables: 'utcMs', 'convertedMs', 'convertedTimestamp'
+* Replaced references to 'convertedTimestamp' with 'retrievedTimestamp'
 
 ---
 
-**./script/code.js - runSubmissionToPDF**
-* Added call to 'validateUtcOffset'
-* Added 'globalsObject' argument to 'readSubmissionTimestamp' call.
+**./script/render-form_data.js - handleSubmissionDataRender**
+* Commented out 'Timestamp' field.
+
+---
+
+**./script/options.js**
+* Removed 'utcOffset' option from 'scriptSettings'
+* Capitalized 'textColours.gridSymbol'
