@@ -6,8 +6,8 @@ var colourRegex = /^#[0-9A-Fa-f]{6}$/gi;
 
 function validateStylingInput(renderGlobal)
 {
-  var globalColour = setStyleColour(renderGlobal.colours, "global", "#000000");
-  var globalFont = setStyleFont(renderGlobal.fonts, "global", "Arial");
+  var globalColour = readColourInput(renderGlobal.colours, "global", "#000000");
+  var globalFont = readFontInput(renderGlobal.fonts, "global", "Arial");
   var elementProps = ["mainHeading", "formDesc", "sectionHeading", "sectionDesc", "question", "tableHeader", "meta"];
 
   var propIndex = 0;
@@ -18,13 +18,12 @@ function validateStylingInput(renderGlobal)
   for (propIndex = 0; propIndex < elementProps.length; propIndex = propIndex + 1)
   {
     currentProp = elementProps[propIndex];
-    currentColour = setStyleColour(renderGlobal.colours, currentProp, globalColour);
-    currentFont = setStyleFont(renderGlobal.fonts, currentProp, globalFont);
+    currentColour = readColourInput(renderGlobal.colours, currentProp, globalColour);
+    currentFont = readFontInput(renderGlobal.fonts, currentProp, globalFont);
 
     renderGlobal.colours[currentProp] = currentColour;
     renderGlobal.fonts[currentProp] = currentFont;
   }
-  
 }
 
 
@@ -33,15 +32,15 @@ function prepareTextStyling(renderGlobal, styleProp)
 {
   var styleRes = {};
 
-  styleRes["colour"] = setStyleColour(renderGlobal.colours, styleProp, renderGlobal.colours.global);
-  styleRes["font"] = setStyleFont(renderGlobal.fonts, styleProp, renderGlobal.fonts.global);
+  styleRes["colour"] = renderGlobal.colours[styleProp];
+  styleRes["font"] = renderGlobal.fonts[styleProp];
 
   return styleRes;
 }
 
 
 // Set text colour.
-function setStyleColour(colSettings, sProp, defaultColour)
+function readColourInput(colSettings, sProp, defaultColour)
 {
   var colourString = "";
   var entryType = "";
@@ -70,7 +69,7 @@ function setStyleColour(colSettings, sProp, defaultColour)
 
 
 // Set text font.
-function setStyleFont(fontSettings, sProp, defaultFont)
+function readFontInput(fontSettings, sProp, defaultFont)
 {
   var fontString = fontSettings[sProp];
   var entryType = typeof fontString;
