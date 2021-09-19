@@ -12,17 +12,12 @@ function decideSubmissionName(globalsObj, frmName, subNumber, sTimeObj, pElement
   var textAns = "";
   var nameRes = "";
 
-  // Reads submission timestamp, and chosen name mode.
-  writtenTimestamp = writeTimestampFileName(sTimeObj);
+  // Reads chosen name mode.
   modeFlag = globalsObj.mainSettings.documentNameMode;
 
   
   // IF structure decides name.
-  if (modeFlag === globalsObj.nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP)
-  {
-    nameRes = incorporateFormName(frmName, writtenTimestamp);
-  }
-  else if (modeFlag === globalsObj.nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER)
+  if (modeFlag === globalsObj.nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER)
   {
     nameRes = incorporateFormName(frmName, subNumber);
   }
@@ -34,10 +29,6 @@ function decideSubmissionName(globalsObj, frmName, subNumber, sTimeObj, pElement
   else if (modeFlag === globalsObj.nameOpts.FIRST_TEXT)
   {
     nameRes = getFirstTextAnswer(pElements.overall, subNumber, globalsObj.renderTypes);
-  }
-  else if (modeFlag === globalsObj.nameOpts.SUBMISSION_TIMESTAMP)
-  {
-    nameRes = writtenTimestamp;
   }
   else if (modeFlag >= 0)
   {

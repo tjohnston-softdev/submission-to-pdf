@@ -4,12 +4,10 @@
 // Document naming.
 var nameOpts =
 {
-  "FORM_NAME_WITH_SUBMISSION_TIMESTAMP": 1,
-  "FORM_NAME_WITH_SUBMISSION_NUMBER": 2,
-  "FORM_NAME_WITH_FIRST_TEXT": 3,
-  "FIRST_TEXT": 4,
-  "SUBMISSION_TIMESTAMP": 5,
-  "SUBMISSION_NUMBER": 6
+  "FORM_NAME_WITH_SUBMISSION_NUMBER": 1,
+  "FORM_NAME_WITH_FIRST_TEXT": 2,
+  "FIRST_TEXT": 3,
+  "SUBMISSION_NUMBER": 4
 };
 
 
@@ -42,7 +40,7 @@ var sectionHeaderOpts =
 var scriptSettings =
 {
   outputFolderID: "",
-  documentNameMode: -1,
+  documentNameMode: nameOpts.FORM_NAME_WITH_SUBMISSION_NUMBER,
   includeFormDesc: true,
   includeSubmissionData: true,
   includeEmailAddress: true,

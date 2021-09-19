@@ -1,25 +1,21 @@
 # Changelog
 
-**./script/code.js**
-* Removed call to 'validateUtcOffset'
-* Removed 'globalsObject' argument from 'readSubmissionTimestamp' call.
-
----
-
-**./script/submission-timestamp.js**
-* Removed 'validateUtcOffset' function.
-* Removed from 'readSubmissionTimestamp'
-	* 'globalObj' parameter.
-	* Variables: 'utcMs', 'convertedMs', 'convertedTimestamp'
-* Replaced references to 'convertedTimestamp' with 'retrievedTimestamp'
-
----
-
-**./script/render-form_data.js - handleSubmissionDataRender**
-* Commented out 'Timestamp' field.
-
----
-
 **./script/options.js**
-* Removed 'utcOffset' option from 'scriptSettings'
-* Capitalized 'textColours.gridSymbol'
+* Removed from 'nameOpts'
+	* FORM_NAME_WITH_SUBMISSION_TIMESTAMP
+	* SUBMISSION_TIMESTAMP
+* Changed 'scriptSettings.documentNameMode'
+	* Before: -1
+	* After: FORM_NAME_WITH_SUBMISSION_NUMBER
+* Re-ordered 'nameOpts' flags.
+
+---
+
+**./script/submission-name.js - decideSubmissionName**
+* Removed cases from IF structure.
+	* `globalsObj.nameOpts.FORM_NAME_WITH_SUBMISSION_TIMESTAMP`
+	* `globalsObj.nameOpts.SUBMISSION_TIMESTAMP`
+* Removed 'writtenTimestamp' assignment.
+* Changed comment.
+	* Before: "Reads submission timestamp, and chosen name mode."
+	* After: "Reads chosen name mode."
