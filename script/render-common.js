@@ -107,6 +107,9 @@ function constructListOtherItem(parsedListObject, listConstructData)
     listConstructData.textString += otherFilledText;
     selectEnd = listConstructData.textString.length - 1;
 
+    // Saves symbol location
+    otherSelectRange = [selectStart, selectEnd];
+
     // Writes tab separator between symbol and answer.
     listConstructData.textString += "\t";
     optionStart = listConstructData.textString.length - 1;
@@ -122,10 +125,16 @@ function constructListOtherItem(parsedListObject, listConstructData)
 
   if (customAdded === true && listConstructData.boldSelection === true)
   {
-    // Indicates symbol text index range for bolding.
-    otherSelectRange = [selectStart, selectEnd];
+    // Include symbol with custom styling at bold weight.
     listConstructData.boldArray.push(otherSelectRange);
+    listConstructData.symbolArray.push(otherSelectRange);
   }
+  else if (customAdded === true)
+  {
+    // Include symbol with custom styling at normal weight.
+    listConstructData.symbolArray.push(otherSelectRange);
+  }
+
 }
 
 
